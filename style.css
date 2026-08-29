@@ -301,3 +301,19 @@ footer{margin-top:50px;color:var(--muted);font-size:.85rem}
   html{scroll-behavior:auto}
   .memo-entry,.plain-tools a{transition:none}
 }
+
+
+/* Free shelf */
+.free-section{padding-top:104px}
+.free-product{position:relative;display:grid;grid-template-columns:130px minmax(0,1fr) 190px;gap:28px;align-items:start;padding:30px 26px 32px;border-top:1px solid var(--memo-ink);border-bottom:1px solid var(--memo-ink);background:rgba(241,201,212,.13)}
+.free-product:before{content:"free";position:absolute;right:22px;top:-18px;color:var(--memo-accent);font:italic 700 .8rem/1 Georgia,serif;transform:rotate(5deg)}
+.free-product-kicker{font:700 .72rem/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sage);padding-top:4px}
+.free-product h3{margin:0 0 11px;font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;font-size:clamp(1.55rem,3vw,2.2rem);line-height:1.25;font-weight:600;letter-spacing:-.035em}
+.free-product h3 span{display:block;margin-top:5px;font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic UI","Noto Sans JP",sans-serif;font-size:.78rem;font-weight:700;color:var(--memo-muted);letter-spacing:.02em}
+.free-product p{margin:0;color:#615750;font-size:.86rem;line-height:1.9}
+.free-product ul{display:flex;flex-wrap:wrap;gap:6px 15px;padding:0;margin:18px 0 0;list-style:none;color:var(--memo-muted);font-size:.72rem}
+.free-product li:before{content:"✓ ";color:var(--sage);font-weight:800}
+.free-product-links{display:grid;gap:9px;padding-top:4px}
+.free-product-links a{color:var(--memo-ink);font-size:.78rem;font-weight:750;text-decoration-color:var(--memo-accent)}
+@media(max-width:800px){.free-product{grid-template-columns:1fr;gap:14px}.free-product-links{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.free-product-links a{font-size:.72rem}}
+@media(max-width:600px){.free-section{padding-top:84px}.free-product{padding:24px 18px 27px}.free-product-links{grid-template-columns:1fr}}
