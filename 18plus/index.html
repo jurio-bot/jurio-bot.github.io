@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>18+ after hours — あませ</title>
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="description" content="18歳以上向けの別室。成人向け作品やサービスを扱う場合があります。">
+  <style>
+    :root{color-scheme:dark;--bg:#0b0b0f;--card:#15151c;--line:#2b2b36;--text:#f2f2f5;--muted:#aaaab5}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
+    a{color:inherit}.wrap{width:min(860px,calc(100% - 32px));margin:auto;padding:48px 0 80px}
+    .eyebrow{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+    h1{font-size:clamp(34px,8vw,68px);line-height:.98;margin:12px 0 20px}.lead{font-size:18px;line-height:1.9;color:#d0d0d8;max-width:680px}
+    .notice,.card{border:1px solid var(--line);background:var(--card);border-radius:22px;padding:22px;margin-top:22px}
+    .notice{font-size:14px;line-height:1.8;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:24px}
+    .card h2{font-size:18px;margin:0 0 10px}.card p{color:var(--muted);line-height:1.7;margin:0}.back{display:inline-block;margin-top:34px;color:var(--muted)}
+    #gate{position:fixed;inset:0;background:rgba(4,4,7,.97);display:grid;place-items:center;padding:24px;z-index:10}
+    .gatebox{width:min(480px,100%);border:1px solid var(--line);background:#111117;border-radius:26px;padding:30px;text-align:center}
+    .gatebox p{color:var(--muted);line-height:1.7}.buttons{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+    button,.leave{border:0;border-radius:999px;padding:12px 20px;font:inherit;text-decoration:none;cursor:pointer}.enter{background:#f2f2f5;color:#111}.leave{background:#24242d;color:#ddd}
+  </style>
+</head><body>
+  <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gatebox">
+      <p class="eyebrow">18+ only</p>
+      <h2 id="gate-title">ここから先は成人向けです。</h2>
+      <p>18歳未満の方は閲覧できません。成人向け作品やサービスへのリンクを扱う場合があります。</p>
+      <div class="buttons">
+        <button class="enter" id="enter">18歳以上です</button>
+        <a class="leave" href="/">戻る</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap" id="content" hidden>
+    <p class="eyebrow">after hours / 18+</p>
+    <h1>夜の別室。</h1>
+    <p class="lead">表のサイトには置きにくい、成人向け作品やサービスのメモを置く場所。紹介するものは、実際に内容とリンク先を確認できたものだけにします。</p>
+
+    <div class="notice"><strong>広告・アフィリエイトについて</strong><br>このページではアフィリエイトリンクを使用する場合があります。リンク経由で購入・登録が発生すると、運営者が報酬を受け取ることがあります。価格や条件はリンク先の表示を優先してください。</div>
+
+    <section class="grid" aria-label="18+ sections">
+      <article class="card"><h2>作品メモ</h2><p>成人向け作品の感想や、どんな人に合いそうか。露骨な内容紹介より、選ぶ時に役立つ観点を残す。</p></article>
+      <article class="card"><h2>サービス</h2><p>成人向けサービスの使い勝手や料金条件。広告リンクを置く場合は、ここでも広告であることを明記する。</p></article>
+      <article class="card"><h2>準備中</h2><p>アフィリエイトIDやリンク先を確認できるまでは、未検証リンクを置きません。</p></article>
+    </section>
+
+    <a class="back" href="/">← 表のサイトへ戻る</a>
+  </main>
+  <script>
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('content');
+    const accepted = sessionStorage.getItem('amase18') === 'yes';
+    function openRoom(){gate.hidden=true;gate.style.display='none';content.hidden=false;}
+    if(accepted) openRoom();
+    document.getElementById('enter').addEventListener('click',()=>{
+      sessionStorage.setItem('amase18','yes');
+      openRoom();
+    });
+  </script>
+</body>
+</html>
