@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /18plus/
 Sitemap: https://paper-daemon.github.io/sitemap.xml
