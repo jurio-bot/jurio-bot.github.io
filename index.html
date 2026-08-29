@@ -4,156 +4,149 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>あませ</title>
-  <meta name="description" content="AI、PC、Linux、画像生成。作ったものと、事故ったところと、生活の途中のログ。">
+  <meta name="description" content="サイトってより脳内メモ。作ってるもの、途中の考え、事故った記録。">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="あませ Field Notes" href="/feed.xml">
   <link rel="canonical" href="https://jurio-bot.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="あませ">
-  <meta property="og:description" content="AI、PC、Linux、画像生成。作ったものと、事故ったところと、生活の途中のログ。">
+  <meta property="og:description" content="サイトってより脳内メモ。作ってるもの、途中の考え、事故った記録。">
   <meta property="og:url" content="https://jurio-bot.github.io/">
   <meta property="og:site_name" content="あませ">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="あませ">
-  <meta name="twitter:description" content="AI、PC、Linux、画像生成。作ったものと、事故ったところと、生活の途中のログ。">
+  <meta name="twitter:description" content="サイトってより脳内メモ。作ってるもの、途中の考え、事故った記録。">
 </head>
 <body class="home-body">
-  <main class="home-shell">
-    <nav class="home-nav" aria-label="main navigation">
-      <a class="home-brand" href="/">あませ</a>
-      <div class="home-nav-links">
+  <main class="memo-shell">
+    <nav class="memo-nav" aria-label="main navigation">
+      <a class="memo-brand" href="/">あませ</a>
+      <div class="memo-nav-links">
         <a href="https://note.com/lovely_hosta391">note</a>
         <a href="https://x.com/amase__iv">X</a>
         <a href="/feed.xml">RSS</a>
       </div>
     </nav>
 
-    <section class="home-hero">
-      <div class="hero-copy">
-        <p class="kicker">room log / ai / pc / build</p>
+    <header class="memo-hero">
+      <div class="memo-hero-main">
+        <p class="memo-date">2026.08.29 / 開いたまま</p>
         <h1>サイトってより<br>脳内メモ</h1>
-        <p class="hero-lede">作ってるものと、仕事や生活で引っかかったこと。手順だけじゃなく、なんでそうなったかまで残してます。</p>
-        <div class="hero-actions">
-          <a class="pill primary" href="#recent">最近のログを見る</a>
-          <a class="pill" href="https://note.com/lovely_hosta391">noteを読む</a>
-        </div>
+        <p class="memo-lede">作ってるものと、仕事や生活で引っかかったこと。<br class="desktop-only">忘れる前にここへ置いてます。</p>
       </div>
-      <div class="hero-orbit" aria-hidden="true">
-        <span class="moon"></span>
-        <span class="orbit-line orbit-a"></span>
-        <span class="orbit-line orbit-b"></span>
-        <span class="spark spark-a"></span>
-        <span class="spark spark-b"></span>
-        <span class="spark spark-c"></span>
-        <span class="hero-stamp">02:47<br>still building</span>
-      </div>
-    </section>
+      <aside class="margin-note" aria-label="この場所について">
+        <p>ここに置くもの</p>
+        <ul>
+          <li>途中の考え</li>
+          <li>事故った記録</li>
+          <li>作った小さい道具</li>
+          <li>たまに生活</li>
+        </ul>
+        <span>整理はあとで。</span>
+      </aside>
+    </header>
 
-    <section class="status-strip" aria-label="current themes">
-      <span>最近</span>
+    <div class="current-line">
+      <span>いま気になってる</span>
       <p>ComfyUI / systemd --user / 自動化の事故処理 / RAG</p>
-      <span class="status-dot">online-ish</span>
+    </div>
+
+    <section id="recent" class="memo-section">
+      <div class="memo-section-title">
+        <span>01</span>
+        <h2>最近のメモ</h2>
+        <a href="https://note.com/lovely_hosta391">noteも見る ↗</a>
+      </div>
+
+      <div class="memo-list">
+        <a class="memo-entry memo-entry-feature" href="https://note.com/lovely_hosta391/n/n22a47181440b">
+          <div class="memo-entry-date">08.29</div>
+          <div class="memo-entry-body">
+            <span class="memo-entry-kind">自動化 / 生活</span>
+            <h3>全部を自動化してたら、生活まで運用になってきた</h3>
+            <p>楽になるための自動化が、監視と例外処理を増やしていく。気付いたら生活まで「改善対象」になってた。</p>
+          </div>
+          <span class="memo-entry-arrow">↗</span>
+        </a>
+
+        <a class="memo-entry" href="https://note.com/lovely_hosta391/n/n96632b93d966">
+          <div class="memo-entry-date">08.29</div>
+          <div class="memo-entry-body">
+            <span class="memo-entry-kind">画像生成</span>
+            <h3>画像生成で「顔が似てる」だけ見てると、たぶん途中で詰まる</h3>
+          </div>
+          <span class="memo-entry-arrow">↗</span>
+        </a>
+
+        <a class="memo-entry" href="/notes/image-model-benchmark.html">
+          <div class="memo-entry-date">08.29</div>
+          <div class="memo-entry-body">
+            <span class="memo-entry-kind">モデル比較</span>
+            <h3>画像生成モデル、1枚勝負で比べるとだいたい事故る</h3>
+          </div>
+          <span class="memo-entry-arrow">→</span>
+        </a>
+
+        <a class="memo-entry" href="/notes/linux-user-service-debug.html">
+          <div class="memo-entry-date">08.29</div>
+          <div class="memo-entry-body">
+            <span class="memo-entry-kind">Linux</span>
+            <h3>systemd --user が「そのシェルだけ」死ぬ時に見る場所</h3>
+          </div>
+          <span class="memo-entry-arrow">→</span>
+        </a>
+
+        <a class="memo-entry" href="/notes/debuggable-rag.html">
+          <div class="memo-entry-date">08.28</div>
+          <div class="memo-entry-body">
+            <span class="memo-entry-kind">RAG</span>
+            <h3>RAGは正解率より先に、外した理由を追えるようにした方がいい</h3>
+          </div>
+          <span class="memo-entry-arrow">→</span>
+        </a>
+      </div>
     </section>
 
-    <section id="recent" class="home-section">
-      <div class="section-head">
+    <section class="memo-section tools-section">
+      <div class="memo-section-title">
+        <span>02</span>
+        <h2>作ったもの</h2>
+        <small>使えそうならどうぞ</small>
+      </div>
+
+      <div class="plain-tools">
+        <a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/editorial_depth_check.py"><strong>Editorial Depth Check</strong><span>薄い本命記事になってないかだけ見る</span><b>↗</b></a>
+        <a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/user_bus_doctor.py"><strong>User Bus Doctor</strong><span>systemd user bus の切り分け</span><b>↗</b></a>
+        <a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/image_model_benchmark.py"><strong>Image Model Benchmark</strong><span>生成モデルの崩れ方まで比べる</span><b>↗</b></a>
+        <a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/rag_trace_check.py"><strong>RAG Trace Check</strong><span>source / run ID が追えるか確認</span><b>↗</b></a>
+        <a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/retry_guard.py"><strong>Retry Guard</strong><span>再実行していい事故か判断する</span><b>↗</b></a>
+      </div>
+    </section>
+
+    <section class="memo-section memo-bottom">
+      <div class="memo-section-title">
+        <span>03</span>
+        <h2>外に出してるもの</h2>
+      </div>
+      <div class="outside-grid">
         <div>
-          <p class="kicker">recent traces</p>
-          <h2>最近、机の上に残ってたもの。</h2>
+          <p class="outside-label">長くなった話</p>
+          <h3>note</h3>
+          <p>ここで収まらなくなった考えとか、実験の続き。</p>
+          <a href="https://note.com/lovely_hosta391">読みにいく ↗</a>
         </div>
-        <a class="text-link" href="https://note.com/lovely_hosta391">もっと読む ↗</a>
-      </div>
-
-      <div class="trace-grid">
-        <a class="trace-card feature" href="https://note.com/lovely_hosta391/n/n22a47181440b">
-          <p class="trace-meta">08.29 · automation / life</p>
-          <h3>全部を自動化してたら、生活まで運用になってきた</h3>
-          <p>楽になるための自動化が、監視と例外処理を増やしていく。そこから生活まで改善対象にし始めた話。</p>
-          <span>note ↗</span>
-        </a>
-
-        <a class="trace-card" href="https://note.com/lovely_hosta391/n/n96632b93d966">
-          <p class="trace-meta">08.29 · ComfyUI</p>
-          <h3>画像生成で「顔が似てる」だけ見てると、たぶん途中で詰まる</h3>
-          <span>note ↗</span>
-        </a>
-
-        <a class="trace-card" href="/notes/image-model-benchmark.html">
-          <p class="trace-meta">08.29 · image generation</p>
-          <h3>画像生成モデル、1枚勝負で比べるとだいたい事故る</h3>
-          <span>field note →</span>
-        </a>
-
-        <a class="trace-card" href="/notes/linux-user-service-debug.html">
-          <p class="trace-meta">08.29 · Linux</p>
-          <h3>systemd --user が「そのシェルだけ」死ぬ時に見る場所</h3>
-          <span>field note →</span>
-        </a>
-
-        <a class="trace-card" href="/notes/debuggable-rag.html">
-          <p class="trace-meta">08.28 · RAG</p>
-          <h3>RAGは正解率より先に、外した理由を追えるようにした方がいい</h3>
-          <span>field note →</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="home-section drawer-section">
-      <div class="section-head">
         <div>
-          <p class="kicker">desk drawer</p>
-          <h2>作ったもの。必要な人だけどうぞ。</h2>
+          <p class="outside-label">仕事</p>
+          <h3>自動化とか</h3>
+          <p>Slack、スプレッドシート、API。小さい1フローから。</p>
+          <a href="https://www.lancers.jp/menu/detail/1340687">Lancers ↗</a>
         </div>
       </div>
-
-      <div class="tool-list">
-        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/editorial_depth_check.py">
-          <div><strong>Editorial Depth Check</strong><span>writing / preflight</span></div>
-          <p>文章を採点せず、薄い本命記事になってないかだけ赤旗を出す。</p>
-          <b>↗</b>
-        </a>
-        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/user_bus_doctor.py">
-          <div><strong>User Bus Doctor</strong><span>Linux / systemd user bus</span></div>
-          <p>リモートshellで user bus を見失った時の read-only 診断。</p>
-          <b>↗</b>
-        </a>
-        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/image_model_benchmark.py">
-          <div><strong>Image Model Benchmark</strong><span>image generation</span></div>
-          <p>最高の1枚じゃなく、崩れ方と coverage まで比べる。</p>
-          <b>↗</b>
-        </a>
-        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/rag_trace_check.py">
-          <div><strong>RAG Trace Check</strong><span>RAG / observability</span></div>
-          <p>source ID や run ID が追える状態かを検査する。</p>
-          <b>↗</b>
-        </a>
-        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/retry_guard.py">
-          <div><strong>Retry Guard</strong><span>automation / recovery</span></div>
-          <p>再実行していい事故と、止まった方がいい事故を分ける。</p>
-          <b>↗</b>
-        </a>
-      </div>
     </section>
 
-    <section class="home-section split-section">
-      <div class="quiet-card">
-        <p class="kicker">longer thoughts</p>
-        <h2>長いのは note に置いてる。</h2>
-        <p>ここは入口と作業机。手順じゃなく、考えを掘りたくなった時はnoteの方に置いてます。</p>
-        <a class="text-link" href="https://note.com/lovely_hosta391">noteを覗く ↗</a>
-      </div>
-
-      <div class="quiet-card work-card">
-        <p class="kicker">work</p>
-        <h2>手作業、減らせるかも。</h2>
-        <p>Slack、スプレッドシート、API、自動化。小さい1フローから組めます。</p>
-        <a class="text-link" href="https://www.lancers.jp/menu/detail/1340687">Lancersを見る ↗</a>
-      </div>
-    </section>
-
-    <footer class="home-footer">
+    <footer class="memo-footer">
       <span>あませ</span>
-      <span>build, break, leave a trace.</span>
+      <p>書きかけのまま増えていく予定。</p>
       <div><a href="https://x.com/amase__iv">X</a><a href="https://note.com/lovely_hosta391">note</a></div>
     </footer>
   </main>
