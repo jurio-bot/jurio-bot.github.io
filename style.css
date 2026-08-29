@@ -317,3 +317,17 @@ footer{margin-top:50px;color:var(--muted);font-size:.85rem}
 .free-product-links a{color:var(--memo-ink);font-size:.78rem;font-weight:750;text-decoration-color:var(--memo-accent)}
 @media(max-width:800px){.free-product{grid-template-columns:1fr;gap:14px}.free-product-links{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.free-product-links a{font-size:.72rem}}
 @media(max-width:600px){.free-section{padding-top:84px}.free-product{padding:24px 18px 27px}.free-product-links{grid-template-columns:1fr}}
+
+/* OSS shelf expansion */
+.free-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.free-product-feature{grid-column:1/-1}
+.free-mini{position:relative;min-height:235px;padding:24px 21px 22px;background:#fff8ed;border:1px solid #dfd2c5;box-shadow:2px 3px 0 rgba(82,65,54,.06)}
+.free-mini:nth-child(3){background:#edf1e8;transform:rotate(.35deg)}
+.free-mini:nth-child(4){background:#f8e8ed;transform:rotate(-.25deg)}
+.free-mini>span{font:700 .66rem/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sage);letter-spacing:.03em}
+.free-mini h3{margin:10px 0 10px;font-family:'Hiragino Mincho ProN','Yu Mincho','YuMincho','Noto Serif JP',serif;font-size:1.35rem;line-height:1.2;font-weight:650}
+.free-mini p{margin:0;color:#615750;font-size:.78rem;line-height:1.78}
+.free-mini>div{display:flex;gap:9px 12px;flex-wrap:wrap;margin-top:20px}
+.free-mini a{color:var(--memo-ink);font-size:.7rem;font-weight:750;text-decoration-color:var(--memo-accent)}
+@media(max-width:800px){.free-grid{grid-template-columns:1fr 1fr}.free-product-feature{grid-column:1/-1}.free-mini:nth-child(4){grid-column:1/-1}}
+@media(max-width:600px){.free-grid{grid-template-columns:1fr}.free-product-feature,.free-mini:nth-child(4){grid-column:auto}.free-mini:nth-child(n){transform:none}}
