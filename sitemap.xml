@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://paper-daemon.github.io/</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://paper-daemon.github.io/finders.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://paper-daemon.github.io/services/media-qa.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://paper-daemon.github.io/services/motion-15s.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://paper-daemon.github.io/portfolio/flowkit-motion-sample.html</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://paper-daemon.github.io/ai-work-router/</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://paper-daemon.github.io/vpn-needs-router/</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://paper-daemon.github.io/creator-stack-picker/</loc><lastmod>2026-08-29</lastmod></url>
@@ -10,6 +13,7 @@
   <url><loc>https://paper-daemon.github.io/creator-delivery-inspector/</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://paper-daemon.github.io/notes/image-model-benchmark.html</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://paper-daemon.github.io/notes/linux-user-service-debug.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://paper-daemon.github.io/notes/github-rename-link-audit.html</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://paper-daemon.github.io/notes/debuggable-rag.html</loc><lastmod>2026-08-28</lastmod></url>
   <url><loc>https://paper-daemon.github.io/notes/proof-of-antiquity.html</loc><lastmod>2026-08-28</lastmod></url>
 </urlset>
