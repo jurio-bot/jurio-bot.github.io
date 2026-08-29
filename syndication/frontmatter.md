@@ -1,7 +1,7 @@
 # Syndication package — Proof of Antiquity field note
 
 Canonical URL: https://paper-daemon.github.io/notes/proof-of-antiquity.html
-Author credit: あませ / jurio-bot
+Author credit: あませ / paper-daemon
 License for syndication: Elyan Labs may cross-post this article on official channels with permanent author credit and the canonical URL preserved.
 
 ## Dev.to
