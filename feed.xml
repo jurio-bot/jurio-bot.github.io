@@ -5,6 +5,13 @@
 <description>作って、回して、事故った所を書く。</description>
 <language>ja</language>
 <item>
+<title>GitHubの名前を変えたあと、repo内検索だけして安心すると危ない</title>
+<link>https://paper-daemon.github.io/notes/github-rename-link-audit.html</link>
+<guid>https://paper-daemon.github.io/notes/github-rename-link-audit.html</guid>
+<pubDate>2026-08-29T20:38:00+09:00</pubDate>
+<description>コード検索0件でもIssue本文や配布文面には旧リンクが残る。リネーム後に見る場所のメモ。</description>
+</item>
+<item>
 <title>画像生成モデル、1枚勝負で比べるとだいたい事故る</title>
 <link>https://paper-daemon.github.io/notes/image-model-benchmark.html</link>
 <guid>https://paper-daemon.github.io/notes/image-model-benchmark.html</guid>
