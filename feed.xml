@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>あませ Field Notes</title>
-<link>https://jurio-bot.github.io/</link>
+<link>https://paper-daemon.github.io/</link>
 <description>作って、回して、事故った所を書く。</description>
 <language>ja</language>
 <item>
 <title>画像生成モデル、1枚勝負で比べるとだいたい事故る</title>
-<link>https://jurio-bot.github.io/notes/image-model-benchmark.html</link>
-<guid>https://jurio-bot.github.io/notes/image-model-benchmark.html</guid>
+<link>https://paper-daemon.github.io/notes/image-model-benchmark.html</link>
+<guid>https://paper-daemon.github.io/notes/image-model-benchmark.html</guid>
 <pubDate>2026-08-29T00:00:00+09:00</pubDate>
 <description>写真・イラスト・漫画・複雑構図を分けて、最高点より失敗率まで見る。</description>
 </item>
 <item>
 <title>systemd --user が「そのシェルだけ」死ぬ時に見る場所</title>
-<link>https://jurio-bot.github.io/notes/linux-user-service-debug.html</link>
-<guid>https://jurio-bot.github.io/notes/linux-user-service-debug.html</guid>
+<link>https://paper-daemon.github.io/notes/linux-user-service-debug.html</link>
+<guid>https://paper-daemon.github.io/notes/linux-user-service-debug.html</guid>
 <pubDate>2026-08-29T00:00:00+09:00</pubDate>
 <description>リモートshellでuser busを見失った時、サービスを再起動する前の確認順。</description>
 </item>
 <item>
 <title>RAGは「正解率」より先に、外した理由を追えるようにした方がいい</title>
-<link>https://jurio-bot.github.io/notes/debuggable-rag.html</link>
-<guid>https://jurio-bot.github.io/notes/debuggable-rag.html</guid>
+<link>https://paper-daemon.github.io/notes/debuggable-rag.html</link>
+<guid>https://paper-daemon.github.io/notes/debuggable-rag.html</guid>
 <pubDate>2026-08-28T00:00:00+09:00</pubDate>
 <description>source ID、run ID、agent分離、health、validationを先に置いて、外した時に直せるRAGにする。</description>
 </item>
 <item>
 <title>Why an Old Power Mac Can Matter More Than a New Gaming Rig</title>
-<link>https://jurio-bot.github.io/notes/proof-of-antiquity.html</link>
-<guid>https://jurio-bot.github.io/notes/proof-of-antiquity.html</guid>
+<link>https://paper-daemon.github.io/notes/proof-of-antiquity.html</link>
+<guid>https://paper-daemon.github.io/notes/proof-of-antiquity.html</guid>
 <pubDate>2026-08-28T00:00:00+09:00</pubDate>
 <description>Proof-of-Antiquity、hardware fingerprinting、antiquity multiplierのfield note。</description>
 </item>

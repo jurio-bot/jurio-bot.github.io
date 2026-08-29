@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /18plus/
-Sitemap: https://jurio-bot.github.io/sitemap.xml
+Sitemap: https://paper-daemon.github.io/sitemap.xml
