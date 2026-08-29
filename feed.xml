@@ -5,13 +5,6 @@
 <description>作って、回して、事故った所を書く。</description>
 <language>ja</language>
 <item>
-<title>FedoraでSteamはかなり遊べる。でもGTAまで考えると、Windowsはまだ少し残したい。</title>
-<link>https://jurio-bot.github.io/notes/fedora-steam-proton-gta.html</link>
-<guid>https://jurio-bot.github.io/notes/fedora-steam-proton-gta.html</guid>
-<pubDate>2026-08-29T01:58:00+09:00</pubDate>
-<description>Proton、GTA V Enhanced、GTA OnlineのBattlEye、NTFS共有まで、Linux移行で詰まりやすい所を整理。</description>
-</item>
-<item>
 <title>画像生成モデル、1枚勝負で比べるとだいたい事故る</title>
 <link>https://jurio-bot.github.io/notes/image-model-benchmark.html</link>
 <guid>https://jurio-bot.github.io/notes/image-model-benchmark.html</guid>
