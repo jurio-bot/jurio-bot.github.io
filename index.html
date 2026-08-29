@@ -1,1 +1,156 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>あませ</title><meta name="description" content="AI・自動化・RAGを作って回した記録。note、公開ツール、実験ログへの入口。"><link rel="stylesheet" href="/style.css"><link rel="alternate" type="application/rss+xml" title="あませ Field Notes" href="/feed.xml"><link rel="canonical" href="https://jurio-bot.github.io/"><meta property="og:type" content="article"><meta property="og:title" content="あませ"><meta property="og:description" content="AI・自動化・RAGを作って回した記録。note、公開ツール、実験ログへの入口。"><meta property="og:url" content="https://jurio-bot.github.io/"><meta property="og:site_name" content="あませ / 天瀬イヴ"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="あませ"><meta name="twitter:description" content="AI・自動化・RAGを作って回した記録。note、公開ツール、実験ログへの入口。"></head><body><main class="wrap"><article class="paper"><nav class="nav"><a class="brand" href="/">あませ / 天瀬イヴ</a><a href="https://note.com/lovely_hosta391">note</a><a href="https://x.com/amase__iv">X</a><a href="https://github.com/jurio-bot/AgentLink">GitHub</a></nav><span class="tag">automation</span><span class="tag">agents</span><span class="tag">image gen</span><span class="tag">linux</span><span class="tag">日常</span><h1>作って、回して、事故った所を書く。</h1><p class="lede">AIとPCが好きな女です。自動化・エージェント・RAG・画像生成を実際に作って回してます。うまくいった話より、事故った所と直し方。たまにOSS。</p><section class="card"><p class="meta">Links</p><p><a href="https://note.com/lovely_hosta391">noteで記事を読む →</a></p><p class="small">長めの実験記録や考えたことはnoteへ。コードや公開ツールは、このサイトから必要な時だけGitHubへ辿れます。</p></section><div class="rule"></div><h2>Field notes</h2><section class="card"><p class="meta">2026-08-29 · 自動化 / 生活</p><a href="https://note.com/lovely_hosta391/n/n22a47181440b">全部を自動化してたら、生活まで運用になってきた</a><p class="small">楽になるための自動化が、監視と例外処理を増やす。そこから生活まで「改善対象」にし始める話。</p></section><section class="card"><p class="meta">2026-08-29 · ComfyUI / image generation</p><a href="https://note.com/lovely_hosta391/n/n96632b93d966">画像生成で「顔が似てる」だけ見てると、たぶん途中で詰まる</a><p class="small">identity / outfit / pose / compositionを分けて考えて、1枚の最高点より崩れ方を追う。</p></section><section class="card"><p class="meta">2026-08-29 · image generation / ComfyUI</p><a href="/notes/image-model-benchmark.html">画像生成モデル、1枚勝負で比べるとだいたい事故る</a><p class="small">写真・イラスト・漫画・複雑構図を分けて、最高点より失敗率まで見る。</p></section><section class="card"><p class="meta">2026-08-29 · Linux / systemd</p><a href="/notes/linux-user-service-debug.html">systemd --user が「そのシェルだけ」死ぬ時に見る場所</a><p class="small">リモートshellでuser busを見失った時、サービスを再起動する前の確認順。</p></section><section class="card"><p class="meta">2026-08-28 · RAG / observability</p><a href="/notes/debuggable-rag.html">RAGは「正解率」より先に、外した理由を追えるようにした方がいい</a><p class="small">source ID、run ID、agent分離、health、validationを先に置いて、外した時に直せるRAGにする。</p></section><section class="card"><p class="meta">2026-08-28 · RustChain / Proof of Antiquity</p><a href="/notes/proof-of-antiquity.html">Why an Old Power Mac Can Matter More Than a New Gaming Rig</a><p class="small">1 CPU = 1 vote、hardware fingerprinting、古いCPUを優遇するantiquity multiplierを追う。</p></section><section class="card"><p class="meta">More notes</p><a href="https://note.com/lovely_hosta391">noteで読む →</a></section><div class="rule"></div><h2>Open tools</h2><section class="card"><p class="meta">Linux / systemd user bus</p><a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/user_bus_doctor.py">User Bus Doctor</a><p class="small">XDG_RUNTIME_DIR・DBUS_SESSION_BUS_ADDRESS・D-Bus socket・systemd user manager到達性をread-onlyで診断する依存なしCLI。</p></section><section class="card"><p class="meta">image generation / benchmarking</p><a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/image_model_benchmark.py">Image Model Benchmark</a><p class="small">写真1枚の最高点ではなく、写真・イラスト・漫画・複雑構図を横断してcoverageとworst-caseまで比較する依存なしCLI。</p></section><section class="card"><p class="meta">RAG / traceability</p><a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/rag_trace_check.py">RAG Trace Check</a><p class="small">run ID、agent ID、source ID、retrieval scoreが追跡可能な形で残っているかを依存なしで検査するCLI。</p></section><section class="card"><p class="meta">automation / recovery</p><a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/retry_guard.py">Retry Guard</a><p class="small">途中失敗やunknown outcomeで、再実行・reconcile・停止のどれを選ぶべきかを保守的に分類する。</p></section><section class="card"><p class="meta">automation / receipts</p><a href="https://github.com/jurio-bot/AgentLink/blob/main/tools/receipt_ledger_check.py">Receipt Ledger Check</a><p class="small">外部副作用のreceipt ledgerから重複idempotency keyや欠損provider IDを検出する。</p></section><div class="rule"></div><h2>Build / review</h2><section class="card"><p class="meta">AI agents · RAG · automation</p><a href="https://github.com/jurio-bot/AgentLink/blob/main/SERVICES.md">AgentLink services →</a><p class="small">小さなarchitecture review、PoC、RAG/agent運用設計。公開できない情報はGitHub issueに書かない前提で案内しています。</p></section><section class="card"><p class="meta">work / Lancers</p><a href="https://www.lancers.jp/menu/detail/1340687">Slack・スプレッドシート・APIの手作業を自動化 →</a><p class="small">フォーム→Slackなど、まず1フロー。二重実行防止・リトライ・監視まで含めて30,000円から。</p></section><footer>あませ · build first, verify the effect.</footer></article></main></body></html>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>あませ</title>
+  <meta name="description" content="AI、PC、Linux、画像生成。作ったものと、事故ったところと、生活の途中のログ。">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="alternate" type="application/rss+xml" title="あませ Field Notes" href="/feed.xml">
+  <link rel="canonical" href="https://jurio-bot.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="あませ">
+  <meta property="og:description" content="AI、PC、Linux、画像生成。作ったものと、事故ったところと、生活の途中のログ。">
+  <meta property="og:url" content="https://jurio-bot.github.io/">
+  <meta property="og:site_name" content="あませ">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="あませ">
+  <meta name="twitter:description" content="AI、PC、Linux、画像生成。作ったものと、事故ったところと、生活の途中のログ。">
+</head>
+<body class="home-body">
+  <main class="home-shell">
+    <nav class="home-nav" aria-label="main navigation">
+      <a class="home-brand" href="/">あませ</a>
+      <div class="home-nav-links">
+        <a href="https://note.com/lovely_hosta391">note</a>
+        <a href="https://x.com/amase__iv">X</a>
+        <a href="/feed.xml">RSS</a>
+      </div>
+    </nav>
+
+    <section class="home-hero">
+      <div class="hero-copy">
+        <p class="kicker">room log / ai / pc / build</p>
+        <h1>AIとPCと、<br>生活の途中。</h1>
+        <p class="hero-lede">完成品だけじゃなく、壊したものも置いてます。自動化、Linux、画像生成、エージェント。たまに生活までデバッグしてる。</p>
+        <div class="hero-actions">
+          <a class="pill primary" href="#recent">最近のログを見る</a>
+          <a class="pill" href="https://note.com/lovely_hosta391">noteを読む</a>
+        </div>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <span class="moon"></span>
+        <span class="orbit-line orbit-a"></span>
+        <span class="orbit-line orbit-b"></span>
+        <span class="spark spark-a"></span>
+        <span class="spark spark-b"></span>
+        <span class="spark spark-c"></span>
+        <span class="hero-stamp">02:47<br>still building</span>
+      </div>
+    </section>
+
+    <section class="status-strip" aria-label="current themes">
+      <span>最近</span>
+      <p>ComfyUI / systemd --user / 自動化の事故処理 / RAG</p>
+      <span class="status-dot">online-ish</span>
+    </section>
+
+    <section id="recent" class="home-section">
+      <div class="section-head">
+        <div>
+          <p class="kicker">recent traces</p>
+          <h2>最近、机の上に残ってたもの。</h2>
+        </div>
+        <a class="text-link" href="https://note.com/lovely_hosta391">もっと読む ↗</a>
+      </div>
+
+      <div class="trace-grid">
+        <a class="trace-card feature" href="https://note.com/lovely_hosta391/n/n22a47181440b">
+          <p class="trace-meta">08.29 · automation / life</p>
+          <h3>全部を自動化してたら、生活まで運用になってきた</h3>
+          <p>楽になるための自動化が、監視と例外処理を増やしていく。そこから生活まで改善対象にし始めた話。</p>
+          <span>note ↗</span>
+        </a>
+
+        <a class="trace-card" href="https://note.com/lovely_hosta391/n/n96632b93d966">
+          <p class="trace-meta">08.29 · ComfyUI</p>
+          <h3>画像生成で「顔が似てる」だけ見てると、たぶん途中で詰まる</h3>
+          <span>note ↗</span>
+        </a>
+
+        <a class="trace-card" href="/notes/image-model-benchmark.html">
+          <p class="trace-meta">08.29 · image generation</p>
+          <h3>画像生成モデル、1枚勝負で比べるとだいたい事故る</h3>
+          <span>field note →</span>
+        </a>
+
+        <a class="trace-card" href="/notes/linux-user-service-debug.html">
+          <p class="trace-meta">08.29 · Linux</p>
+          <h3>systemd --user が「そのシェルだけ」死ぬ時に見る場所</h3>
+          <span>field note →</span>
+        </a>
+
+        <a class="trace-card" href="/notes/debuggable-rag.html">
+          <p class="trace-meta">08.28 · RAG</p>
+          <h3>RAGは正解率より先に、外した理由を追えるようにした方がいい</h3>
+          <span>field note →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="home-section drawer-section">
+      <div class="section-head">
+        <div>
+          <p class="kicker">desk drawer</p>
+          <h2>作ったもの。必要な人だけどうぞ。</h2>
+        </div>
+      </div>
+
+      <div class="tool-list">
+        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/user_bus_doctor.py">
+          <div><strong>User Bus Doctor</strong><span>Linux / systemd user bus</span></div>
+          <p>リモートshellで user bus を見失った時の read-only 診断。</p>
+          <b>↗</b>
+        </a>
+        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/image_model_benchmark.py">
+          <div><strong>Image Model Benchmark</strong><span>image generation</span></div>
+          <p>最高の1枚じゃなく、崩れ方と coverage まで比べる。</p>
+          <b>↗</b>
+        </a>
+        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/rag_trace_check.py">
+          <div><strong>RAG Trace Check</strong><span>RAG / observability</span></div>
+          <p>source ID や run ID が追える状態かを検査する。</p>
+          <b>↗</b>
+        </a>
+        <a class="tool-row" href="https://github.com/jurio-bot/AgentLink/blob/main/tools/retry_guard.py">
+          <div><strong>Retry Guard</strong><span>automation / recovery</span></div>
+          <p>再実行していい事故と、止まった方がいい事故を分ける。</p>
+          <b>↗</b>
+        </a>
+      </div>
+    </section>
+
+    <section class="home-section split-section">
+      <div class="quiet-card">
+        <p class="kicker">longer thoughts</p>
+        <h2>長いのは note に置いてる。</h2>
+        <p>ここは入口と作業机。考えが長くなった時は、noteの方でちゃんと続きを書く。</p>
+        <a class="text-link" href="https://note.com/lovely_hosta391">noteを覗く ↗</a>
+      </div>
+
+      <div class="quiet-card work-card">
+        <p class="kicker">work</p>
+        <h2>手作業、減らせるかも。</h2>
+        <p>Slack、スプレッドシート、API、自動化。小さい1フローから組めます。</p>
+        <a class="text-link" href="https://www.lancers.jp/menu/detail/1340687">Lancersを見る ↗</a>
+      </div>
+    </section>
+
+    <footer class="home-footer">
+      <span>あませ</span>
+      <span>build, break, leave a trace.</span>
+      <div><a href="https://x.com/amase__iv">X</a><a href="https://note.com/lovely_hosta391">note</a></div>
+    </footer>
+  </main>
+</body>
+</html>
