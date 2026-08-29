@@ -331,3 +331,14 @@ footer{margin-top:50px;color:var(--muted);font-size:.85rem}
 .free-mini a{color:var(--memo-ink);font-size:.7rem;font-weight:750;text-decoration-color:var(--memo-accent)}
 @media(max-width:800px){.free-grid{grid-template-columns:1fr 1fr}.free-product-feature{grid-column:1/-1}.free-mini:nth-child(4){grid-column:1/-1}}
 @media(max-width:600px){.free-grid{grid-template-columns:1fr}.free-product-feature,.free-mini:nth-child(4){grid-column:auto}.free-mini:nth-child(n){transform:none}}
+
+
+/* support box */
+.support-section{padding-top:94px}
+.support-note{position:relative;max-width:720px;padding:30px 34px 32px;background:#fff6e5;border:1px solid var(--memo-line);box-shadow:4px 5px 0 rgba(60,48,39,.08);transform:rotate(-.45deg)}
+.support-note:before{content:"☕";position:absolute;right:24px;top:18px;font-size:2rem;transform:rotate(8deg)}
+.support-note>span{font:700 .68rem/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sage)}
+.support-note h3{margin:8px 0 12px;font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;font-size:clamp(1.65rem,4vw,2.5rem);font-weight:600;letter-spacing:-.04em}
+.support-note p{max-width:580px;margin:0 0 19px;color:#62574e;font-size:.86rem;line-height:1.9}
+.support-note a{color:var(--memo-ink);font-size:.83rem;font-weight:800;text-decoration-color:var(--memo-accent)}
+@media(max-width:600px){.support-note{padding:25px 20px 27px;transform:none}.support-note:before{right:15px;top:14px}}
