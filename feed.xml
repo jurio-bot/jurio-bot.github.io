@@ -16,7 +16,7 @@
 <link>https://paper-daemon.github.io/notes/site-surface-doctor.html</link>
 <guid>https://paper-daemon.github.io/notes/site-surface-doctor.html</guid>
 <pubDate>2026-08-29T22:26:00+09:00</pubDate>
-<description>旧ブランド表記、canonical重複、noindex、sitemap漏れまでまとめて見る小さい監査ツールを作った。</description>
+<description>旧ブランド表記、canonical、noindex、sitemapに加えて、srcsetのresponsive画像とdata URI境界まで見る静的監査ツールの記録。</description>
 </item>
 <item>
 <title>GitHubの名前を変えたあと、repo内検索だけして安心すると危ない</title>
