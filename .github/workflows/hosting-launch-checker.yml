@@ -1,0 +1,31 @@
+name: Hosting Launch Checker guard
+
+on:
+  push:
+    paths:
+      - 'hosting-launch-checker/**'
+      - '.github/workflows/hosting-launch-checker.yml'
+  pull_request:
+    paths:
+      - 'hosting-launch-checker/**'
+      - '.github/workflows/hosting-launch-checker.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check
+        run: node --check hosting-launch-checker/app.js
+      - name: Keep user-facing rendering out of innerHTML
+        run: |
+          if grep -n 'innerHTML' hosting-launch-checker/app.js; then
+            echo 'Do not render Hosting Launch Checker input or offers through innerHTML.' >&2
+            exit 1
+          fi
