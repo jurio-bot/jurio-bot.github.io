@@ -12,6 +12,48 @@
 <description>額面より「自分が何分触るか」で仕事を見る。Whisperの実測から字幕・BGMまで繋いだ日のメモ。</description>
 </item>
 <item>
+<title>自動化する前に、小さい表で済むこともある</title>
+<link>https://paper-daemon.github.io/notes/small-workflow-kit-first.html</link>
+<guid>https://paper-daemon.github.io/notes/small-workflow-kit-first.html</guid>
+<pubDate>2026-08-30T00:00:00+09:00</pubDate>
+<description>自動化や大きいツールを足す前に、情報の散らかり方を小さいテンプレで整理できるかを見るためのメモ。</description>
+</item>
+<item>
+<title>CSV、splitlines()してから読むとquoted fieldの改行が消えた</title>
+<link>https://paper-daemon.github.io/notes/csv-quoted-multiline.html</link>
+<guid>https://paper-daemon.github.io/notes/csv-quoted-multiline.html</guid>
+<pubDate>2026-08-30T00:00:00+09:00</pubDate>
+<description>CSVのquoted field内改行を実fixtureで確認。splitlines()後にcsv.readerへ渡すと改行が消えたため、StringIOでrecord境界をparserへ任せたメモ。</description>
+</item>
+<item>
+<title>SRTの00:61:00を普通の時刻として読んでた</title>
+<link>https://paper-daemon.github.io/notes/srt-timestamp-ranges.html</link>
+<guid>https://paper-daemon.github.io/notes/srt-timestamp-ranges.html</guid>
+<pubDate>2026-08-30T00:00:00+09:00</pubDate>
+<description>SRT字幕のtimestamp rangeを実fixtureで確認。00:61:00や00:00:60を正常時刻として受理していたため、分・秒の範囲を明示検証したメモ。</description>
+</item>
+<item>
+<title>ログのtimestamp=trueを1秒として読んでた</title>
+<link>https://paper-daemon.github.io/notes/trace-invalid-timestamps.html</link>
+<guid>https://paper-daemon.github.io/notes/trace-invalid-timestamps.html</guid>
+<pubDate>2026-08-30T00:00:00+09:00</pubDate>
+<description>Trace WeaverでbooleanやNaNのtimestampを実fixtureで確認。Pythonの型とJSON parserの癖で偽の時刻やnan durationが出る境界を修正したメモ。</description>
+</item>
+<item>
+<title>公開前チェックがsymlinkの外まで読んでた</title>
+<link>https://paper-daemon.github.io/notes/share-safe-symlink-boundary.html</link>
+<guid>https://paper-daemon.github.io/notes/share-safe-symlink-boundary.html</guid>
+<pubDate>2026-08-30T00:00:00+09:00</pubDate>
+<description>Share Safe Packでフォルダ外を指すsymlinkを実fixtureで確認。公開対象の境界を越えてscan/redact-copyしていた挙動を修正した短いメモ。</description>
+</item>
+<item>
+<title>secret検出レポートがsecretを載せてた</title>
+<link>https://paper-daemon.github.io/notes/repo-health-secret-report.html</link>
+<guid>https://paper-daemon.github.io/notes/repo-health-secret-report.html</guid>
+<pubDate>2026-08-30T00:00:00+09:00</pubDate>
+<description>Repo Health Mapのsecret-like findingが実secret文字列をレポートへ再掲していた境界を修正。実fixtureと3/3テストの短いメモ。</description>
+</item>
+<item>
 <title>サイト監査、リンク切れだけ見ても足りなかった</title>
 <link>https://paper-daemon.github.io/notes/site-surface-doctor.html</link>
 <guid>https://paper-daemon.github.io/notes/site-surface-doctor.html</guid>
