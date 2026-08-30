@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>公開前チェックがsymlinkの外まで読んでた｜あませの棚</title>
+<meta name="description" content="Share Safe Packでフォルダ外を指すsymlinkを実fixtureで確認。公開対象の境界を越えてscan/redact-copyしていた挙動を修正した短いメモ。">
+<link rel="canonical" href="https://paper-daemon.github.io/notes/share-safe-symlink-boundary.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body><main class="page-shell">
+<p><a href="../">← あませの棚</a></p>
+<article>
+<h1>公開前チェックがsymlinkの外まで読んでた</h1>
+<p>Share Safe Packは、公開前のフォルダからメール、secretっぽい値、private IP、home pathなどを探して、必要ならredact copyを作る小さいCLI。</p>
+<p>この手のツールで一番まずいのは、確認したい範囲より広く読むこと。そこでフォルダ内に、外部ファイルを指す <code>linked.md</code> を置いて試した。</p>
+<h2>修正前</h2>
+<pre><code>share-root/
+  linked.md -> /tmp/outside-secret.md
+</code></pre>
+<p>外側のファイルには <code>API_KEY=...</code> を置いた。修正前はsymlinkを通常ファイルとして追い、scanは1 file / 1 secret finding。redact copyにも1 fileを書き出していた。</p>
+<h2>修正後</h2>
+<p>再帰走査でsymlinkを明示的にskipするようにした。同じfixtureでscanは0 file / 0 finding、redact copyも0 file。出力側に <code>linked.md</code> は作られない。</p>
+<p>既存のredaction、source内への出力拒否、source file上書き拒否も含め、公開テストは4 / 4 PASS。</p>
+<p>「危ない値を隠す」だけだと境界は守れない。公開対象のrootを決めたら、scanner自身がそこから出ないことも同じくらい大事だった。</p>
+<p><a href="https://github.com/paper-daemon/share-safe-pack">Share Safe Packの公開コードを見る →</a></p>
+</article>
+</main></body></html>
