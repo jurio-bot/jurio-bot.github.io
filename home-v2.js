@@ -1,4 +1,5 @@
 (() => {
+const navStyle=document.createElement('link');navStyle.rel='stylesheet';navStyle.href='/nav-icons.css';document.head.append(navStyle);
 const samples={trace:`{"trace_id":"a1","event_id":"e1","step":"fetch","ms":120}\n{"trace_id":"a1","event_id":"e2","step":"transform","ms":860}\n{"trace_id":"a1","event_id":"e2","step":"transform","ms":860}\nnot-json`,srt:`1\n00:00:00,000 --> 00:00:02,400\n最初の字幕\n\n2\n00:00:02,200 --> 00:00:05,800\n少し重なる字幕\n\n3\n00:00:09,800 --> 00:00:13,000\n長い空白のあと`,retry:`{"attempts":4,"base_ms":400,"concurrency":6,"success_rate":0.68}`,csv:` name , email , status\n Alice ,alice@example.com, ok\nBob,bob@example.com, pending\n Alice ,alice@example.com, ok\nCharlie, , ok`};
 const input=document.querySelector('#lab-input'),output=document.querySelector('#lab-output'),run=document.querySelector('#lab-run'),tabs=[...document.querySelectorAll('[data-mode]')];if(!input||!output)return;let mode='trace';
 const parseTime=s=>{const m=s.match(/(\d\d):(\d\d):(\d\d),(\d\d\d)/);return m?(((+m[1]*60 + +m[2])*60 + +m[3])*1000 + +m[4]):NaN};
