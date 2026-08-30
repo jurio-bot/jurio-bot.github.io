@@ -1,1 +1,2 @@
 body{font-family:system-ui,sans-serif;background:#111;color:#eee;margin:0}main{max-width:760px;margin:auto;padding:32px}input,button{font:inherit;padding:12px;border-radius:12px;border:1px solid #555}input{width:68%}button{cursor:pointer}section{margin-top:24px}.card{background:#1b1b1b;padding:16px;border-radius:16px;margin:10px 0}a{color:#9ad}
+.disclosure{font-size:.86rem;color:#bbb;margin-top:-4px}
