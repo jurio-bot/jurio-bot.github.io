@@ -1,137 +1,32 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>あませ / paper-daemon</title>
-  <meta name="description" content="作ってるもの、途中の考え、事故った記録。AI・自動化・Web・画像・動画・音声・データの作業机。">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="あませ Field Notes" href="/feed.xml">
-  <link rel="canonical" href="https://paper-daemon.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="あませ">
-  <meta property="og:description" content="作ってるもの、途中の考え、事故った記録。AI・自動化・Web・画像・動画・音声・データの作業机。">
-  <meta property="og:url" content="https://paper-daemon.github.io/">
-  <meta property="og:site_name" content="あませ">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="あませ">
-  <meta name="twitter:description" content="作ってるもの、途中の考え、事故った記録。AI・自動化・Web・画像・動画・音声・データの作業机。">
-  <script src="/lab.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>あませ / paper-daemon</title>
+<meta name="description" content="AI・自動化・Web・データ・画像・動画。必要になったものを作って、壊して、直して、使える形まで持っていく。">
+<link rel="canonical" href="https://paper-daemon.github.io/">
+<link rel="stylesheet" href="/home-v2.css">
+<link rel="alternate" type="application/rss+xml" title="あませ Field Notes" href="/feed.xml">
+<meta property="og:type" content="website"><meta property="og:title" content="あませ / paper-daemon"><meta property="og:description" content="欲しいものは、だいたい作る。コードと実物で見せる作業場。"><meta property="og:url" content="https://paper-daemon.github.io/">
+<script src="/home-v2.js" defer></script>
 </head>
-<body class="home-body">
-  <main class="memo-shell">
-    <nav class="memo-nav" aria-label="main navigation">
-      <a class="memo-brand" href="/"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span><span>あませ</span><small>paper-daemon</small></a>
-      <div class="memo-nav-links">
-        <a href="https://note.com/lovely_hosta391">note</a>
-        <a href="https://x.com/amase__iv">X</a>
-        <a href="https://www.threads.com/@ive.amase">Threads</a>
-        <a href="https://github.com/paper-daemon">GitHub</a>
-        <a href="/showcase.html">Showcase</a><a href="#elsewhere">links ↓</a>
-      </div>
-    </nav>
-
-    <header class="memo-hero">
-      <div class="memo-hero-main">
-        <p class="memo-date">2026.08.30　公開面を磨き直した</p>
-        <h1>欲しいものは、<br>だいたい作る。</h1>
-        <p class="memo-lede">AI・自動化・Web・データ・画像・動画。必要になったらまず作る。<br class="desktop-only">そのあと壊して、直して、使えるところまで持っていく。ここでは実物を動かせます。</p>
-      </div>
-      <aside class="hero-card" aria-label="この場所について">
-        <div class="paperdaemon-mark" aria-hidden="true"><span class="eye eye-a"></span><span class="eye eye-b"></span><b>&lt;/&gt;</b></div>
-        <div class="hero-card-copy">
-          <p>paper-daemon / workbench</p>
-          <strong>つくる・整える・効率化する。</strong>
-          <span>コードだけじゃなく、画像も動画も音声も文章も。必要なものを小さく作って試してます。</span>
-        </div>
-      </aside>
-    </header>
-
-    <div class="current-line">
-      <span>いま気になってる</span>
-      <p>ComfyUI / systemd --user / 自動化の事故処理 / RAG</p>
-    </div>
-
-    <div class="scope-line" aria-label="扱っていること">
-      <span>Web</span><span>AI</span><span>自動化</span><span>画像</span><span>動画</span><span>音声</span><span>文章</span><span>データ</span><span>作業サポート</span>
-    </div>
-
-    <section class="live-lab" aria-labelledby="lab-title">
-      <div class="lab-head"><div><p class="lab-kicker">LIVE LAB / browser only</p><h2 id="lab-title">ここで動かす。</h2><p>下の4つは飾りじゃなく、その場でJavaScriptが処理します。入力を書き換えて遊べます。</p></div><div class="github-pulse" id="github-pulse"><b>GitHub</b><span>公開repoを読込中…</span></div></div>
-      <div class="lab-tabs" role="tablist" aria-label="live demos">
-        <button class="is-active" data-lab="trace">JSONL trace</button><button data-lab="srt">SRT QA</button><button data-lab="retry">Retry budget</button><button data-lab="csv">CSV clean</button>
-      </div>
-      <div class="lab-console"><div><label for="lab-input">input</label><textarea id="lab-input" spellcheck="false"></textarea><button id="lab-run" class="lab-run">RUN ↵</button></div><div><label for="lab-output">output</label><pre id="lab-output" tabindex="0"></pre></div></div>
-      <p class="lab-foot">本番のOSSはもっと厳密。ここは処理の芯だけをブラウザ上で小さく見せてます。<a href="/showcase.html">全部の実装を見る →</a></p>
-    </section>
-
-    <section class="proof-wall" aria-label="recent build proofs">
-      <a href="https://github.com/paper-daemon/AgentLink"><span>STATE / RECOVERY</span><strong>会話が死んでも、仕事は死なせない。</strong><p>thread-firstからstate-firstへ。checkpoint / effect ledger / idempotencyで継続。</p></a>
-      <a href="/demos/repo-health-report.html"><span>SELF AUDIT</span><strong>自分のOSSで、自分の棚を検査。</strong><p>公開repoをscanして、壊れリンク・説明ムラ・CI不足を実際に潰した。</p></a>
-      <a href="https://github.com/paper-daemon/creator-delivery-inspector"><span>MEDIA / DELIVERY</span><strong>動画も「見た感じ」じゃなく測る。</strong><p>ffprobeでresolution / duration / codec / audio条件を機械チェック。</p></a>
-    </section>
-
-    <section class="memo-section affiliate-section" aria-label="PR / affiliate links">
-      <div class="memo-section-title">
-        <h2>試してる道具のとなり</h2>
-        <small>PR / アフィリエイトリンクを含みます</small>
-      </div>
-      <div class="plain-tools">
-        <a href="https://px.a8.net/svt/ejp?a8mat=4BAH9L+A6R1F6+50+7RTY1E" rel="nofollow sponsored"><strong>ConoHa AI Canvas</strong><span>画像生成まわりで気になってるやつ。ブラウザから触れるので比較用に置いてます。</span><b>PR ↗</b></a>
-        <a href="https://px.a8.net/svt/ejp?a8mat=4BAH9L+A8JC8I+5UU0+5YJRM" rel="nofollow sponsored"><strong>Doraverse</strong><span>自動化まわりで試してるやつ。使いどころがありそうなので触ってます。</span><b>PR ↗</b></a>
-      </div>
-      <p class="tiny-note">リンク経由で申込み・購入されると報酬が入る場合があります。使ってないものを使った顔では書きません。</p>
-    </section>
-
-    <section class="memo-section quick-buy-section" aria-label="products and demos">
-      <div class="memo-section-title"><h2>商品 / OSS / デモ</h2><small>買う前にも、使う前にも中身を見る</small></div>
-      <div class="support-note"><span>SHOWCASE / PROOF FIRST</span><h3>作ったものを1ページにまとめました。</h3><p>有料キットは中身の一部、無料OSSは実際の出力、Webツールはその場で触れるやつまで置きました。買う前でも使う前でも、だいたい何者か分かるようにしてます。</p><a href="/showcase.html">全部見る →</a></div>
-    </section>
-
-    <section id="recent" class="memo-section">
-      <div class="memo-section-title"><h2>最近のメモ</h2><a href="https://note.com/lovely_hosta391">noteにもある ↗</a></div>
-      <div class="memo-list">
-        <a class="memo-entry memo-entry-feature" href="https://note.com/lovely_hosta391/n/n6278127b03ba"><div class="memo-entry-date">08.30</div><div class="memo-entry-body"><span class="memo-entry-kind">仕事 / 音声 / 自動化</span><h3>20円の文字起こし案件で、単価より先に見るものが変わった</h3><p>額面より「自分が何分触るか」で仕事を見る。Whisperの実測から字幕・BGMまで繋いだ日のメモ。</p></div><span class="memo-entry-arrow">↗</span></a>
-        <a class="memo-entry" href="https://note.com/lovely_hosta391/n/n22a47181440b"><div class="memo-entry-date">08.29</div><div class="memo-entry-body"><span class="memo-entry-kind">自動化 / 生活</span><h3>全部を自動化してたら、生活まで運用になってきた</h3><p>楽になるための自動化が、監視と例外処理を増やしていく。気付いたら生活まで「改善対象」になってた。</p></div><span class="memo-entry-arrow">↗</span></a>
-        <a class="memo-entry" href="/notes/github-rename-link-audit.html"><div class="memo-entry-date">08.29</div><div class="memo-entry-body"><span class="memo-entry-kind">GitHub / 運用</span><h3>GitHubの名前を変えたあと、repo内検索だけして安心すると危ない</h3></div><span class="memo-entry-arrow">→</span></a>
-        <a class="memo-entry" href="https://note.com/lovely_hosta391/n/n96632b93d966"><div class="memo-entry-date">08.29</div><div class="memo-entry-body"><span class="memo-entry-kind">画像生成</span><h3>画像生成で「顔が似てる」だけ見てると、たぶん途中で詰まる</h3></div><span class="memo-entry-arrow">↗</span></a>
-        <a class="memo-entry" href="/notes/image-model-benchmark.html"><div class="memo-entry-date">08.29</div><div class="memo-entry-body"><span class="memo-entry-kind">モデル比較</span><h3>画像生成モデル、1枚勝負で比べるとだいたい事故る</h3></div><span class="memo-entry-arrow">→</span></a>
-        <a class="memo-entry" href="/notes/linux-user-service-debug.html"><div class="memo-entry-date">08.29</div><div class="memo-entry-body"><span class="memo-entry-kind">Linux</span><h3>systemd --user が「そのシェルだけ」死ぬ時に見る場所</h3></div><span class="memo-entry-arrow">→</span></a>
-        <a class="memo-entry" href="/notes/debuggable-rag.html"><div class="memo-entry-date">08.28</div><div class="memo-entry-body"><span class="memo-entry-kind">RAG</span><h3>RAGは正解率より先に、外した理由を追えるようにした方がいい</h3></div><span class="memo-entry-arrow">→</span></a>
-      </div>
-    </section>
-
-    <section class="memo-section now-section"><div class="memo-section-title"><h2>いま作ってる</h2><small>完成してないやつも含む</small></div><div class="project-scraps"><a class="project-scrap" href="https://github.com/paper-daemon/AgentLink"><span>ずっと触ってる</span><strong>AgentLink</strong><p>AI、PC、スマホ、通知とかを繋いでる途中。</p><b>GitHub ↗</b></a><a class="project-scrap" href="/notes/image-model-benchmark.html"><span>画像まわり</span><strong>生成モデル比較</strong><p>綺麗さより、崩れ方と構図の理解を見る。</p><b>メモ →</b></a><a class="project-scrap" href="/notes/debuggable-rag.html"><span>最近よく考える</span><strong>追えるAI</strong><p>賢さより、事故った理由を後から追えること。</p><b>メモ →</b></a></div></section>
-
-    <p style="margin:24px 0"><a href="/showcase.html">商品・OSS・デモをまとめて見る →</a>　<a href="finders.html">用途から無料ツールを探す →</a></p>
-
-    <section id="free" class="memo-section free-section"><div class="memo-section-title"><h2>あませの棚</h2><small>作ったやつ、無料のやつ、たまに売ってるやつ。ちゃんと動いたところまで確認してから置いてます。</small></div><div class="free-grid">
-      <article class="free-product free-product-feature"><div class="free-product-kicker">FREE / OSS / MIT</div><div class="free-product-copy"><h3>Automation First Aid <span>自動化の救急箱</span></h3><p>環境診断、再試行判定、JSON / JSONL破損チェック、systemd --user診断。止まった時の最初の10分を短くする。</p></div><div class="free-product-links"><a href="https://amase-memo.booth.pm/items/8778532">BOOTH 0円 ↗</a><a href="https://github.com/paper-daemon/automation-first-aid">OSS本体 ↗</a><a href="https://github.com/paper-daemon/automation-first-aid/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>LOG / OBSERVABILITY</span><h3>Trace Weaver</h3><p>JSONLログをtrace/job/request単位で束ね、時間の穴・retry・重複・壊れた行をHTML化。</p><div><a href="https://amase-memo.booth.pm/items/8778523">0円DL ↗</a><a href="https://github.com/paper-daemon/trace-weaver">GitHub ↗</a><a href="https://github.com/paper-daemon/trace-weaver/releases/tag/v1.0.1">Release ↗</a></div></article>
-      <article class="free-mini"><span>CONFIG / PRIVACY</span><h3>Config Drift Lens</h3><p>before / after の設定差分を、秘密値を伏せたままリスク度つきHTMLレポートへ。</p><div><a href="https://amase-memo.booth.pm/items/8778525">0円DL ↗</a><a href="https://github.com/paper-daemon/config-drift-lens">GitHub ↗</a><a href="https://github.com/paper-daemon/config-drift-lens/releases/tag/v1.0.1">Release ↗</a></div></article>
-      <article class="free-mini"><span>REPO / QUALITY</span><h3>Repo Health Map</h3><p>壊れリンク、TODO/FIXME、秘密値候補、巨大ファイル、README/LICENSE/testsを1枚で診断。</p><div><a href="https://amase-memo.booth.pm/items/8778526">0円DL ↗</a><a href="https://github.com/paper-daemon/repo-health-map">GitHub ↗</a><a href="https://github.com/paper-daemon/repo-health-map/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>DATA / CONTRACT</span><h3>Data Shape Guard</h3><p>実JSON/JSONLから型と出現率を推定して、型変更・フィールド消失・required率のドリフトを検出。</p><div><a href="https://amase-memo.booth.pm/items/8778557">0円DL ↗</a><a href="https://github.com/paper-daemon/data-shape-guard">GitHub ↗</a><a href="https://github.com/paper-daemon/data-shape-guard/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>RETRY / CAPACITY</span><h3>Retry Budget Lab</h3><p>リトライ回数・backoff・成功率・同時数から、負荷増幅と最悪時間を入れる前に計算。</p><div><a href="https://amase-memo.booth.pm/items/8778559">0円DL ↗</a><a href="https://github.com/paper-daemon/retry-budget-lab">GitHub ↗</a><a href="https://github.com/paper-daemon/retry-budget-lab/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>REPRO / DEBUG</span><h3>Repro Capsule</h3><p>OS・Git・CLI・依存manifest・環境変数の存在を、秘密値を伏せた再現カプセルとして保存。</p><div><a href="https://amase-memo.booth.pm/items/8778562">0円DL ↗</a><a href="https://github.com/paper-daemon/repro-capsule">GitHub ↗</a><a href="https://github.com/paper-daemon/repro-capsule/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>CSV / OFFICE</span><h3>CSV Clean Room</h3><p>文字化け、余計な空白、重複行、欠損セルが混じったCSV/TSVを整理してレポート化。</p><div><a href="https://amase-memo.booth.pm/items/8778712">0円DL ↗</a><a href="https://github.com/paper-daemon/csv-clean-room">GitHub ↗</a><a href="https://github.com/paper-daemon/csv-clean-room/releases/tag/v1.0.0">Release ↗</a><a href="https://github.com/paper-daemon/csv-clean-room/blob/main/docs/csv-first-pass.md">整理メモ ↗</a></div></article>
-      <article class="free-mini"><span>WEB / LANDING PAGE</span><h3>Brief to Page</h3><p>短いJSON要件から、スマホ対応・基本SEO/OGP入りの1ページLPを単一HTMLで生成。</p><div><a href="https://amase-memo.booth.pm/items/8778713">0円DL ↗</a><a href="https://github.com/paper-daemon/brief-to-page">GitHub ↗</a><a href="https://github.com/paper-daemon/brief-to-page/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>PUBLISH / PRIVACY</span><h3>Share Safe Pack</h3><p>記事や納品物を公開する前に、連絡先・秘密値・ローカルパス・DRAFT残りをまとめて確認。</p><div><a href="https://amase-memo.booth.pm/items/8778714">0円DL ↗</a><a href="https://github.com/paper-daemon/share-safe-pack">GitHub ↗</a><a href="https://github.com/paper-daemon/share-safe-pack/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>VIDEO / SUBTITLE</span><h3>Subtitle Workbench</h3><p>SRT字幕の重なり・長い空白・不正時間をチェックし、番号正規化と一括タイムシフト。</p><div><a href="https://amase-memo.booth.pm/items/8778719">0円DL ↗</a><a href="https://github.com/paper-daemon/subtitle-workbench">GitHub ↗</a><a href="https://github.com/paper-daemon/subtitle-workbench/releases/tag/v1.0.0">Release ↗</a><a href="https://github.com/paper-daemon/subtitle-workbench/blob/main/docs/srt-qa-first-pass.md">QAメモ ↗</a></div></article>
-      <article class="free-mini"><span>IMAGE / BATCH</span><h3>Image Batch Kit</h3><p>画像をまとめてリサイズ・WebP/JPEG/PNG変換し、一覧シートとmanifestを生成。</p><div><a href="https://amase-memo.booth.pm/items/8778724">0円DL ↗</a><a href="https://github.com/paper-daemon/image-batch-kit">GitHub ↗</a><a href="https://github.com/paper-daemon/image-batch-kit/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>WEB / AI ROUTER</span><h3>AI Work Router</h3><p>目的・予算・運用の重視点から、先に比較するAIツールカテゴリを整理する無料診断。</p><div><a href="https://paper-daemon.github.io/ai-work-router/">使う ↗</a><a href="https://github.com/paper-daemon/ai-work-router">GitHub ↗</a><a href="https://github.com/paper-daemon/ai-work-router/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>WEB / SECURITY</span><h3>VPN Needs Router</h3><p>公衆Wi‑Fi・固定IP・リモート接続・旅行用途から、VPN選びで確認する条件を整理。</p><div><a href="https://paper-daemon.github.io/vpn-needs-router/">使う ↗</a><a href="https://github.com/paper-daemon/vpn-needs-router">GitHub ↗</a><a href="https://github.com/paper-daemon/vpn-needs-router/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>WEB / HOSTING</span><h3>Hosting Launch Checker</h3><p>HTTPS・robots・sitemap・404・基本ヘッダなど、公開前後の確認ポイントを整理。</p><div><a href="https://paper-daemon.github.io/hosting-launch-checker/">使う ↗</a><a href="https://github.com/paper-daemon/hosting-launch-checker">GitHub ↗</a><a href="https://github.com/paper-daemon/hosting-launch-checker/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>EC / IMAGE</span><h3>Shop Image QA</h3><p>商品画像の寸法・比率・容量・形式をブラウザ内で確認。画像はアップロードしません。</p><div><a href="https://paper-daemon.github.io/shop-image-qa/">使う ↗</a><a href="https://github.com/paper-daemon/shop-image-qa">GitHub ↗</a><a href="https://github.com/paper-daemon/shop-image-qa/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>CREATOR / GEAR</span><h3>Creator Gear Router</h3><p>会議・配信・商品撮影・外作業から、先に揃える機材カテゴリを用途ベースで整理。</p><div><a href="https://paper-daemon.github.io/creator-gear-router/">使う ↗</a><a href="https://github.com/paper-daemon/creator-gear-router">GitHub ↗</a><a href="https://github.com/paper-daemon/creator-gear-router/releases/tag/v1.0.0">Release ↗</a></div></article>
-      <article class="free-mini"><span>CREATOR / STACK</span><h3>Creator Stack Picker</h3><p>制作・自動化の要件から、先に比較するツールカテゴリを整理。広告の有無と診断ロジックを分離。</p><div><a href="https://paper-daemon.github.io/creator-stack-picker/">使う ↗</a><a href="https://github.com/paper-daemon/creator-stack-picker">GitHub ↗</a></div></article>
-      <article class="free-mini"><span>VIDEO / DELIVERY QA</span><h3>Creator Delivery Inspector</h3><p>ffprobeで動画・音声の解像度、長さ、codec、sample rateなどを確認。Shorts/横動画の簡易プリセット付き。</p><div><a href="https://github.com/paper-daemon/creator-delivery-inspector">GitHub ↗</a><a href="https://github.com/paper-daemon/creator-delivery-inspector/releases/tag/v1.0.0">Release ↗</a></div></article>
-    </div></section>
-    <p class="tiny-note">動画・音声の納品QA（解像度・尺・codec確認）にも対応。</p>
-    <section class="memo-section tools-section"><div class="memo-section-title"><h2>机のすみ</h2><small>途中のやつとか、メモとか。</small></div><div class="plain-tools"><a href="https://github.com/paper-daemon/AgentLink/blob/main/tools/url_contract_check.py"><strong>URL Contract Check</strong><span>rename / domain migration の参照漏れチェック。</span><b>↗</b></a><a href="https://github.com/paper-daemon/AgentLink"><strong>AgentLink</strong><span>AI、PC、スマホ、通知まわりを繋いでる本体。</span><b>↗</b></a><a href="/notes/image-model-benchmark.html"><strong>Image Model Benchmark memo</strong><span>生成モデルを1枚勝負にしない比較メモ。</span><b>→</b></a><a href="/notes/debuggable-rag.html"><strong>Debuggable RAG memo</strong><span>外した理由を追えるRAGについて。</span><b>→</b></a></div></section>
-    <section class="memo-section support-section"><div class="memo-section-title"><h2>貢ぎ箱</h2><small>無料で使って、気に入ったら笑</small></div><div class="support-note"><span>ACTIVITY SUPPORT / ¥100</span><h3>気に入ったら貢いで ☕</h3><p>無料OSSは無料のまま。役に立ったら、作業机にコーヒー置いといて。支援ページの中身はお礼メモだけです。</p><a href="https://amase-memo.booth.pm/items/8778581">100円置いてく ↗</a></div></section>
-    <section id="elsewhere" class="memo-section memo-bottom"><div class="memo-section-title"><h2>置き場所</h2><small>あちこちに散らばってる</small></div><div class="places-grid"><a class="place-link place-note" href="https://note.com/lovely_hosta391"><span>長くなった話</span><strong>note</strong><p>実験とか、考えが収まらなくなった時。</p><b>↗</b></a><a class="place-link place-x" href="https://x.com/amase__iv"><span>その時のやつ</span><strong>X</strong><p>ぼやき、途中経過、たまに技術。</p><b>↗</b></a><a class="place-link place-threads" href="https://www.threads.com/@ive.amase"><span>もう少し会話寄り</span><strong>Threads</strong><p>気になったことを投げたり、ゆるく話す場所。</p><b>↗</b></a><a class="place-link place-github" href="https://github.com/paper-daemon"><span>コード置き場</span><strong>GitHub</strong><p>道具と実装。paper-daemon。</p><b>↗</b></a><a class="place-link place-booth" href="https://amase-memo.booth.pm/"><span>あませの棚</span><strong>BOOTH</strong><p>無料OSSと、たまに何か。支援箱もここ。</p><b>↗</b></a></div></section>
-    <section class="memo-section work-section"><div class="memo-section-title"><h2>仕事の窓口</h2><small>相談はこっち</small></div><div class="work-grid"><div class="work-note"><span>自動化 / AI / CSV / Web / 字幕 / 画像 / API</span><h3>Lancers</h3><p>自動化、CSV整理、API連携、小さいWeb/LP、字幕整理、画像下処理。まず一部分から。</p><div><a href="https://www.lancers.jp/profile/aLuu">プロフィール ↗</a><a href="https://www.lancers.jp/menu/detail/1340687">自動化パッケージ ↗</a><a href="https://www.lancers.jp/menu/detail/1340785">CSV整理パッケージ ↗</a></div></div><div class="work-note work-note-coconala"><span>相談・依頼 / QA</span><h3>ココナラ</h3><p>自動化やデータ整理に加えて、動画・音声の納品前QAも受付中。</p><div><a href="https://coconala.com/users/3185601">プロフィール ↗</a><a href="https://coconala.com/services/3914156">動画・音声QA ↗</a><a href="https://coconala.com/services/4374617">SRT字幕QA ↗</a><a href="https://coconala.com/services/4374623">CSV整理 ↗</a></div></div></div></section>
-    <footer class="memo-footer"><span>あませ</span><p>書きかけのまま増えていく予定。</p><div><a href="https://x.com/amase__iv">X</a><a href="https://www.threads.com/@ive.amase">Threads</a><a href="https://note.com/lovely_hosta391">note</a><a href="https://github.com/paper-daemon">GitHub</a><a href="https://amase-memo.booth.pm/">BOOTH</a><a href="/feed.xml">RSS</a></div></footer>
-  </main>
-</body>
-</html>
+<body>
+<header class="site-header"><a class="brand" href="/">あませ <span>/ paper-daemon</span></a><nav><a href="#work">Work</a><a href="#lab">Live Lab</a><a href="#services">Services</a><a href="/showcase.html">All builds</a><a href="https://github.com/paper-daemon">GitHub ↗</a></nav></header>
+<main>
+<section class="hero"><p class="eyebrow">INDEPENDENT BUILD LAB</p><h1>欲しいものは、<br>だいたい作る。</h1><p class="hero-copy">AI・自動化・Web・データ・画像・動画。必要になったものを作って、壊して、直して、使える形まで持っていく。説明より先に、動くものを置いてます。</p><div class="hero-actions"><a class="button primary" href="#lab">その場で動かす</a><a class="button" href="/showcase.html">商品・OSS・デモ全部</a></div><div class="stats" aria-label="public build stats"><div><strong id="repo-count">21</strong><span>public repos</span></div><div><strong>4</strong><span>live demos</span></div><div><strong>6</strong><span>fixed-scope services</span></div></div></section>
+<section id="work" class="section"><div class="section-head"><p class="eyebrow">SELECTED WORK</p><h2>まず3つだけ。</h2><p>全部見せるより、今の作り方が一番出てるものを選びました。</p></div><div class="work-list">
+<a class="work-item feature" href="https://github.com/paper-daemon/AgentLink"><div class="work-meta"><span>01</span><span>AGENT / SYSTEMS</span></div><div><h3>AgentLink</h3><p>会話やブラウザが落ちても、checkpoint・receipt・idempotencyから仕事を続ける。AI、PC、スマホ、Company OSを繋いでる本体。</p><ul><li>state-first continuity</li><li>bounded workers</li><li>multi-route recovery</li></ul></div><b>GitHub ↗</b></a>
+<a class="work-item" href="/demos/repo-health-report.html"><div class="work-meta"><span>02</span><span>QUALITY / OSS</span></div><div><h3>Repo Health Map</h3><p>壊れリンク、secret-like、README、LICENSE、tests、CIを一括で見る。自分の公開repo群にも実際に当てて棚を直した。</p></div><b>Sample report →</b></a>
+<a class="work-item" href="https://paper-daemon.github.io/creator-delivery-inspector/"><div class="work-meta"><span>03</span><span>MEDIA / DELIVERY</span></div><div><h3>Creator Delivery Inspector</h3><p>動画・音声のresolution、duration、codec、sample rateをffprobeベースで確認。納品前QAを「見た感じ」で終わらせない。</p></div><b>Demo →</b></a>
+</div><p class="more-link"><a href="/showcase.html">残りのOSS・商品・デモを見る →</a></p></section>
+<section id="lab" class="section lab-section"><div class="section-head inverse"><p class="eyebrow">LIVE LAB</p><h2>読むより、触る。</h2><p>ブラウザの中だけで動く小さい実演。入力を書き換えてRUNできます。</p></div><div class="lab-shell"><div class="lab-tabs" role="tablist"><button class="active" data-mode="trace">JSONL trace</button><button data-mode="srt">SRT QA</button><button data-mode="retry">Retry budget</button><button data-mode="csv">CSV clean</button></div><div class="lab-grid"><div><label for="lab-input">INPUT</label><textarea id="lab-input" spellcheck="false"></textarea><button id="lab-run">RUN</button></div><div><label for="lab-output">OUTPUT</label><pre id="lab-output"></pre></div></div><div class="lab-bottom"><span id="github-pulse">GitHubを読込中…</span><a href="/showcase.html">本体の実装を見る ↗</a></div></div></section>
+<section id="services" class="section"><div class="section-head"><p class="eyebrow">FIXED-SCOPE SERVICES</p><h2>そのまま頼める。</h2><p>デモと同じ考え方を、手元のデータやrepoでやる枠。最初から大工事にはしません。</p></div><div class="service-groups">
+<article><span>DATA / MEDIA</span><h3>整える・検査する</h3><p>CSV、SRT、動画・音声。入力が明確なものを機械チェック＋短いQAで返します。</p><div class="price-row"><a href="https://buy.stripe.com/5kQ9AS9lk9QW2ghf0TgEg0j">CSV ¥3,000 ↗</a><a href="https://buy.stripe.com/9B67sK0OO6EKaMNaKDgEg0k">SRT ¥3,000 ↗</a><a href="https://buy.stripe.com/4gM5kC8hg1kq8EF3ibgEg0l">Media ¥3,000 ↗</a></div></article>
+<article><span>CODE / WEB</span><h3>公開前に潰す</h3><p>公開repoやWebサイトを、リンク・構成・CI・基本ヘッダ・旧表記までまとめて点検します。</p><div class="price-row"><a href="https://buy.stripe.com/4gM9AS2WW4wC6wx1a3gEg0i">Repo ¥4,900 ↗</a><a href="https://buy.stripe.com/aFaaEWapo4wCbQR05ZgEg0n">Site ¥4,900 ↗</a></div></article>
+<article><span>GENERATIVE / WORKFLOW</span><h3>複雑さをほどく</h3><p>ComfyUI workflow JSONのノード配置・命名・missing/custom nodeを整理して、引き継ぎやすくします。</p><div class="price-row"><a href="https://buy.stripe.com/bJedR87dc6EK9IJ8CvgEg0m">ComfyUI ¥7,000 ↗</a></div></article>
+</div><p class="scope-note">固定料金の外まで勝手に広げません。範囲外なら作業開始前に止めます。</p></section>
+<section class="section notes"><div class="section-head"><p class="eyebrow">FIELD NOTES</p><h2>最近の記録。</h2></div><div class="note-list"><a href="https://note.com/lovely_hosta391/n/n6278127b03ba"><time>08.30</time><div><h3>20円の文字起こし案件で、単価より先に見るものが変わった</h3><p>Whisperの実測から字幕・BGMまで繋いだ日のメモ。</p></div><b>↗</b></a><a href="/notes/linux-user-service-debug.html"><time>08.29</time><div><h3>systemd --user が「そのシェルだけ」死ぬ時に見る場所</h3><p>Linuxのuser serviceを追った時の切り分け。</p></div><b>→</b></a><a href="/notes/debuggable-rag.html"><time>08.28</time><div><h3>RAGは正解率より先に、外した理由を追えるようにした方がいい</h3><p>賢さより、事故の原因を追える構成について。</p></div><b>→</b></a></div></section>
+<section class="contact"><p class="eyebrow">ELSEWHERE</p><h2>コードはGitHub。長い話はnote。<br>仕事はLancers / ココナラ。</h2><div><a href="https://github.com/paper-daemon">GitHub ↗</a><a href="https://note.com/lovely_hosta391">note ↗</a><a href="https://x.com/amase__iv">X ↗</a><a href="https://www.threads.com/@ive.amase">Threads ↗</a><a href="https://www.lancers.jp/profile/aLuu">Lancers ↗</a><a href="https://coconala.com/users/3185601">ココナラ ↗</a></div></section>
+</main><footer><span>あませ / paper-daemon</span><span>Build → break → fix → verify.</span><a href="/feed.xml">RSS</a></footer>
+</body></html>
