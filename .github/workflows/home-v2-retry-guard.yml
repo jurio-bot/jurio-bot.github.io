@@ -1,0 +1,29 @@
+name: Home retry mini-lab guard
+
+on:
+  push:
+    paths:
+      - 'home-v2.js'
+      - 'tests/test_home_v2_retry_guard.py'
+      - '.github/workflows/home-v2-retry-guard.yml'
+  pull_request:
+    paths:
+      - 'home-v2.js'
+      - 'tests/test_home_v2_retry_guard.py'
+      - '.github/workflows/home-v2-retry-guard.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax check
+        run: node --check home-v2.js
+      - name: Retry boundary regression guard
+        run: python -m unittest -v tests.test_home_v2_retry_guard
