@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SRTの00:61:00を普通の時刻として読んでた｜あませの棚</title>
+<meta name="description" content="SRT字幕のtimestamp rangeを実fixtureで確認。00:61:00や00:00:60を正常時刻として受理していたため、分・秒の範囲を明示検証したメモ。">
+<link rel="canonical" href="https://paper-daemon.github.io/notes/srt-timestamp-ranges.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body><main class="page-shell">
+<p><a href="../">← あませの棚</a></p>
+<article>
+<h1>SRTの00:61:00を普通の時刻として読んでた</h1>
+<p>Subtitle Workbenchのtimestamp parserをfixtureで叩いていたら、形式だけ合っている壊れた時刻を普通に受理していた。</p>
+<pre><code>00:61:00,000 --> 00:61:01,000</code></pre>
+<p>正規表現は <code>HH:MM:SS,mmm</code> の桁数を見ていたけど、分と秒が59以下かまでは見ていなかった。なので <code>00:61:00,000</code> も、<code>00:00:60,000</code> も数値化できてしまう。</p>
+<h2>今回の境界</h2>
+<ul>
+<li><code>00:59:59,999</code> は受理</li>
+<li><code>00:61:00,000</code> は拒否</li>
+<li><code>00:00:60,000</code> は拒否</li>
+</ul>
+<p>分・秒が60以上なら、後段で謎のdurationやgapを作る前にtimestamp自体を不正として止めるようにした。</p>
+<h2>確認した範囲</h2>
+<p>既存のSRT parse、overlap検出、time shift、formatのテストを維持しつつ、範囲外timestampの回帰テストを追加。公開テストは2 / 2 PASS。</p>
+<p>字幕QAは「タイムコードらしい文字列か」だけじゃなく、「その値が時刻として成立しているか」まで分けて見た方が切り分けしやすい。</p>
+<p><a href="https://github.com/paper-daemon/subtitle-workbench">Subtitle Workbenchの公開コードを見る →</a></p>
+<p><a href="https://github.com/paper-daemon/subtitle-workbench/blob/main/docs/srt-qa-first-pass.md">別fixtureでのSRT QA実測を見る →</a></p>
+</article>
+</main></body></html>
