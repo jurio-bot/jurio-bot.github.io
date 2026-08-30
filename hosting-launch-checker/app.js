@@ -21,21 +21,31 @@ document.querySelector('#f').addEventListener('submit',e=>{
   renderOffers();
 });
 
+function safeExternalUrl(raw){
+  try{
+    const url=new URL(raw,window.location.href);
+    return url.protocol==='https:'||url.protocol==='http:'?url.href:null;
+  }catch{
+    return null;
+  }
+}
+
 function renderOffers(){
   const o=(window.AFFILIATE_OFFERS||[]).filter(x=>x.enabled);
   const target=document.querySelector('#offers');
   target.replaceChildren();
-  if(!o.length)return;
+  const safeOffers=o.map(offer=>({offer,url:safeExternalUrl(offer.url)})).filter(x=>x.url);
+  if(!safeOffers.length)return;
   const heading=document.createElement('h2');
   heading.textContent='関連サービス';
   target.appendChild(heading);
-  for(const offer of o){
+  for(const {offer,url} of safeOffers){
     const card=document.createElement('div');
     card.className='card';
     const link=document.createElement('a');
     link.rel='sponsored nofollow noopener';
     link.target='_blank';
-    link.href=offer.url;
+    link.href=url;
     link.textContent=offer.label;
     const disclosure=document.createElement('p');
     disclosure.textContent='広告リンクを含みます。';
