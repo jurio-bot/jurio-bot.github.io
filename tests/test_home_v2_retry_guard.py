@@ -7,6 +7,11 @@ class HomeRetryGuardTests(unittest.TestCase):
     def setUpClass(cls):
         cls.source = Path("home-v2.js").read_text(encoding="utf-8")
 
+    def test_all_modes_share_an_input_size_cap(self):
+        self.assertIn("const MAX_LAB_INPUT_CHARS=200000", self.source)
+        self.assertIn("if(input.value.length>MAX_LAB_INPUT_CHARS)", self.source)
+        self.assertIn("input too large; max ${MAX_LAB_INPUT_CHARS} characters", self.source)
+
     def test_attempts_are_bounded_before_loop(self):
         self.assertIn("boundedNumber(x.attempts,'attempts',1,12,{integer:true})", self.source)
         self.assertIn("for(let i=0;i<a-1;i++)", self.source)
