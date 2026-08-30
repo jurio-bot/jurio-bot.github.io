@@ -1,0 +1,1 @@
+:root{font-family:system-ui,sans-serif;color-scheme:light dark}body{margin:0}main{max-width:720px;margin:auto;padding:32px 20px}section{display:grid;gap:16px;margin:24px 0;padding:20px;border:1px solid #8885;border-radius:20px}label{display:grid;gap:6px}select,button{font:inherit;padding:12px;border-radius:12px}button{cursor:pointer}a{font-weight:700}
