@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creator Stack Picker</title><meta name="description" content="制作と自動化の条件から、使い始めるツール候補を整理する無料ツール。">
+<link rel="stylesheet" href="style.css"></head><body>
+<main><header><p class="eyebrow">AMASE / FREE TOOL</p><h1>Creator Stack Picker</h1><p>やりたいことを選ぶと、制作・自動化まわりのツール候補を軽く整理します。</p></header>
+<section class="panel"><h2>何をしたい？</h2><div id="choices" class="choices"></div>
+<label>いちばん優先したいこと<select id="priority"><option value="easy">かんたんさ</option><option value="control">自由度・自前運用</option><option value="creative">制作機能</option><option value="cost">初期費用を抑える</option></select></label>
+<button id="run">候補を出す</button></section>
+<section id="result" class="panel result" hidden><h2>候補スタック</h2><div id="cards"></div><p class="note">これは用途整理用の候補です。特定サービスが絶対に最適という意味ではありません。</p></section>
+<footer><p>無料ツール / <a href="https://github.com/paper-daemon" rel="noopener">paper-daemon</a></p><p id="disclosure" hidden>※一部リンクにはアフィリエイトリンクを含む場合があります。</p></footer>
+</main><script src="affiliate-config.js"></script><script src="app.js"></script></body></html>
