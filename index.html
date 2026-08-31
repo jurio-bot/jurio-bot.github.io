@@ -4,77 +4,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>あませ / paper-daemon</title>
-<meta name="description" content="PCまわり、自動化、Web、画像、動画、データとか。作ったものと途中のメモを置いてます。">
+<meta name="description" content="PCまわり、自動化、AI、Web。実際に動かしてるものと途中のメモを置いてます。">
 <link rel="canonical" href="https://paper-daemon.github.io/">
 <link rel="stylesheet" href="/home-v2.css">
+<link rel="stylesheet" href="/nav-icons.css">
 <link rel="alternate" type="application/rss+xml" title="あませ Field Notes" href="/feed.xml">
-<meta property="og:type" content="website"><meta property="og:title" content="あませ / paper-daemon"><meta property="og:description" content="作ったものと途中のメモ。たまにその場で動かせます。"><meta property="og:url" content="https://paper-daemon.github.io/">
+<meta property="og:type" content="website"><meta property="og:title" content="あませ / paper-daemon"><meta property="og:description" content="実際に動かしてるものと途中のメモ。"><meta property="og:url" content="https://paper-daemon.github.io/">
 <script src="/home-v2.js" defer></script>
 </head>
 <body>
 <header class="topbar">
   <a class="name" href="/">あませ <small>paper-daemon</small></a>
-  <nav><a href="#made">作ったもの</a><a href="#lab">試す</a><a href="/finders.html">用途から探す</a><a href="#work">作業受付</a><a href="/showcase.html">一覧</a><a href="https://github.com/paper-daemon">GitHub ↗</a></nav>
+  <nav aria-label="main"><a href="#made">作ったもの</a><a href="#lab">試す</a><a href="#work">作業受付</a><a href="/showcase.html">一覧</a><a href="https://github.com/paper-daemon">GitHub</a></nav>
 </header>
 <main>
-  <section class="intro">
-    <div class="intro-main">
-      <p class="date">2026.08.30 / 最近またサイトいじってる</p>
-      <h1>いろいろ<br>作ってます。</h1>
-      <p class="lead">PCまわり、自動化、Web、画像、動画、データとか。その時に欲しくなったものを作って、使いにくかったらまた直してます。ここにはその中で人に見せられるものを置いてます。</p>
-      <p class="jump"><a href="#lab">ちょっと試す ↓</a><a href="/finders.html">用途から探す →</a><a href="/showcase.html">作ったもの一覧 →</a></p>
-    </div>
-    <aside class="desk-note">
-      <span>最近よく触ってる</span>
-      <p>AgentLink<br>ComfyUI<br>字幕と動画QA<br>画像モデル比較<br>自動化まわり</p>
-      <small id="github-pulse">GitHubを読込中…</small>
-    </aside>
-  </section>
+<section class="intro"><div class="intro-main"><p class="date">2026.08.31</p><h1>いろいろ<br>作ってます。</h1><p class="lead">自動化とかAIとかPCまわり。作って終わりじゃなく、実際に動かしながら直してるものを中心に置いてます。</p><p class="jump"><a href="#lab">↓</a><a href="/showcase.html">→</a></p></div><aside class="desk-note"><span>最近</span><p>AgentLink<br>長時間worker<br>復旧まわり<br>RAG<br>ComfyUI</p><small id="github-pulse">GitHubを読込中…</small></aside></section>
 
-  <section id="made" class="made">
-    <header class="chapter"><span>01</span><div><h2>最近作ったやつ。</h2><p>とりあえず3つ。</p></div></header>
-    <a class="big-piece" href="https://github.com/paper-daemon/AgentLink">
-      <div class="piece-index">A</div>
-      <div class="piece-copy"><p class="piece-kind">Agent / systems</p><h3>AgentLink</h3><p>AI、PC、スマホをつないで色々やってるやつ。自動化を長く動かしてると途中で落ちたり二重実行したりするので、そのへんも含めてずっと直してます。</p><code>thread dies → state survives → next worker resumes</code></div>
-      <b>GitHub ↗</b>
-    </a>
-    <div class="small-pieces">
-      <a href="/demos/repo-health-report.html"><span>B</span><h3>Repo Health Map</h3><p>GitHubのREADME、リンク、CIとかをまとめて見るやつ。自分のrepoにも使ってます。</p><b>sample report →</b></a>
-      <a href="https://paper-daemon.github.io/creator-delivery-inspector/"><span>C</span><h3>Creator Delivery Inspector</h3><p>動画と音声の解像度、長さ、codecとかをまとめて確認するやつ。</p><b>demo →</b></a>
-    </div>
-  </section>
+<section id="made" class="made"><header class="chapter"><span>01</span><div><h2>最近。</h2></div></header>
+<a class="big-piece" href="https://github.com/paper-daemon/AgentLink"><div class="piece-index">A</div><div class="piece-copy"><p class="piece-kind">Agent / systems</p><h3>AgentLink</h3><p>AI、PC、スマホ、外部サービスをつないで長時間動かしてる基盤。途中で落ちた時の復旧、二重実行、workerの引き継ぎまで実運用しながら直してます。</p><code>state → worker → effect → receipt → recover</code></div><b>↗</b></a>
+<div class="small-pieces"><a href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><span>B</span><h3>Receipt Replay Simulator</h3><p>処理結果が分からなくなった時に、再実行していいかを分ける実験。</p><b>↗</b></a><a href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><span>C</span><h3>RAG Fleet Harness</h3><p>複数Agentのrouting、source、health、validationをまとめて試してる構成。</p><b>↗</b></a></div></section>
 
-  <section id="lab" class="lab-wrap">
-    <header class="chapter light"><span>02</span><div><h2>ここで少し試せます。</h2><p>JSONL、SRT、retry、CSVの簡易版。</p></div></header>
-    <div class="lab-tabs" role="tablist"><button class="active" data-mode="trace">JSONL trace</button><button data-mode="srt">SRT QA</button><button data-mode="retry">retry budget</button><button data-mode="csv">CSV clean</button></div>
-    <div class="lab-grid"><div class="lab-cell"><label for="lab-input">input</label><textarea id="lab-input" spellcheck="false"></textarea><button id="lab-run">RUN</button></div><div class="lab-cell"><label for="lab-output">output</label><pre id="lab-output"></pre></div></div>
-    <p class="lab-note">ここはブラウザで動かす簡易版です。 <a href="/showcase.html">他のツールとデモ →</a></p>
-  </section>
+<section id="lab" class="lab-wrap"><header class="chapter light"><span>02</span><div><h2>試す。</h2></div></header><div class="lab-tabs" role="tablist"><button class="active" data-mode="trace">JSONL trace</button><button data-mode="srt">SRT QA</button><button data-mode="retry">retry budget</button><button data-mode="csv">CSV clean</button></div><div class="lab-grid"><div class="lab-cell"><label for="lab-input">input</label><textarea id="lab-input" spellcheck="false"></textarea><button id="lab-run">RUN</button></div><div class="lab-cell"><label for="lab-output">output</label><pre id="lab-output"></pre></div></div><p class="lab-note">これはブラウザ用の小さい実験です。</p></section>
 
-  <section id="work" class="work">
-    <header class="chapter"><span>03</span><div><h2>頼める作業。</h2><p>今すぐ値段を決められるものだけ置いてます。</p></div></header>
-    <div class="work-table">
-      <a href="https://buy.stripe.com/5kQ9AS9lk9QW2ghf0TgEg0j"><strong>CSV Cleanup & QA</strong><span>CSV/TSV 1本を整理してQAメモ付きで返す</span><em>¥3,000</em><b>↗</b></a>
-      <a href="https://buy.stripe.com/9B67sK0OO6EKaMNaKDgEg0k"><strong>SRT Subtitle QA</strong><span>SRT 1本の連番・timing・overlap・gapを見る</span><em>¥3,000</em><b>↗</b></a>
-      <a href="https://buy.stripe.com/4gM5kC8hg1kq8EF3ibgEg0l"><strong>Media Delivery QA</strong><span>動画/音声 最大3本の納品条件をチェック</span><em>¥3,000</em><b>↗</b></a>
-      <a href="https://buy.stripe.com/4gM9AS2WW4wC6wx1a3gEg0i"><strong>Public Repo Health Audit</strong><span>公開repo 1件をREADME・CI・リンクなどまとめて確認</span><em>¥4,900</em><b>↗</b></a>
-      <a href="https://buy.stripe.com/aFaaEWapo4wCbQR05ZgEg0n"><strong>Site Launch Preflight</strong><span>最大30URLの公開前後チェック</span><em>¥4,900</em><b>↗</b></a>
-      <a href="https://buy.stripe.com/bJedR87dc6EK9IJ8CvgEg0m"><strong>ComfyUI Workflow Cleanup</strong><span>workflow JSON 1本を見やすく整理</span><em>¥7,000</em><b>↗</b></a>
-    </div>
-    <p class="fineprint">ここにないものはLancersかココナラから相談できます。商品・OSS・デモは <a href="/showcase.html">一覧</a> にあります。</p>
-  </section>
+<section id="work" class="work"><header class="chapter"><span>03</span><div><h2>作業。</h2></div></header><div class="work-table">
+<a href="https://buy.stripe.com/8x214meFE4wC5st7yrgEg0g"><strong>Automation Debug & Recovery</strong><span>実コード・設定・ログから不具合を再現して、修正して、再実行テストまで</span><em>¥9,800</em><b>↗</b></a>
+<a href="https://buy.stripe.com/8x2fZg4104wC9IJ4mfgEg08"><strong>Agent / RAG Reliability Hardening</strong><span>既存フローへretry・idempotency・reconcile・再開処理を必要な分だけ実装して失敗テスト</span><em>¥14,800</em><b>↗</b></a>
+<a href="https://buy.stripe.com/eVq9AS8hg8MS6wxbOHgEg07"><strong>Automation Deployment</strong><span>実際の環境へ自動化を接続・配置して、テストデータで動作確認まで</span><em>¥29,800</em><b>↗</b></a>
+</div><p class="fineprint">文章やテンプレを作るだけのメニューはやめました。ここにない案件は <a href="https://www.lancers.jp/profile/aLuu">Lancers</a> / <a href="https://coconala.com/users/3185601">ココナラ</a> から。</p></section>
 
-  <section class="notes">
-    <header class="chapter"><span>04</span><div><h2>最近のメモ。</h2></div></header>
-    <div class="note-list">
-      <a href="https://note.com/lovely_hosta391/n/n6278127b03ba"><time>08.30</time><h3>20円の文字起こし案件で、単価より先に見るものが変わった</h3><b>↗</b></a>
-      <a href="/notes/linux-user-service-debug.html"><time>08.29</time><h3>systemd --user が「そのシェルだけ」死ぬ時に見る場所</h3><b>→</b></a>
-      <a href="/notes/debuggable-rag.html"><time>08.28</time><h3>RAGは正解率より先に、外した理由を追えるようにした方がいい</h3><b>→</b></a>
-    </div>
-  </section>
-
-  <section class="elsewhere"><p><a href="https://github.com/paper-daemon">GitHub</a> / <a href="https://note.com/lovely_hosta391">note</a> / <a href="https://x.com/amase__iv">X</a> / <a href="https://www.threads.com/@ive.amase">Threads</a><br>仕事は <a href="https://www.lancers.jp/profile/aLuu">Lancers</a> と <a href="https://coconala.com/users/3185601">ココナラ</a>。</p></section>
-</main>
-<footer><span>あませ / paper-daemon</span><a href="/feed.xml">RSS</a></footer>
-</body>
-</html>
+<section class="notes"><header class="chapter"><span>04</span><div><h2>メモ。</h2></div></header><div class="note-list"><a href="https://note.com/lovely_hosta391/n/n6278127b03ba"><time>08.30</time><h3>20円の文字起こし案件で、単価より先に見るものが変わった</h3><b>↗</b></a><a href="/notes/linux-user-service-debug.html"><time>08.29</time><h3>systemd --user が「そのシェルだけ」死ぬ時に見る場所</h3><b>→</b></a><a href="/notes/debuggable-rag.html"><time>08.28</time><h3>RAGは正解率より先に、外した理由を追えるようにした方がいい</h3><b>→</b></a></div></section>
+<section class="elsewhere"><p><a href="https://github.com/paper-daemon">GitHub</a> / <a href="https://note.com/lovely_hosta391">note</a> / <a href="https://x.com/amase__iv">X</a> / <a href="https://www.threads.com/@ive.amase">Threads</a></p></section>
+</main><footer><span>あませ / paper-daemon</span><a href="/feed.xml">RSS</a></footer>
+</body></html>
