@@ -3,54 +3,56 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>棚 | あませ / paper-daemon</title>
-<meta name="description" content="AIを使わない人、未課金の人、課金済みの人で分けた実作業・一回券・技術サービスの棚。">
+<meta name="description" content="作ったもの、実験、途中のメモ。">
 <link rel="canonical" href="https://paper-daemon.github.io/showcase.html">
-<link rel="stylesheet" href="/home-v2.css"><link rel="stylesheet" href="/showcase-v2.css"><link rel="stylesheet" href="/nav-icons.css">
+<link rel="stylesheet" href="/home-v2.css">
+<link rel="stylesheet" href="/showcase-v2.css">
+<link rel="stylesheet" href="/nav-icons.css">
 </head>
 <body>
-<header class="topbar"><a class="name" href="/">あませ <small>paper-daemon</small></a><nav aria-label="showcase"><a href="#trial">おためし</a><a href="#no-ai">AIなし</a><a href="#ai-free">未課金</a><a href="#ai-paid">課金済み</a><a href="#oss">公開中</a></nav></header>
+<header class="topbar">
+  <a class="name" href="/">あませ <small>paper-daemon</small></a>
+  <nav aria-label="showcase">
+    <a class="nav-icon i-home" href="/" aria-label="home" data-tip="home"></a>
+    <a class="nav-icon i-work" href="/work.html" aria-label="仕事" data-tip="仕事"></a>
+    <a class="nav-icon i-note" href="https://note.com/lovely_hosta391" aria-label="note" data-tip="note"></a>
+    <a class="nav-icon i-github" href="https://github.com/paper-daemon" aria-label="GitHub" data-tip="GitHub"></a>
+  </nav>
+</header>
 <main class="catalog">
-<section class="catalog-intro"><p>2026.08.31</p><h1>棚。</h1><div><p>同じAIサービスでも、相手の環境で価値が変わるので入口を3つに分けました。いきなり本体は重い人向けに、小さく実作業を試せる入口も置いてます。</p></div></section>
-
-<section id="trial" class="catalog-block"><header><span>00</span><div><h2>まず試す。</h2><p>相談だけじゃなく、範囲内なら実際に1個直す。</p></div></header><div class="catalog-rows">
-<a href="https://book.stripe.com/7sY6oG9lk0gm6wx8CvgEg0x"><strong>PCおためし診断・1修正</strong><span>症状1件を見て、範囲内なら安全な設定・ソフトウェア修正を1つ</span><em>¥980</em><b>↗</b></a>
-<a href="https://book.stripe.com/3cIcN4dBA7IOaMNdWPgEg0y"><strong>Webおためし1か所修正</strong><span>目に見える不具合1か所を小さく修正して表示確認</span><em>¥1,480</em><b>↗</b></a>
-<a href="https://book.stripe.com/7sY3cu7dce7caMN2e7gEg0z"><strong>Automationおためし1件修正</strong><span>再現できる不具合1件を、狭い範囲なら実コード/設定で1修正</span><em>¥1,980</em><b>↗</b></a>
-</div><p>同じ症状・案件で本サービスへ進む場合は、トライアル料金を本体料金から差し引きます。</p></section>
-
-<section id="no-ai" class="catalog-block"><header><span>01</span><div><h2>AIを使ってない。</h2><p>AIを覚える必要なし。欲しい結果をそのまま頼む。</p></div></header><div class="catalog-rows">
-<a href="https://book.stripe.com/cNiaEW1SS9QWf336ungEg0o"><strong>PCトラブル解決スプリント</strong><span>Windows / Linuxの主要トラブル1件を診断・修正・確認</span><em>¥6,800</em><b>↗</b></a>
-<a href="https://book.stripe.com/cNicN4cxwfbg7ABdWPgEg0p"><strong>小規模Web修正スプリント</strong><span>小さいサイトの不具合を再現して、修正・公開確認まで</span><em>¥9,800</em><b>↗</b></a>
-<a href="https://book.stripe.com/aFacN4btsd38dYZbOHgEg0q"><strong>動画仕上げパック</strong><span>簡単なカット / 字幕 / 静的ぼかし / 音量調整 / 書き出しQA</span><em>¥7,800</em><b>↗</b></a>
-</div></section>
-
-<section id="ai-free" class="catalog-block"><header><span>02</span><div><h2>AIは使うけど課金してない。</h2><p>月額はいらない。必要な時だけ上位AIを一回使う。</p></div></header><div class="catalog-rows">
-<a href="https://buy.stripe.com/7sY7sK2WW2oug772e7gEg0r"><strong>有料AIリサーチ代行 1回券</strong><span>テーマ1件を最新Web情報で調査し、主要論点・比較・出典を整理</span><em>¥1,980</em><b>↗</b></a>
-<a href="https://buy.stripe.com/eVq00ieFEd38g771a3gEg0s"><strong>有料AI文章仕上げ 1回券</strong><span>メモや下書きを整理・推敲して、そのまま使える完成稿へ</span><em>¥1,480</em><b>↗</b></a>
-<a href="https://buy.stripe.com/fZu7sKapo2oubQRbOHgEg0t"><strong>有料AI発信パック 1回券</strong><span>紹介文 + SNS投稿5本 + タイトル案 + FAQを1テーマから作成</span><em>¥2,480</em><b>↗</b></a>
-</div></section>
-
-<section id="ai-paid" class="catalog-block"><header><span>03</span><div><h2>AIに課金してる。</h2><p>生成物ではなく、実コード・実環境・接続・復旧・検証を買う。</p></div></header><div class="catalog-rows">
-<a href="https://book.stripe.com/28EaEW410gfk6wx05ZgEg0u"><strong>Automation Bug Fix</strong><span>再現できる不具合1件を実コード・設定・ログから修正して確認</span><em>¥4,800</em><b>↗</b></a>
-<a href="https://book.stripe.com/14A7sK0OO3sycUV1a3gEg0w"><strong>Automation 1-Connection Setup</strong><span>API / SaaS / ローカル処理を1つ接続して代表データで動作確認</span><em>¥7,800</em><b>↗</b></a>
-<a href="https://book.stripe.com/4gM00ifJI9QW2gh9GzgEg0v"><strong>Agent / RAG Reliability Patch</strong><span>1フローへ必要なretry・重複防止・reconcile・再開処理を限定実装</span><em>¥8,800</em><b>↗</b></a>
-</div><p>1万円を超えるAI案件は固定販売しません。実物と完成条件を見て見積もります。</p></section>
-
-<section id="oss" class="catalog-block"><header><span>04</span><div><h2>公開中。</h2><p>単発の生成物ではなく、実験・検証の根拠になるもの。</p></div></header>
-<div class="oss-cluster"><h3>AgentLink</h3><div class="oss-lines">
-<a href="https://github.com/paper-daemon/AgentLink"><strong>AgentLink</strong><span>長時間worker、state-first continuity、idempotency、receipts、multi-route recovery</span><b>↗</b></a>
-<a href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><strong>RAG Fleet Harness</strong><span>複数Agentのrouting、source IDs、health、validation</span><b>↗</b></a>
-<a href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><strong>Receipt Replay Simulator</strong><span>結果不明時のskip / retry / reconcileを再現</span><b>↗</b></a>
-<a href="https://github.com/paper-daemon/AgentLink/blob/main/PUBLIC_PROOF_SITE_SURFACE_DOCTOR.md"><strong>Site Surface Doctor</strong><span>公開面の静的監査とCI evidence</span><b>↗</b></a>
-</div></div>
+<section class="catalog-intro">
+  <p>2026.08.31</p><h1>shelf</h1><div><p>できたものと、まだ触ってるもの。小さいのは下の方に置いてます。</p></div>
 </section>
-
-<section id="demos" class="catalog-block"><header><span>05</span><div><h2>動くもの。</h2></div></header><div class="demo-list">
-<a href="/#lab"><strong>Live Lab</strong><span>JSONL / SRT / retry / CSVのブラウザ実験</span><b>→</b></a>
-<a href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><strong>Receipt Replay Simulator</strong><span>副作用の再実行判断をコードで確認</span><b>↗</b></a>
-<a href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><strong>RAG Fleet Harness</strong><span>isolated configs / routing / health / validation</span><b>↗</b></a>
-</div></section>
-
-<section class="catalog-end"><p><a href="https://github.com/paper-daemon">GitHub</a> / <a href="https://www.lancers.jp/profile/aLuu">Lancers</a> / <a href="https://coconala.com/users/3185601">ココナラ</a></p></section>
-</main><footer><span>あませ / paper-daemon</span><a href="/">home</a></footer>
-</body></html>
+<section class="catalog-block">
+<header><span>01</span><div><h2>systems</h2></div></header>
+<div class="feature-stack">
+  <a class="feature-main" href="https://github.com/paper-daemon/AgentLink"><small>main</small><strong>AgentLink</strong><span>長時間worker / state-first continuity / idempotency / receipts / recovery</span><b>↗</b></a>
+  <div class="feature-pair">
+    <a href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><small>RAG</small><strong>RAG Fleet Harness</strong><span>routing / source IDs / health / validation</span><b>↗</b></a>
+    <a href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><small>recovery</small><strong>Receipt Replay Simulator</strong><span>unknown outcome → skip / retry / reconcile</span><b>↗</b></a>
+  </div>
+</div>
+</section>
+<section class="catalog-block">
+<header><span>02</span><div><h2>notes</h2></div></header>
+<div class="demo-list">
+  <a href="/notes/linux-user-service-debug.html"><strong>systemd --user debug</strong><span>そのシェルだけuser serviceが死ぬ時の確認箇所</span><b>→</b></a>
+  <a href="/notes/debuggable-rag.html"><strong>Debuggable RAG</strong><span>外した理由を追えるRAGにするメモ</span><b>→</b></a>
+  <a href="/notes/image-model-benchmark.html"><strong>Image model benchmark</strong><span>ローカル画像モデルを比べた時の記録</span><b>→</b></a>
+  <a href="/notes/proof-of-antiquity.html"><strong>Proof of Antiquity</strong><span>昔のものを残す時の小さい実験</span><b>→</b></a>
+</div>
+</section>
+<section class="catalog-block quiet">
+<header><span>03</span><div><h2>small stuff</h2><p>単体だと小さいもの。</p></div></header>
+<div class="oss-lines">
+  <a href="/creator-delivery-inspector/"><strong>creator-delivery-inspector</strong><span>動画・音声の納品前メタデータ確認</span><b>→</b></a>
+  <a href="/hosting-launch-checker/"><strong>hosting-launch-checker</strong><span>公開前サイトの静的チェック</span><b>→</b></a>
+  <a href="/ai-work-router/"><strong>ai-work-router</strong><span>作業をどのAI/ルートへ回すかの小さい判断器</span><b>→</b></a>
+  <a href="/creator-stack-picker/"><strong>creator-stack-picker</strong><span>制作環境の選択を整理する小さいツール</span><b>→</b></a>
+</div>
+</section>
+<section class="catalog-end"><p><a href="/work.html">仕事</a> / <a href="https://github.com/paper-daemon">GitHub</a> / <a href="https://note.com/lovely_hosta391">note</a></p></section>
+</main>
+<footer><span>あませ / paper-daemon</span><a href="/">home</a></footer>
+</body>
+</html>
