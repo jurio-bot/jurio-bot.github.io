@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>あませ / paper-daemon</title>
-<meta name="description" content="PCまわり、自動化、AI、Web。実際に動かしてるものと途中のメモを置いてます。">
+<meta name="description" content="PC、Web、動画、調査、文章、自動化。AIの使い方に合わせて頼み方を分けています。">
 <link rel="canonical" href="https://paper-daemon.github.io/">
 <link rel="stylesheet" href="/home-v2.css">
 <link rel="stylesheet" href="/nav-icons.css">
 <link rel="alternate" type="application/rss+xml" title="あませ Field Notes" href="/feed.xml">
-<meta property="og:type" content="website"><meta property="og:title" content="あませ / paper-daemon"><meta property="og:description" content="実際に動かしてるものと途中のメモ。"><meta property="og:url" content="https://paper-daemon.github.io/">
+<meta property="og:type" content="website"><meta property="og:title" content="あませ / paper-daemon"><meta property="og:description" content="AIを使わない人、未課金の人、課金済みの人で入口を分けた実作業の棚。"><meta property="og:url" content="https://paper-daemon.github.io/">
 <script src="/home-v2.js" defer></script>
 </head>
 <body>
 <header class="topbar">
   <a class="name" href="/">あませ <small>paper-daemon</small></a>
-  <nav aria-label="main"><a href="#made">作ったもの</a><a href="#lab">試す</a><a href="#work">作業受付</a><a href="/showcase.html">一覧</a><a href="https://github.com/paper-daemon">GitHub</a></nav>
+  <nav aria-label="main"><a href="#made">作ったもの</a><a href="#lab">試す</a><a href="#work">頼む</a><a href="/showcase.html">一覧</a><a href="https://github.com/paper-daemon">GitHub</a></nav>
 </header>
 <main>
-<section class="intro"><div class="intro-main"><p class="date">2026.08.31</p><h1>いろいろ<br>作ってます。</h1><p class="lead">自動化とかAIとかPCまわり。作って終わりじゃなく、実際に動かしながら直してるものを中心に置いてます。</p><p class="jump"><a href="#lab">↓</a><a href="/showcase.html">→</a></p></div><aside class="desk-note"><span>最近</span><p>AgentLink<br>長時間worker<br>復旧まわり<br>RAG<br>ComfyUI</p><small id="github-pulse">GitHubを読込中…</small></aside></section>
+<section class="intro"><div class="intro-main"><p class="date">2026.08.31</p><h1>作るより先に、<br>終わらせる。</h1><p class="lead">PC、Web、動画、調査、文章、自動化。AIを使うかどうかより、欲しい結果までちゃんと持っていくことを優先してます。</p><p class="jump"><a href="#work">頼めるもの ↓</a><a href="/showcase.html">全部見る →</a></p></div><aside class="desk-note"><span>今の軸</span><p>実作業<br>実環境<br>再現と修正<br>検証<br>引き継ぎ</p><small id="github-pulse">GitHubを読込中…</small></aside></section>
 
 <section id="made" class="made"><header class="chapter"><span>01</span><div><h2>最近。</h2></div></header>
 <a class="big-piece" href="https://github.com/paper-daemon/AgentLink"><div class="piece-index">A</div><div class="piece-copy"><p class="piece-kind">Agent / systems</p><h3>AgentLink</h3><p>AI、PC、スマホ、外部サービスをつないで長時間動かしてる基盤。途中で落ちた時の復旧、二重実行、workerの引き継ぎまで実運用しながら直してます。</p><code>state → worker → effect → receipt → recover</code></div><b>↗</b></a>
@@ -26,11 +26,26 @@
 
 <section id="lab" class="lab-wrap"><header class="chapter light"><span>02</span><div><h2>試す。</h2></div></header><div class="lab-tabs" role="tablist"><button class="active" data-mode="trace">JSONL trace</button><button data-mode="srt">SRT QA</button><button data-mode="retry">retry budget</button><button data-mode="csv">CSV clean</button></div><div class="lab-grid"><div class="lab-cell"><label for="lab-input">input</label><textarea id="lab-input" spellcheck="false"></textarea><button id="lab-run">RUN</button></div><div class="lab-cell"><label for="lab-output">output</label><pre id="lab-output"></pre></div></div><p class="lab-note">これはブラウザ用の小さい実験です。</p></section>
 
-<section id="work" class="work"><header class="chapter"><span>03</span><div><h2>作業。</h2></div></header><div class="work-table">
+<section id="work" class="work"><header class="chapter"><span>03</span><div><h2>どこから頼む？</h2><p>AIの使い方で入口を分けました。</p></div></header>
+<div class="small-pieces"><a href="#no-ai"><span>1</span><h3>AIを使ってない</h3><p>AIの話は抜きで、PC・Web・動画の作業そのものを任せたい。</p><b>↓</b></a><a href="#ai-free"><span>2</span><h3>AIは使うけど未課金</h3><p>月額はいらない。必要な時だけ上位AIを1回使いたい。</p><b>↓</b></a><a href="#ai-paid"><span>3</span><h3>AIに課金してる</h3><p>文章生成じゃなく、実装・接続・復旧・検証までやってほしい。</p><b>↓</b></a></div>
+
+<h3 id="no-ai">AIを使ってない人向け</h3><div class="work-table">
+<a href="https://book.stripe.com/cNiaEW1SS9QWf336ungEg0o"><strong>PCトラブル解決スプリント</strong><span>Windows / Linuxの主要トラブル1件を切り分けて、範囲内で修正・確認まで</span><em>¥6,800</em><b>↗</b></a>
+<a href="https://book.stripe.com/cNicN4cxwfbg7ABdWPgEg0p"><strong>小規模Web修正スプリント</strong><span>小さいサイトの不具合を再現して、修正・公開確認まで</span><em>¥9,800</em><b>↗</b></a>
+<a href="https://book.stripe.com/aFacN4btsd38dYZbOHgEg0q"><strong>動画仕上げパック</strong><span>簡単なカット、字幕、静的ぼかし、音量調整、書き出し確認まで</span><em>¥7,800</em><b>↗</b></a>
+</div>
+
+<h3 id="ai-free">AIは使うけど課金してない人向け</h3><div class="work-table">
+<a href="https://buy.stripe.com/7sY7sK2WW2oug772e7gEg0r"><strong>有料AIリサーチ代行 1回券</strong><span>テーマ1件を最新Web情報から調べて、主要論点と出典をまとめる</span><em>¥1,980</em><b>↗</b></a>
+<a href="https://buy.stripe.com/eVq00ieFEd38g771a3gEg0s"><strong>有料AI文章仕上げ 1回券</strong><span>メモや下書き1件を、用途に合わせてそのまま使える完成稿へ</span><em>¥1,480</em><b>↗</b></a>
+<a href="https://buy.stripe.com/fZu7sKapo2oubQRbOHgEg0t"><strong>有料AI発信パック 1回券</strong><span>紹介文、SNS投稿5本、タイトル案、FAQを1テーマから一式作成</span><em>¥2,480</em><b>↗</b></a>
+</div>
+
+<h3 id="ai-paid">AIに課金してる人向け</h3><div class="work-table">
 <a href="https://buy.stripe.com/8x214meFE4wC5st7yrgEg0g"><strong>Automation Debug & Recovery</strong><span>実コード・設定・ログから不具合を再現して、修正して、再実行テストまで</span><em>¥9,800</em><b>↗</b></a>
-<a href="https://buy.stripe.com/8x2fZg4104wC9IJ4mfgEg08"><strong>Agent / RAG Reliability Hardening</strong><span>既存フローへretry・idempotency・reconcile・再開処理を必要な分だけ実装して失敗テスト</span><em>¥14,800</em><b>↗</b></a>
-<a href="https://buy.stripe.com/eVq9AS8hg8MS6wxbOHgEg07"><strong>Automation Deployment</strong><span>実際の環境へ自動化を接続・配置して、テストデータで動作確認まで</span><em>¥29,800</em><b>↗</b></a>
-</div><p class="fineprint">文章やテンプレを作るだけのメニューはやめました。ここにない案件は <a href="https://www.lancers.jp/profile/aLuu">Lancers</a> / <a href="https://coconala.com/users/3185601">ココナラ</a> から。</p></section>
+<a href="https://buy.stripe.com/8x2fZg4104wC9IJ4mfgEg08"><strong>Agent / RAG Reliability Hardening</strong><span>既存フローへretry・idempotency・reconcile・再開処理を実装して失敗テスト</span><em>¥14,800</em><b>↗</b></a>
+<a href="https://buy.stripe.com/eVq9AS8hg8MS6wxbOHgEg07"><strong>Automation Deployment</strong><span>実環境へ自動化を接続・配置して、テストデータで動作確認まで</span><em>¥29,800</em><b>↗</b></a>
+</div><p class="fineprint">AI課金済みの人には、Plus等でその場生成できるだけのテンプレ・レビュー・小物は売りません。ここにない案件は <a href="https://www.lancers.jp/profile/aLuu">Lancers</a> / <a href="https://coconala.com/users/3185601">ココナラ</a> から。</p></section>
 
 <section class="notes"><header class="chapter"><span>04</span><div><h2>メモ。</h2></div></header><div class="note-list"><a href="https://note.com/lovely_hosta391/n/n6278127b03ba"><time>08.30</time><h3>20円の文字起こし案件で、単価より先に見るものが変わった</h3><b>↗</b></a><a href="/notes/linux-user-service-debug.html"><time>08.29</time><h3>systemd --user が「そのシェルだけ」死ぬ時に見る場所</h3><b>→</b></a><a href="/notes/debuggable-rag.html"><time>08.28</time><h3>RAGは正解率より先に、外した理由を追えるようにした方がいい</h3><b>→</b></a></div></section>
 <section class="elsewhere"><p><a href="https://github.com/paper-daemon">GitHub</a> / <a href="https://note.com/lovely_hosta391">note</a> / <a href="https://x.com/amase__iv">X</a> / <a href="https://www.threads.com/@ive.amase">Threads</a></p></section>
