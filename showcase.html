@@ -3,22 +3,34 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>棚 | あませ / paper-daemon</title>
-<meta name="description" content="実際に動かしているシステム、デモ、実環境で対応する作業。">
+<meta name="description" content="AIを使わない人、未課金の人、課金済みの人で分けた実作業・一回券・技術サービスの棚。">
 <link rel="canonical" href="https://paper-daemon.github.io/showcase.html">
 <link rel="stylesheet" href="/home-v2.css"><link rel="stylesheet" href="/showcase-v2.css"><link rel="stylesheet" href="/nav-icons.css">
 </head>
 <body>
-<header class="topbar"><a class="name" href="/">あませ <small>paper-daemon</small></a><nav aria-label="showcase"><a href="#service">作業受付</a><a href="#oss">OSS</a><a href="#demos">デモ</a><a href="https://github.com/paper-daemon">GitHub</a></nav></header>
+<header class="topbar"><a class="name" href="/">あませ <small>paper-daemon</small></a><nav aria-label="showcase"><a href="#no-ai">AIなし</a><a href="#ai-free">未課金</a><a href="#ai-paid">課金済み</a><a href="#oss">公開中</a><a href="https://github.com/paper-daemon">GitHub</a></nav></header>
 <main class="catalog">
-<section class="catalog-intro"><p>2026.08.31</p><h1>棚。</h1><div><p>小さいテンプレや単発スクリプトを並べるのはやめました。実際に運用してるもの、失敗させて確認してるもの、実環境で作業するものだけ。</p></div></section>
+<section class="catalog-intro"><p>2026.08.31</p><h1>棚。</h1><div><p>同じAIサービスでも、相手の環境で価値が変わるので入口を3つに分けました。AIを使わない人には作業そのもの、未課金の人には月額より軽い一回券、課金済みの人にはAIだけでは終わらない実装を。</p></div></section>
 
-<section id="service" class="catalog-block"><header><span>01</span><div><h2>作業。</h2></div></header><div class="catalog-rows">
+<section id="no-ai" class="catalog-block"><header><span>01</span><div><h2>AIを使ってない。</h2><p>AIを覚える必要なし。欲しい結果をそのまま頼む。</p></div></header><div class="catalog-rows">
+<a href="https://book.stripe.com/cNiaEW1SS9QWf336ungEg0o"><strong>PCトラブル解決スプリント</strong><span>Windows / Linuxの主要トラブル1件を診断・修正・確認</span><em>¥6,800</em><b>↗</b></a>
+<a href="https://book.stripe.com/cNicN4cxwfbg7ABdWPgEg0p"><strong>小規模Web修正スプリント</strong><span>小さいサイトの不具合を再現して、修正・公開確認まで</span><em>¥9,800</em><b>↗</b></a>
+<a href="https://book.stripe.com/aFacN4btsd38dYZbOHgEg0q"><strong>動画仕上げパック</strong><span>簡単なカット / 字幕 / 静的ぼかし / 音量調整 / 書き出しQA</span><em>¥7,800</em><b>↗</b></a>
+</div></section>
+
+<section id="ai-free" class="catalog-block"><header><span>02</span><div><h2>AIは使うけど課金してない。</h2><p>月額はいらない。必要な時だけ上位AIを一回使う。</p></div></header><div class="catalog-rows">
+<a href="https://buy.stripe.com/7sY7sK2WW2oug772e7gEg0r"><strong>有料AIリサーチ代行 1回券</strong><span>テーマ1件を最新Web情報で調査し、主要論点・比較・出典を整理</span><em>¥1,980</em><b>↗</b></a>
+<a href="https://buy.stripe.com/eVq00ieFEd38g771a3gEg0s"><strong>有料AI文章仕上げ 1回券</strong><span>メモや下書きを整理・推敲して、そのまま使える完成稿へ</span><em>¥1,480</em><b>↗</b></a>
+<a href="https://buy.stripe.com/fZu7sKapo2oubQRbOHgEg0t"><strong>有料AI発信パック 1回券</strong><span>紹介文 + SNS投稿5本 + タイトル案 + FAQを1テーマから作成</span><em>¥2,480</em><b>↗</b></a>
+</div></section>
+
+<section id="ai-paid" class="catalog-block"><header><span>03</span><div><h2>AIに課金してる。</h2><p>生成物ではなく、実コード・実環境・接続・復旧・検証を買う。</p></div></header><div class="catalog-rows">
 <a href="https://buy.stripe.com/8x214meFE4wC5st7yrgEg0g"><strong>Automation Debug & Recovery</strong><span>再現 → 原因切り分け → 修正 → 再実行テスト</span><em>¥9,800</em><b>↗</b></a>
 <a href="https://buy.stripe.com/8x2fZg4104wC9IJ4mfgEg08"><strong>Agent / RAG Reliability Hardening</strong><span>既存コードへ復旧・重複防止・retry・reconcileを実装して失敗テスト</span><em>¥14,800</em><b>↗</b></a>
 <a href="https://buy.stripe.com/eVq9AS8hg8MS6wxbOHgEg07"><strong>Automation Deployment</strong><span>実環境へ接続・実装・配置してテストデータで動作確認</span><em>¥29,800</em><b>↗</b></a>
 </div></section>
 
-<section id="oss" class="catalog-block"><header><span>02</span><div><h2>公開中。</h2></div></header>
+<section id="oss" class="catalog-block"><header><span>04</span><div><h2>公開中。</h2><p>単発の生成物ではなく、実験・検証の根拠になるもの。</p></div></header>
 <div class="oss-cluster"><h3>AgentLink</h3><div class="oss-lines">
 <a href="https://github.com/paper-daemon/AgentLink"><strong>AgentLink</strong><span>長時間worker、state-first continuity、idempotency、receipts、multi-route recovery</span><b>↗</b></a>
 <a href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><strong>RAG Fleet Harness</strong><span>複数Agentのrouting、source IDs、health、validation</span><b>↗</b></a>
@@ -27,7 +39,7 @@
 </div></div>
 </section>
 
-<section id="demos" class="catalog-block"><header><span>03</span><div><h2>動くもの。</h2></div></header><div class="demo-list">
+<section id="demos" class="catalog-block"><header><span>05</span><div><h2>動くもの。</h2></div></header><div class="demo-list">
 <a href="/#lab"><strong>Live Lab</strong><span>JSONL / SRT / retry / CSVのブラウザ実験</span><b>→</b></a>
 <a href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><strong>Receipt Replay Simulator</strong><span>副作用の再実行判断をコードで確認</span><b>↗</b></a>
 <a href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><strong>RAG Fleet Harness</strong><span>isolated configs / routing / health / validation</span><b>↗</b></a>
