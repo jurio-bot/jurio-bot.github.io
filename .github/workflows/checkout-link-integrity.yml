@@ -1,6 +1,7 @@
 name: Checkout link integrity
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'work.html'
