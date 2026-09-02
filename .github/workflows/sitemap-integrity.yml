@@ -20,22 +20,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Require indexed notes in sitemap
+      - name: Verify note indexability and canonical URLs
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
 
           sitemap = Path('sitemap.xml').read_text(encoding='utf-8')
-          missing = []
-          for path in sorted(Path('notes').glob('*.html')):
-              html = path.read_text(encoding='utf-8').lower()
-              if 'name="robots"' in html and ('noindex' in html.split('name="robots"', 1)[1].split('>', 1)[0]):
-                  continue
-              url = f'https://paper-daemon.github.io/{path.as_posix()}'
-              if url not in sitemap:
-                  missing.append(url)
+          errors = []
+          base = 'https://paper-daemon.github.io/'
 
-          if missing:
-              raise SystemExit('Indexed note(s) missing from sitemap:\n' + '\n'.join(missing))
-          print('All indexed notes are present in sitemap.xml')
+          for path in sorted(Path('notes').glob('*.html')):
+              raw = path.read_text(encoding='utf-8')
+              html = raw.lower()
+              url = f'{base}{path.as_posix()}'
+
+              robots_match = re.search(r'<meta[^>]+name=["\']robots["\'][^>]*>', html)
+              noindex = bool(robots_match and 'noindex' in robots_match.group(0))
+              canonical_match = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)["\']', raw, re.I)
+
+              if noindex:
+                  if url in sitemap:
+                      errors.append(f'noindex note must not be in sitemap: {url}')
+                  continue
+
+              if url not in sitemap:
+                  errors.append(f'indexed note missing from sitemap: {url}')
+
+              if not canonical_match:
+                  errors.append(f'indexed note missing canonical: {path.as_posix()}')
+              elif canonical_match.group(1) != url:
+                  errors.append(f'canonical mismatch: {path.as_posix()} -> {canonical_match.group(1)} (expected {url})')
+
+          if errors:
+              raise SystemExit('\n'.join(errors))
+          print('Indexed/noindex note and canonical/sitemap consistency verified')
           PY
