@@ -1,0 +1,56 @@
+name: Checkout link integrity
+
+on:
+  push:
+    paths:
+      - 'work.html'
+      - '.github/workflows/checkout-link-integrity.yml'
+  pull_request:
+    paths:
+      - 'work.html'
+      - '.github/workflows/checkout-link-integrity.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-checkout-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Stripe checkout links
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          from urllib.parse import urlparse
+
+          html = Path('work.html').read_text(encoding='utf-8')
+          urls = re.findall(r'href=["\'](https://[^"\']*stripe\.com/[^"\']+)["\']', html)
+          errors = []
+
+          if not urls:
+              errors.append('no Stripe checkout links found in work.html')
+
+          seen = set()
+          allowed_hosts = {'buy.stripe.com', 'book.stripe.com'}
+          for url in urls:
+              if url in seen:
+                  errors.append(f'duplicate checkout URL: {url}')
+              seen.add(url)
+
+              parsed = urlparse(url)
+              if parsed.scheme != 'https':
+                  errors.append(f'non-HTTPS checkout URL: {url}')
+              if parsed.hostname not in allowed_hosts:
+                  errors.append(f'unapproved Stripe host: {url}')
+              if not parsed.path or parsed.path == '/':
+                  errors.append(f'missing checkout token: {url}')
+              if any(marker in url for marker in ('...', 'TODO', 'REPLACE', '<', '>')):
+                  errors.append(f'placeholder or malformed checkout URL: {url}')
+              if parsed.query or parsed.fragment:
+                  errors.append(f'unexpected query/fragment in checkout URL: {url}')
+
+          print(f'validated {len(urls)} Stripe checkout links')
+          if errors:
+              raise SystemExit('\n'.join(errors))
