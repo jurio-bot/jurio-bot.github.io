@@ -1,0 +1,56 @@
+name: External link target integrity
+
+on:
+  push:
+    paths:
+      - '**/*.html'
+      - '.github/workflows/external-link-target-integrity.yml'
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '.github/workflows/external-link-target-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Require noopener on target blank links
+        shell: python
+        run: |
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class LinkParser(HTMLParser):
+              def __init__(self, path):
+                  super().__init__()
+                  self.path = path
+                  self.errors = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag.lower() != 'a':
+                      return
+                  data = {k.lower(): (v or '') for k, v in attrs}
+                  if data.get('target', '').lower() != '_blank':
+                      return
+                  rel_tokens = {token.lower() for token in data.get('rel', '').split()}
+                  if 'noopener' not in rel_tokens:
+                      href = data.get('href', '')
+                      self.errors.append(f'{self.path}: target=_blank missing rel=noopener: {href}')
+
+          errors = []
+          checked = 0
+          for path in sorted(Path('.').rglob('*.html')):
+              parser = LinkParser(path)
+              parser.feed(path.read_text(encoding='utf-8'))
+              errors.extend(parser.errors)
+              checked += 1
+
+          if errors:
+              raise SystemExit('\n'.join(errors))
+
+          print(f'Checked {checked} HTML files; all target=_blank links include noopener')
