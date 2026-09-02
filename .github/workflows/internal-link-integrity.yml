@@ -1,0 +1,78 @@
+name: Internal link integrity
+
+on:
+  push:
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - '.github/workflows/internal-link-integrity.yml'
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '**/*.css'
+      - '**/*.js'
+      - '.github/workflows/internal-link-integrity.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check local href/src references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit, unquote
+
+          root = Path('.').resolve()
+          missing = []
+
+          class Parser(HTMLParser):
+              def __init__(self, source):
+                  super().__init__()
+                  self.source = source
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  for key in ('href', 'src'):
+                      value = attrs.get(key)
+                      if not value:
+                          continue
+                      if value.startswith(('#', 'mailto:', 'tel:', 'javascript:', 'data:')):
+                          continue
+                      parts = urlsplit(value)
+                      if parts.scheme or parts.netloc:
+                          continue
+                      path = unquote(parts.path)
+                      if not path:
+                          continue
+                      if path.startswith('/'):
+                          target = root / path.lstrip('/')
+                      else:
+                          target = (self.source.parent / path).resolve()
+                      try:
+                          target.relative_to(root)
+                      except ValueError:
+                          missing.append((self.source.as_posix(), value, 'outside repository'))
+                          continue
+                      if target.is_dir():
+                          target = target / 'index.html'
+                      if not target.exists():
+                          missing.append((self.source.as_posix(), value, target.relative_to(root).as_posix()))
+
+          for html in sorted(Path('.').rglob('*.html')):
+              if any(part.startswith('.') for part in html.parts):
+                  continue
+              parser = Parser(html.resolve())
+              parser.feed(html.read_text(encoding='utf-8'))
+
+          if missing:
+              lines = ['Broken internal reference(s):']
+              lines += [f'{src}: {value} -> {target}' for src, value, target in missing]
+              raise SystemExit('\n'.join(lines))
+          print('All local HTML href/src references resolve inside the repository')
+          PY
