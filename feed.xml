@@ -5,6 +5,13 @@
 <description>作って、回して、事故った所を書く。</description>
 <language>ja</language>
 <item>
+<title>結果不明の時、再送しなかったらちゃんと送れてた</title>
+<link>https://note.com/lovely_hosta391/n/n870c74863550</link>
+<guid>https://note.com/lovely_hosta391/n/n870c74863550</guid>
+<pubDate>2026-09-02T12:16:00+09:00</pubDate>
+<description>投稿直後に結果不明になった時、再送せず外側を照合したら最初の投稿は成功していた。unknown outcomeを失敗扱いしないための実運用メモ。</description>
+</item>
+<item>
 <title>サイトとGitHubで値段がズレてたので、正本を1個にした</title>
 <link>https://paper-daemon.github.io/notes/one-price-source.html</link>
 <guid>https://paper-daemon.github.io/notes/one-price-source.html</guid>
