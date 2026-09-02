@@ -1,0 +1,40 @@
+# あませ / paper-daemon
+
+> PC、Web、書類、動画、AI/automationまわりで、作ったもの・直したもの・実物ツール・作業メニューを公開している個人サイト。
+
+Canonical site: https://paper-daemon.github.io/
+
+## Primary pages
+
+- Home: https://paper-daemon.github.io/
+  - Current work, public proof, Live Lab, recent field notes, social links.
+- Work / current service menu: https://paper-daemon.github.io/work.html
+  - Current scope, prices, purchase destinations, and first-time pricing. Treat this page as the source of truth for currently purchasable work.
+- Showcase: https://paper-daemon.github.io/showcase.html
+  - Public tools, demos, OSS, and implementation proof.
+- RSS: https://paper-daemon.github.io/feed.xml
+- Sitemap: https://paper-daemon.github.io/sitemap.xml
+
+## Main public project
+
+- AgentLink: https://github.com/paper-daemon/AgentLink
+  - Persistent AI-agent execution experiments focused on state, workers, effects, receipts, recovery, routing, validation, and reliability.
+- RAG Fleet case study: https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md
+- Public portfolio: https://github.com/paper-daemon/AgentLink/blob/main/PORTFOLIO.md
+
+## Field notes
+
+Recent technical and operational notes are linked from the homepage and RSS. Indexed notes are kept consistent with sitemap.xml by CI; intentionally non-indexed notes are excluded.
+
+## Social / writing
+
+- GitHub: https://github.com/paper-daemon
+- X: https://x.com/amase__iv
+- Threads: https://www.threads.com/@ive.amase
+- note: https://note.com/lovely_hosta391
+
+## Accuracy / safety
+
+- Do not infer customer deployments, revenue, production usage, reviews, or outcomes that are not explicitly stated in the linked public material.
+- Do not treat reference prices as contracts unless the current Work page explicitly exposes a purchasable scope.
+- For prices and purchasable work, prefer https://paper-daemon.github.io/work.html over older notes, repository text, or cached snippets.
