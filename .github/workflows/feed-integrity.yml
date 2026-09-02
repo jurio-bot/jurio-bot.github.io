@@ -26,6 +26,7 @@ jobs:
         run: |
           from pathlib import Path
           from urllib.parse import urlparse
+          from datetime import datetime
           import email.utils
           import xml.etree.ElementTree as ET
           import re
@@ -40,6 +41,20 @@ jobs:
           seen_links = set()
           seen_guids = set()
           items = channel.findall('item')
+          local_items = 0
+          external_items = 0
+
+          def valid_date(value):
+              try:
+                  email.utils.parsedate_to_datetime(value)
+                  return True
+              except Exception:
+                  pass
+              try:
+                  datetime.fromisoformat(value.replace('Z', '+00:00'))
+                  return True
+              except Exception:
+                  return False
 
           for idx, item in enumerate(items, 1):
               title = (item.findtext('title') or '').strip()
@@ -49,12 +64,16 @@ jobs:
 
               if not title:
                   errors.append(f'item {idx}: missing title')
-              if not link.startswith(base):
-                  errors.append(f'item {idx}: link outside canonical site: {link}')
+
+              parsed = urlparse(link)
+              if parsed.scheme != 'https' or not parsed.netloc:
+                  errors.append(f'item {idx}: link must be absolute HTTPS: {link}')
                   continue
+
               if link in seen_links:
                   errors.append(f'item {idx}: duplicate link: {link}')
               seen_links.add(link)
+
               if not guid:
                   errors.append(f'item {idx}: missing guid')
               elif guid in seen_guids:
@@ -63,21 +82,23 @@ jobs:
               if guid and guid != link:
                   errors.append(f'item {idx}: guid differs from link')
 
-              try:
-                  email.utils.parsedate_to_datetime(pub_date)
-              except Exception:
+              if not valid_date(pub_date):
                   errors.append(f'item {idx}: invalid pubDate: {pub_date}')
 
-              rel = urlparse(link).path.lstrip('/')
-              path = Path(rel)
-              if not path.exists():
-                  errors.append(f'item {idx}: local target missing: {rel}')
-                  continue
-              text = path.read_text(encoding='utf-8')
-              if re.search(r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex', text, re.I):
-                  errors.append(f'item {idx}: feed target is noindex: {rel}')
+              if link.startswith(base):
+                  local_items += 1
+                  rel = parsed.path.lstrip('/')
+                  path = Path(rel)
+                  if not path.exists():
+                      errors.append(f'item {idx}: local target missing: {rel}')
+                      continue
+                  text = path.read_text(encoding='utf-8')
+                  if re.search(r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex', text, re.I):
+                      errors.append(f'item {idx}: feed target is noindex: {rel}')
+              else:
+                  external_items += 1
 
           if errors:
               raise SystemExit('\n'.join(errors))
 
-          print(f'Validated {len(items)} RSS items: unique links/guids, parseable dates, live indexed local targets')
+          print(f'Validated {len(items)} RSS items: {local_items} local, {external_items} external; unique links/guids and parseable dates')
