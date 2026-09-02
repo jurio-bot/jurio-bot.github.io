@@ -1,0 +1,34 @@
+name: Workflow runtime integrity
+
+on:
+  push:
+    paths:
+      - '.github/workflows/**'
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Reject stale checkout runtime
+        shell: python
+        run: |
+          from pathlib import Path
+
+          errors = []
+          for path in sorted(Path('.github/workflows').glob('*.yml')):
+              text = path.read_text(encoding='utf-8')
+              if 'actions/checkout@v4' in text:
+                  errors.append(f'{path}: uses actions/checkout@v4')
+
+          if errors:
+              raise SystemExit('\n'.join(errors))
+
+          print('All workflow checkout actions use v5 or newer')
