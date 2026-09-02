@@ -1,0 +1,83 @@
+name: Feed integrity
+
+on:
+  push:
+    paths:
+      - 'feed.xml'
+      - 'notes/**'
+      - '.github/workflows/feed-integrity.yml'
+  pull_request:
+    paths:
+      - 'feed.xml'
+      - 'notes/**'
+      - '.github/workflows/feed-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Validate RSS item targets
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.parse import urlparse
+          import email.utils
+          import xml.etree.ElementTree as ET
+          import re
+
+          base = 'https://paper-daemon.github.io/'
+          root = ET.parse('feed.xml').getroot()
+          channel = root.find('channel')
+          if channel is None:
+              raise SystemExit('feed.xml missing channel')
+
+          errors = []
+          seen_links = set()
+          seen_guids = set()
+          items = channel.findall('item')
+
+          for idx, item in enumerate(items, 1):
+              title = (item.findtext('title') or '').strip()
+              link = (item.findtext('link') or '').strip()
+              guid = (item.findtext('guid') or '').strip()
+              pub_date = (item.findtext('pubDate') or '').strip()
+
+              if not title:
+                  errors.append(f'item {idx}: missing title')
+              if not link.startswith(base):
+                  errors.append(f'item {idx}: link outside canonical site: {link}')
+                  continue
+              if link in seen_links:
+                  errors.append(f'item {idx}: duplicate link: {link}')
+              seen_links.add(link)
+              if not guid:
+                  errors.append(f'item {idx}: missing guid')
+              elif guid in seen_guids:
+                  errors.append(f'item {idx}: duplicate guid: {guid}')
+              seen_guids.add(guid)
+              if guid and guid != link:
+                  errors.append(f'item {idx}: guid differs from link')
+
+              try:
+                  email.utils.parsedate_to_datetime(pub_date)
+              except Exception:
+                  errors.append(f'item {idx}: invalid pubDate: {pub_date}')
+
+              rel = urlparse(link).path.lstrip('/')
+              path = Path(rel)
+              if not path.exists():
+                  errors.append(f'item {idx}: local target missing: {rel}')
+                  continue
+              text = path.read_text(encoding='utf-8')
+              if re.search(r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex', text, re.I):
+                  errors.append(f'item {idx}: feed target is noindex: {rel}')
+
+          if errors:
+              raise SystemExit('\n'.join(errors))
+
+          print(f'Validated {len(items)} RSS items: unique links/guids, parseable dates, live indexed local targets')
