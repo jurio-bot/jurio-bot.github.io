@@ -33,7 +33,10 @@ jobs:
           for path in sorted(Path('notes').glob('*.html')):
               raw = path.read_text(encoding='utf-8')
               html = raw.lower()
-              url = f'{base}{path.as_posix()}'
+              if path.name == 'index.html':
+                  url = f"{base}{path.parent.as_posix().rstrip('/')}/"
+              else:
+                  url = f'{base}{path.as_posix()}'
 
               robots_match = re.search(r'<meta[^>]+name=["\']robots["\'][^>]*>', html)
               noindex = bool(robots_match and 'noindex' in robots_match.group(0))
