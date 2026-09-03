@@ -1,51 +1,25 @@
 <!doctype html>
 <html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>paper-daemon | AI・制作・自動化の作業台</title>
-<meta name="description" content="相談する前から使える、AI制作・自動化・納品QAの小さな作業台。paper-daemonの実装、デモ、仕事窓口。">
-<link rel="canonical" href="https://paper-daemon.github.io/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#f2ece1">
-<meta property="og:type" content="website"><meta property="og:title" content="paper-daemon"><meta property="og:description" content="AI・制作・自動化。相談する前から使える作業台。"><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png">
-<link rel="stylesheet" href="/live-studio.css">
-<script src="/live-studio.js" defer></script>
+<title>paper-daemon | 置くと、次が見える。</title>
+<meta name="description" content="文章やファイルを置くと、必要な条件と次の進め方が見える。AI制作・自動化・Web・PCまわりの実装と仕事窓口。">
+<link rel="canonical" href="https://paper-daemon.github.io/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#f3ede2">
+<meta property="og:type" content="website"><meta property="og:title" content="paper-daemon"><meta property="og:description" content="ここに置く。次にやることが見える。"><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png">
+<link rel="stylesheet" href="/surface-v2.css"><script src="/surface-v2.js" defer></script>
 </head><body>
-<header class="site-head">
-  <a class="brand" href="/"><strong>paper-daemon</strong><small>FIELD DESK</small></a>
-  <nav><a href="#desk">使う</a><a href="/showcase.html">制作物</a><a href="/work.html">仕事</a><a href="https://github.com/paper-daemon">GitHub</a></nav>
-  <a class="head-cta" href="/work.html">相談する <span>↗</span></a>
-</header>
+<header class="site-head"><a class="brand" href="/"><strong>paper-daemon</strong><small>works / tools / notes</small></a><nav><a href="#desk">使う</a><a href="/showcase.html">制作物</a><a href="/work.html">仕事</a><a href="https://github.com/paper-daemon">GitHub</a></nav><a class="head-cta" href="/work.html">相談する ↗</a></header>
 <main>
-<section class="hero">
-  <div class="hero-copy">
-    <p class="kicker"><i></i> SERVICE DESK / OPEN</p>
-    <h1 class="desktop-hero-title">作る前から、<br>ここで始められる。</h1><h1 class="mobile-hero-title">相談する前に、<br>まず使える。</h1>
-    <p class="hero-lead">AI制作、自動化、Web・PCまわり。相談文の整理、ファイル点検、進め方の設計まで、このページで先に試せます。</p>
-    <div class="hero-actions"><a class="primary" href="#desk">今すぐ使う</a><a href="/showcase.html">実物を見る</a></div>
-  </div>
-  <aside class="live-board" aria-label="service status">
-    <header><span>LIVE DESK</span><b><i></i> 稼働中</b></header>
-    <div class="live-line"><span>相談 → brief</span><b>READY</b></div>
-    <div class="live-line"><span>file → delivery QA</span><b>READY</b></div>
-    <div class="live-line"><span>task → workflow</span><b>READY</b></div>
-    <footer><span>browser-side tools</span><strong>03</strong></footer>
-  </aside>
-</section>
-<section id="desk" class="desk">
-  <header class="section-head"><div><p>01 / START HERE</p><h2>作業台。</h2></div><p>入力した内容は、このページ内だけで処理します。外部送信はしません。</p></header>
-  <div id="service-mount"></div>
-</section>
-<section class="proof">
-  <header class="section-head"><div><p>02 / PROOF</p><h2>裏側も、見せる。</h2></div><p>説明だけじゃなく、公開している実装と検証へそのまま繋げています。</p></header>
-  <div class="proof-grid">
-    <a class="proof-main" href="https://github.com/paper-daemon/AgentLink"><small>SYSTEM</small><strong>AgentLink</strong><p>PC、AI、外部サービス、workerをつなぎ、途中停止や二重実行も扱う基盤。</p><code>state → worker → effect → receipt → recover</code><span>GitHub ↗</span></a>
-    <a href="/portfolio/ai-production-control-room.html"><small>PRODUCTION</small><strong>作る → 見る → 直す。</strong><p>生成だけで終わらせず、依頼整理・確認・修正・納品までを一つの流れとして扱う。</p><span>開く →</span></a>
-    <a href="/creator-delivery-inspector/"><small>DELIVERY</small><strong>Delivery Inspector</strong><p>動画・音声を渡す前に、形式や長さなどを確認する小さな道具。</p><span>使う →</span></a>
-  </div>
-</section>
-<section class="work-entry">
-  <p>03 / WORK</p><div><h2>そのまま頼むこともできます。</h2><p>小さな作業から、開発・自動化まで。料金と範囲を先に見られます。</p></div><a href="/work.html">仕事ページへ <b>↗</b></a>
-</section>
-</main>
-<footer><div><strong>paper-daemon</strong><span>built by amase</span></div><p><a href="/showcase.html">制作物</a><a href="/work.html">仕事</a><a href="https://note.com/lovely_hosta391">note</a><a href="https://github.com/paper-daemon">GitHub</a></p></footer>
+<section class="hero"><div><p class="hero-kicker">PAPER-DAEMON / AMASE</p><h1>ここに置く。<br>次にやることが<br>見える。</h1><p class="hero-lead">まとまっていない相談文でも、渡す前のファイルでも。まず置いてみると、必要な条件と進め方が見えるようにしています。AI制作、自動化、Web・PCまわりの仕事をしています。</p></div><aside class="hero-side"><p>文章から、作業条件を拾う</p><p>ファイルの外形を確認する</p><p>最初から確認までの順番を出す</p><small>このページ内で処理します。入力した文章やファイルを外部へ送信しません。</small></aside></section>
+<section id="desk" class="surface-wrap"><header class="surface-title"><div><p>START</p><h2>とりあえず、置いてみる。</h2></div><span>機能を選ぶ必要はありません。文章なら内容を読み、ファイルなら外形を見て、その後に必要な確認を並べます。</span></header>
+<div class="table"><section class="input-sheet"><span class="sheet-number">01 / INPUT</span><h3>まだ雑なままで大丈夫。</h3><p>やりたいこと、困っていること、渡したいファイル。どれか一つから。</p><textarea id="request-input" class="request-input" placeholder="例：ECの商品画像を10枚。正方形、白背景、来週金曜まで。文字入れなし。"></textarea><div class="surface-actions"><button id="place-request" class="place-btn">置いてみる</button><label class="file-pick">ファイルを置く<input id="surface-file" type="file"></label></div><div class="examples"><button data-example="image">商品画像の例</button><button data-example="automation">自動化の例</button><button data-example="web">Web修正の例</button></div></section>
+<aside id="file-slip" class="file-slip" hidden></aside>
+<div id="result-papers" class="result-papers" aria-live="polite"><article id="paper-understand" class="paper-note"></article><article id="paper-check" class="paper-note"></article><article id="paper-route" class="paper-note"></article></div>
+<div id="continue-line" class="continue-line"><p>この先を実際の作業として頼む場合は、料金と範囲を確認できます。</p><a href="/work.html">仕事ページを見る ↗</a></div></div></section>
+<section class="works"><header class="works-head"><div><p>SELECTED WORKS</p><h2>作ったもの。</h2></div><span>説明用のデモだけではなく、公開している実装や検証へそのままつながります。</span></header><div class="work-list">
+<a href="https://github.com/paper-daemon/AgentLink"><span class="work-index">01 / SYSTEM</span><strong class="work-name">AgentLink</strong><span class="work-desc">PC、AI、外部サービス、workerをつなぐ基盤。停止、復旧、二重実行まで扱う。</span><b class="work-arrow">↗</b></a>
+<a href="/portfolio/ai-production-control-room.html"><span class="work-index">02 / PRODUCTION</span><strong class="work-name">作る → 見る → 直す。</strong><span class="work-desc">AI制作を、依頼整理から確認、差分修正、納品まで一つの流れとして扱う。</span><b class="work-arrow">→</b></a>
+<a href="/creator-delivery-inspector/"><span class="work-index">03 / DELIVERY</span><strong class="work-name">Delivery Inspector</strong><span class="work-desc">動画や音声を渡す前に、形式や長さなどを確認する小さな道具。</span><b class="work-arrow">→</b></a>
+</div></section>
+<section class="work-entry"><div><h2>必要なら、そのまま仕事にできます。</h2><p>小さな作業から、制作・開発・自動化まで。料金と範囲を先に確認できます。</p></div><a href="/work.html">料金と仕事を見る ↗</a></section>
+</main><footer><strong>paper-daemon / amase</strong><p><a href="/showcase.html">制作物</a><a href="/work.html">仕事</a><a href="https://note.com/lovely_hosta391">note</a><a href="https://github.com/paper-daemon">GitHub</a></p></footer>
 </body></html>
