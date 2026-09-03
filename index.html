@@ -2,26 +2,41 @@
 <html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>paper-daemon | AI・自動化・Webを実際に動く形へ</title>
-<meta name="description" content="AI制作、自動化、Web・PCまわりを、実際に使える形まで実装。途中で処理が止まっても別経路へ切り替えるインタラクティブデモも公開しています。">
+<meta name="description" content="AI制作、自動化、Web・PCまわりを、実際に使える形まで実装。複数ジョブの停止・重複・再試行・復旧を可視化したインタラクティブデモも公開しています。">
 <link rel="canonical" href="https://paper-daemon.github.io/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#f3ede2">
 <meta property="og:type" content="website"><meta property="og:title" content="paper-daemon"><meta property="og:description" content="AI制作、自動化、Webを、実際に動く形まで。"><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png">
 <link rel="stylesheet" href="/surface-v2.css"><link rel="stylesheet" href="/recovery-demo.css"><script src="/recovery-demo.js" defer></script>
 </head><body>
 <header class="site-head"><a class="brand" href="/"><strong>paper-daemon</strong><small>works / systems / tools</small></a><nav><a href="#demo">デモ</a><a href="/showcase.html">制作物</a><a href="/work.html">仕事</a><a href="https://github.com/paper-daemon">GitHub</a></nav><a class="head-cta" href="/work.html">相談する ↗</a></header>
 <main>
-<section class="hero"><div><p class="hero-kicker">PAPER-DAEMON / AMASE</p><h1>作るだけじゃなく、<br>動き続けるところまで。</h1><p class="hero-lead">AI制作、自動化、Web・PCまわりを、実際に使える形まで作っています。単に処理が動くだけでなく、途中で失敗した時の復旧や確認まで含めて設計します。</p></div><aside class="hero-side"><p><b>作る</b>　AI制作・Web・小さなツール</p><p><b>つなぐ</b>　PC・AI・外部サービス・worker</p><p><b>止めない</b>　失敗検知・別経路・実行記録</p><small>下のデモはシミュレーションです。実稼働を装った表示ではありません。</small></aside></section>
-<section id="demo" class="recovery-demo"><header class="recovery-head"><div><p>INTERACTIVE DEMO / SIMULATION</p><h2>止めても、<br>終わらない。</h2></div><div><b>中央の処理を、わざと止めてみてください。</b><br>通常の経路が使えなくなると、別のworkerへ切り替え、最後まで処理して記録を残します。AgentLinkで扱っている「失敗しても続けられる設計」を、短く見せるためのデモです。</div></header>
+<section class="hero"><div><p class="hero-kicker">PAPER-DAEMON / AMASE</p><h1>作るだけじゃなく、<br>動き続けるところまで。</h1><p class="hero-lead">AI制作、自動化、Web・PCまわりを、実際に使える形まで作っています。単に処理が動くだけでなく、途中で失敗した時の復旧、重複防止、確認、記録まで含めて設計します。</p></div><aside class="hero-side"><p><b>作る</b>　AI制作・Web・小さなツール</p><p><b>つなぐ</b>　PC・AI・外部サービス・worker</p><p><b>止めない</b>　失敗検知・別経路・重複防止・記録</p><small>下の画面は仕組みを見せるためのシミュレーションです。実稼働を装った表示ではありません。</small></aside></section>
+<section id="demo" class="recovery-demo"><header class="recovery-head"><div><p>INTERACTIVE DEMO / SIMULATION</p><h2>3件同時に、<br>壊してみる。</h2></div><div><b>3つの仕事を同時に流し、別々の事故を起こします。</b><br>Worker停止、重複イベント、Delivery ACK消失。それぞれを検知し、他の処理を止めず、必要なものだけ再試行・照合・別workerへ逃がして最後まで完了させます。</div></header>
 <div class="recovery-stage">
-  <div class="recovery-toolbar"><div id="recovery-status" class="recovery-status"><i></i><span>NORMAL ROUTE</span></div><small>SIMULATED REQUEST / NO EXTERNAL ACTION</small></div>
-  <div class="system-map">
-    <article class="system-node"><small>01 / REQUEST</small><strong>依頼を受け取る</strong><span>入力を1件キューへ</span></article>
-    <article id="node-primary" class="system-node primary"><small>02 / PRIMARY</small><strong>AI worker</strong><span>通常はこちらで処理</span></article>
-    <article class="system-node"><small>03 / CHECK</small><strong>結果を確認</strong><span>重複・失敗を確認</span></article>
-    <article id="node-delivery" class="system-node delivery"><small>04 / COMPLETE</small><strong>完了・記録</strong><span>結果とreceiptを残す</span></article>
+  <div class="ops-topbar"><div id="ops-status" class="ops-status"><i></i><span>READY / 3 JOBS QUEUED</span></div><div class="ops-controls"><button id="ops-run-chaos" class="primary">事故込みで3件流す</button><button id="ops-run-normal">正常運転を見る</button><button id="ops-reset">リセット</button></div></div>
+  <div class="ops-metrics">
+    <div class="ops-metric"><small>QUEUED</small><b id="metric-queued">3</b></div><div class="ops-metric"><small>RUNNING</small><b id="metric-running">0</b></div><div class="ops-metric"><small>RETRY</small><b id="metric-retry">0</b></div><div class="ops-metric"><small>DUP BLOCK</small><b id="metric-blocked">0</b></div><div class="ops-metric"><small>DELIVERED</small><b id="metric-delivered">0</b></div><div class="ops-metric"><small>RECEIPTS</small><b id="metric-receipts">0</b></div>
   </div>
-  <div class="fallback-row"><article id="node-fallback" class="fallback-node"><small>FALLBACK</small><strong>別workerへ切替</strong></article></div>
-  <div class="recovery-bottom"><button id="break-route" class="break-btn">わざと止める</button><div id="recovery-log" class="event-log" aria-live="polite"><p class="on">00:00　request accepted / primary selected</p><p class="warn">00:01　primary unavailable / effect not committed</p><p>00:01　fallback selected / duplicate blocked</p><p class="ok">00:02　completed / receipt written</p></div></div>
-  <div class="recovery-caption"><strong>見せたいのは「AIが答えること」ではなく、途中で壊れても仕事を最後まで運べること。</strong><span><a href="https://github.com/paper-daemon/AgentLink">AgentLinkの実装を見る ↗</a></span></div>
+  <div id="ops-canvas" class="ops-canvas">
+    <div class="pipeline">
+      <section id="station-queue" class="ops-station"><small>01 / QUEUE</small><strong>仕事を待たせる</strong><span>順番と状態を保持</span><div class="queue-list"><div id="queue-J-1042" class="queue-job">J-1042 / IMAGE</div><div id="queue-J-1043" class="queue-job">J-1043 / SYNC</div><div id="queue-J-1044" class="queue-job">J-1044 / QA</div></div></section>
+      <section id="station-router" class="ops-station"><small>02 / ROUTER</small><strong>行き先を決める</strong><span>health・lock・負荷を確認</span></section>
+      <section id="station-workers" class="ops-station"><small>03 / WORKER POOL</small><strong>複数workerで処理</strong><span>死んだworkerだけ外す</span><div class="worker-pool">
+        <div id="worker-a" class="worker"><header><b>WORKER A</b><em>READY</em></header><p>primary / creative</p><span id="worker-current-J-1042" hidden></span></div>
+        <div id="worker-b" class="worker"><header><b>WORKER B</b><em>READY</em></header><p>general / sync</p><span id="worker-current-J-1043" hidden></span><span id="worker-current-J-1044" hidden></span></div>
+        <div id="worker-c" class="worker standby"><header><b>WORKER C</b><em>STANDBY</em></header><p>reserve / fallback</p></div>
+      </div></section>
+      <section id="station-qa" class="ops-station"><small>04 / QA</small><strong>結果を確認</strong><span>形式・失敗・重複を確認</span></section>
+      <section id="station-delivery" class="ops-station"><small>05 / DELIVERY</small><strong>外へ渡す</strong><span>曖昧な応答は再送前に照合</span></section>
+      <section id="station-ledger" class="ops-station"><small>06 / RECEIPT</small><strong>実行記録を残す</strong><span>完了したeffectを追跡</span></section>
+    </div>
+    <div class="ops-subsystems">
+      <section id="health-card" class="subsystem"><header><small>HEALTH MONITOR</small><b>ALL HEALTHY</b></header><p>heartbeatを見て、落ちたworkerを新しい仕事から外します。</p></section>
+      <section id="guard-card" class="subsystem"><header><small>IDEMPOTENCY GUARD</small><b>0 BLOCKED</b></header><p>同じ仕事がもう一度来ても、同じeffectを二重に出さないための鍵。</p></section>
+      <section id="retry-card" class="subsystem"><header><small>RETRY BUDGET</small><b>2 / 2 AVAILABLE</b></header><p>失敗したから即再実行ではなく、effectの有無を見てから必要な分だけ再試行。</p></section>
+    </div>
+  </div>
+  <div class="ops-lower"><div id="ops-log" class="event-log" aria-live="polite"><p class="muted">waiting / choose a run mode</p></div><aside class="receipt-ledger"><header><span>RECEIPT LEDGER</span><b>LOCAL SIMULATION</b></header><div id="receipt-list" class="receipt-list"><div class="receipt pending"><i></i><span>waiting for completed jobs</span><span class="hash">—</span></div></div></aside></div>
+  <div class="recovery-caption"><strong>見るポイント：1件壊れても他の2件は止まらず、再送していいか不明な時は先に照合し、重複は入口で止めます。</strong><span><a href="https://github.com/paper-daemon/AgentLink">AgentLinkの実装を見る ↗</a></span></div>
 </div></section>
 <section class="works"><header class="works-head"><div><p>SELECTED WORKS</p><h2>実物。</h2></div><span>デモの続きは、公開している実装や実際に使える道具で確認できます。</span></header><div class="work-list">
 <a href="https://github.com/paper-daemon/AgentLink"><span class="work-index">01 / SYSTEM</span><strong class="work-name">AgentLink</strong><span class="work-desc">PC、AI、外部サービス、workerをつなぐ基盤。停止、復旧、二重実行まで扱う。</span><b class="work-arrow">↗</b></a>
