@@ -16,18 +16,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Wait for this demo runtime to reach GitHub Pages
+      - name: Wait for this demo UI to reach GitHub Pages
         run: |
           for i in {1..48}; do
-            body="$(curl -fsS --max-time 12 "https://paper-daemon.github.io/demo-visible-runtime.js?run=${GITHUB_RUN_ID}" || true)"
-            if printf '%s' "$body" | grep -q 'PD_VISIBLE_RUNTIME_20260903_1'; then
-              echo 'Production runtime is current.'
+            body="$(curl -fsS --max-time 12 "https://paper-daemon.github.io/demo-ui-v2.js?run=${GITHUB_RUN_ID}" || true)"
+            if printf '%s' "$body" | grep -q 'PD_DEMO_UI_V2_20260903_2'; then
+              echo 'Production UI is current.'
               exit 0
             fi
             echo "Waiting for Pages deploy ($i/48)..."
             sleep 5
           done
-          echo 'Timed out waiting for production runtime.'
+          echo 'Timed out waiting for production UI.'
           exit 1
       - name: Install Playwright Chromium
         run: |
@@ -37,24 +37,48 @@ jobs:
         env:
           DEMO_BASE_URL: https://paper-daemon.github.io
         run: node tests/demo-real-browser.mjs
-      - name: Verify visible replay on mobile production
+      - name: Verify clear mobile UI on production
         run: |
           node - <<'NODE'
           const { chromium } = require('playwright');
           (async()=>{
             const browser=await chromium.launch({headless:true});
             const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
-            await page.goto('https://paper-daemon.github.io/demo-view.html?id=svc-entry-100',{waitUntil:'networkidle'});
-            await page.waitForSelector('#vr-shell');
-            await page.click('#de-start');
+            await page.goto('https://paper-daemon.github.io/demo-view.html?id=svc-entry-100&ui=2',{waitUntil:'networkidle'});
+            await page.waitForSelector('.dui-overview');
+            const labels=await page.locator('.dui-overview').innerText();
+            if(!labels.includes('入力する')||!labels.includes('実際に処理する')||!labels.includes('完成を見る')) throw new Error('clear three-step UI missing');
+            const start=page.locator('#de-start');
+            const box=await start.boundingBox();
+            if(!box||box.width<44||box.height<44) throw new Error(`RUN button too small: ${JSON.stringify(box)}`);
+            const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+            if(overflow>1) throw new Error(`mobile page overflows by ${overflow}px`);
+            await start.click();
             await page.waitForFunction(()=>document.querySelector('#vr-badge')?.textContent.includes('VERIFIED REAL RUN'),{timeout:20000});
-            const hash=(await page.locator('#vr-hash').innerText()).trim();
-            const out=(await page.locator('#m-output').innerText()).trim();
-            if(!/^[0-9a-f]{16}/i.test(hash)) throw new Error(`mobile production hash missing: ${hash}`);
-            if(Number(out)<1) throw new Error(`mobile production output missing: ${out}`);
-            const box=await page.locator('#de-start').boundingBox();
-            if(!box||box.width<40||box.height<25) throw new Error('RUN button is not usable on mobile');
-            console.log(`PRODUCTION_MOBILE_VISIBLE_REPLAY_OK hash=${hash}`);
+            await page.waitForFunction(()=>document.querySelector('#dui-result-state')?.textContent.includes('完了'),{timeout:5000});
+            const result=await page.locator('#dui-result-body').innerText();
+            if(!result||/run the process|まだ実行/i.test(result)) throw new Error('result panel did not receive real output');
+            await page.click('.dui-details-toggle');
+            const advanced=await page.evaluate(()=>document.body.classList.contains('dui-advanced'));
+            if(!advanced) throw new Error('technical details toggle did not open');
+            console.log('PRODUCTION_MOBILE_CLEAR_UI_OK');
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+      - name: Verify desktop UI has no page overflow
+        run: |
+          node - <<'NODE'
+          const { chromium } = require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:1440,height:1000}});
+            await page.goto('https://paper-daemon.github.io/demo-view.html?id=work-agentlink&ui=2',{waitUntil:'networkidle'});
+            await page.waitForSelector('.dui-result');
+            const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+            if(overflow>1) throw new Error(`desktop page overflows by ${overflow}px`);
+            const shell=await page.locator('.de-shell').boundingBox();
+            if(!shell||shell.width<900) throw new Error('desktop demo shell is unexpectedly narrow');
+            console.log('PRODUCTION_DESKTOP_CLEAR_UI_OK');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
