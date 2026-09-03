@@ -5,6 +5,13 @@
 <description>作って、回して、事故った所を書く。</description>
 <language>ja</language>
 <item>
+<title>架空の建設日報を、CSVから集計と日報まで自動化した</title>
+<link>https://paper-daemon.github.io/portfolio/construction-daily-report-automation.html</link>
+<guid>https://paper-daemon.github.io/portfolio/construction-daily-report-automation.html</guid>
+<pubDate>2026-09-03T17:25:58+09:00</pubDate>
+<description>完全架空の現場CSVを入力に、必須列と数値を検証し、日別集計CSVと日本語Markdown日報を生成する小さい業務自動化proof。入力・コード・生成物・画面例を公開。</description>
+</item>
+<item>
 <title>結果不明の時、再送しなかったらちゃんと送れてた</title>
 <link>https://note.com/lovely_hosta391/n/n870c74863550</link>
 <guid>https://note.com/lovely_hosta391/n/n870c74863550</guid>
