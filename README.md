@@ -1,29 +1,23 @@
 # paper-daemon public site
 
-Personal site for projects, notes, live experiments, and a separate fixed-scope work catalog.
+Public site for projects, browser demos, field notes, small tools, and a fixed-scope work catalog.
 
-## Main surfaces
+## Main navigation
 
 - Home: https://paper-daemon.github.io/
-- Shelf: https://paper-daemon.github.io/showcase.html
-- Work / trials: https://paper-daemon.github.io/work.html
-- RSS: https://paper-daemon.github.io/feed.xml
+- Works: https://paper-daemon.github.io/showcase.html
+- Demos: https://paper-daemon.github.io/demo.html
+- Notes: https://paper-daemon.github.io/notes/
+- Work / current prices: https://paper-daemon.github.io/work.html
 - GitHub: https://github.com/paper-daemon
 
-## Page roles
+## Information architecture
 
-- **Home** stays hobby-first: current projects, Live Lab, notes, and only a small doorway to paid work.
-- **Shelf** is for projects and experiments. It is not the sales catalog.
-- **Work** contains trials and paid services, split by the customer's AI usage.
-
-## Product rule
-
-A paid item should not exist just because AI can generate it quickly.
-
-- People who do not use AI can buy done-for-you work.
-- People who use free AI can buy bounded one-off access below a monthly subscription-sized commitment.
-- People who already pay for AI are sold hands-on work in real files, code, devices, environments, integrations, deployment, recovery, or verification.
-- Higher-priced AI work is quoted after scope is visible instead of being sold as a generic expensive checkout item.
+- **Home** is a short front door. It does not host large simulations.
+- **Works** contains public projects and tools with real links.
+- **Demos** contains interactive browser demos. The default view is curated; all demos remain reachable by category.
+- **Notes** is the technical archive.
+- **Work** is the source of truth for currently purchasable fixed-scope work and prices.
 
 ## Publishing rule
 
