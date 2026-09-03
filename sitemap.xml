@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://paper-daemon.github.io/</loc><lastmod>2026-09-01</lastmod></url>
-  <url><loc>https://paper-daemon.github.io/showcase.html</loc><lastmod>2026-08-31</lastmod></url>
+  <url><loc>https://paper-daemon.github.io/showcase.html</loc><lastmod>2026-09-03</lastmod></url>
   <url><loc>https://paper-daemon.github.io/work.html</loc><lastmod>2026-08-31</lastmod></url>
   <url><loc>https://paper-daemon.github.io/notes/one-price-source.html</loc><lastmod>2026-09-01</lastmod></url>
   <url><loc>https://paper-daemon.github.io/notes/small-workflow-kit-first.html</loc><lastmod>2026-08-30</lastmod></url>
@@ -16,6 +16,7 @@
   <url><loc>https://paper-daemon.github.io/notes/image-model-benchmark.html</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://paper-daemon.github.io/notes/debuggable-rag.html</loc><lastmod>2026-08-28</lastmod></url>
   <url><loc>https://paper-daemon.github.io/notes/proof-of-antiquity.html</loc><lastmod>2026-08-28</lastmod></url>
-  <url><loc>https://paper-daemon.github.io/portfolio/ai-production-control-room.html</loc></url>
-  <url><loc>https://paper-daemon.github.io/notes/licensed-video-delivery-pipeline.html</loc></url>
+  <url><loc>https://paper-daemon.github.io/portfolio/ai-production-control-room.html</loc><lastmod>2026-09-03</lastmod></url>
+  <url><loc>https://paper-daemon.github.io/portfolio/construction-daily-report-automation.html</loc><lastmod>2026-09-03</lastmod></url>
+  <url><loc>https://paper-daemon.github.io/notes/licensed-video-delivery-pipeline.html</loc><lastmod>2026-09-03</lastmod></url>
 </urlset>

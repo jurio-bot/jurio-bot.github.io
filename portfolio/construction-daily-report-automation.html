@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>建設日報の自動化ミニデモ | あませ / paper-daemon</title>
+<meta name="description" content="完全架空の建設日報CSVを検証・集計し、集計CSVと日本語日報へ変換する小さな自動化デモ。">
+<link rel="canonical" href="https://paper-daemon.github.io/portfolio/construction-daily-report-automation.html">
+<link rel="stylesheet" href="/home-v2.css"><link rel="stylesheet" href="/showcase-v2.css"><link rel="stylesheet" href="/nav-icons.css">
+<style>
+.hero{padding:92px 0 62px;border-bottom:1px solid var(--ink)}.hero small{color:var(--red);font:700 .65rem var(--mono)}.hero h1{max-width:900px;margin:18px 0;font:600 clamp(3rem,7vw,6.5rem)/.9 var(--serif);letter-spacing:-.055em}.hero p{max-width:720px;color:var(--muted);line-height:2}.notice{margin-top:24px;padding:13px 16px;background:#fff6c9;border:1px solid #d8ca96;font-size:.78rem}.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.shots img{width:100%;border:1px solid var(--line);display:block}.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}.facts div{padding:22px;background:var(--paper2)}.facts strong{display:block;font:600 1.2rem var(--serif)}.facts span{color:var(--muted);font-size:.78rem}.files a{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none}.files b{color:var(--red)}@media(max-width:700px){.shots,.facts{grid-template-columns:1fr}}
+</style></head><body>
+<header class="topbar"><a class="name" href="/">あませ <small>paper-daemon</small></a><nav aria-label="portfolio"><a class="nav-icon i-home" href="/" aria-label="home"></a><a class="nav-icon i-shelf" href="/showcase.html" aria-label="棚"></a><a class="nav-icon i-work" href="/work.html" aria-label="仕事"></a><a class="nav-icon i-github" href="https://github.com/paper-daemon" aria-label="GitHub"></a></nav></header>
+<main class="catalog">
+<section class="hero"><small>Python / CSV / automation / Claude Code-ready</small><h1>建設日報を、CSVからまとめる。</h1><p>完全に架空の現場データを使った小さい制作デモ。CSVの必須列を確認して、日付ごとの作業人数と平均進捗を集計し、集計CSVと日本語の日報を生成します。</p><div class="notice">この公開版では変換処理をPythonで実行済み。Claude Code本体を操作して生成した実績とは書いていません。Claude Code / MCP / APIから同じ処理を呼べる形を意識して分離しています。</div></section>
+<section class="catalog-block"><header><span>01</span><div><h2>入力 → 検証 → 集計 → 日報</h2><p>元データにない数値を足さず、見える変換だけにしています。</p></div></header>
+<div class="facts"><div><strong>2026-09-03</strong><span>合計14人 / 平均進捗45.0%</span></div><div><strong>2026-09-04</strong><span>合計14人 / 平均進捗50.0%</span></div></div>
+</section>
+<section class="catalog-block"><header><span>02</span><div><h2>画面イメージ</h2><p>20〜30秒の操作説明へそのまま切れる6枚構成。</p></div></header>
+<div class="shots">
+<img src="/portfolio/construction-daily-report-demo/frame_00.png" alt="建設日報自動化ミニデモのタイトル">
+<img src="/portfolio/construction-daily-report-demo/frame_01.png" alt="架空の入力CSV">
+<img src="/portfolio/construction-daily-report-demo/frame_02.png" alt="Pythonによる自動処理">
+<img src="/portfolio/construction-daily-report-demo/frame_03.png" alt="日別集計結果">
+<img src="/portfolio/construction-daily-report-demo/frame_04.png" alt="生成された日本語日報">
+<img src="/portfolio/construction-daily-report-demo/frame_05.png" alt="再利用可能な自動化部品">
+</div></section>
+<section class="catalog-block"><header><span>03</span><div><h2>そのまま見られるもの</h2><p>入力、コード、生成物まで公開。</p></div></header><div class="files">
+<a href="/portfolio/construction-daily-report-demo/daily_log.csv"><span>架空の入力CSV</span><b>CSV →</b></a>
+<a href="/portfolio/construction-daily-report-demo/transform.py"><span>変換スクリプト</span><b>PY →</b></a>
+<a href="/portfolio/construction-daily-report-demo/progress_summary.csv"><span>日別の集計結果</span><b>CSV →</b></a>
+<a href="/portfolio/construction-daily-report-demo/daily_report.md"><span>生成した日本語日報</span><b>MD →</b></a>
+</div></section>
+<section class="catalog-block"><header><span>04</span><div><h2>案件に持っていけるところ</h2></div></header>
+<p>今回の粒度なら、Excel / CSV / PDF / 写真台帳の処理、架空データによる操作デモ、MCPやAPI経由の実行、画面収録用の短いシナリオへ広げられます。建設会社への商用導入実績がある、という意味ではありません。</p>
+</section>
+<section class="backline"><a href="/showcase.html">← 棚に戻る</a>　/　<a href="/portfolio/ai-production-control-room.html">制作フローを見る</a></section>
+</main><footer><span>あませ / paper-daemon</span><a href="/">home</a></footer>
+</body></html>
