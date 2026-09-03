@@ -1,0 +1,34 @@
+name: Real demo browser integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 > /tmp/paper-daemon-http.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/demo.html >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/paper-daemon-http.log
+          exit 1
+      - name: Run real browser processing tests
+        run: node tests/demo-real-browser.mjs
