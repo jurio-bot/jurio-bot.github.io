@@ -1,0 +1,30 @@
+/* Readability layer for the live OPS topology. Keeps the simulator logic unchanged. */
+.topology-wrap{scrollbar-color:#74665b #1c1916;scrollbar-width:thin}
+.topology-map{min-width:1180px!important;height:660px!important}
+.topology-node{width:132px!important;min-height:96px!important;padding:12px 13px 11px!important;border-color:#756a61!important;background:linear-gradient(180deg,#302a25,#27221e)!important;color:#f4eadf!important;box-shadow:0 12px 28px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035)!important;border-radius:3px;z-index:4}
+.topology-node:before{width:4px!important}
+.topology-node>small{display:block!important;margin:-12px -13px 10px!important;padding:9px 54px 8px 13px!important;border-bottom:1px solid #4e453e;background:rgba(255,255,255,.025);color:#b9aa9d!important;font:800 .48rem/1 var(--mono)!important;letter-spacing:.075em!important;white-space:nowrap}
+.topology-node>strong{display:block!important;margin:0!important;color:#fff7ec!important;font:650 1.03rem/1.05 var(--serif)!important;letter-spacing:-.015em!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topology-node>span{display:block!important;margin-top:7px!important;color:#b5a79b!important;font:650 .56rem/1.35 var(--mono)!important;white-space:normal!important}
+.topology-node:after{content:"READY";position:absolute;right:8px;top:7px;padding:4px 5px;border:1px solid #5d7565;background:#263c2e;color:#a9d4b5;font:850 .39rem/1 var(--mono);letter-spacing:.07em;border-radius:2px}
+.topology-node.active{z-index:8!important;border-color:#b8d0c0!important;transform:translate(-50%,-50%) scale(1.055)!important;box-shadow:0 0 0 3px rgba(111,147,173,.14),0 16px 34px rgba(0,0,0,.35)!important}
+.topology-node.active:after{content:"RUN";border-color:#6f93ad;background:#293b49;color:#c4e0f2}
+.topology-node.warn{z-index:9!important;border-color:#d77b6a!important;background:linear-gradient(180deg,#3a2723,#2f211e)!important}
+.topology-node.warn:after{content:"WARN";border-color:#a85d50;background:#512c27;color:#ffc0b3}
+.topology-node.down{z-index:10!important;opacity:.82!important;border-color:#c25f50!important;background:linear-gradient(180deg,#39221e,#281b19)!important}
+.topology-node.down:after{content:"DOWN"!important;position:absolute!important;right:8px!important;top:7px!important;padding:4px 5px!important;border:1px solid #a84f43!important;background:#572a24!important;color:#ffb6a8!important;font:850 .39rem/1 var(--mono)!important;letter-spacing:.07em!important}
+.topology-node.good:after{content:"OK";border-color:#5d7565;background:#263c2e;color:#a9d4b5}
+.topology-node.reserve:after{content:"STBY";border-color:#756b5c;background:#383229;color:#c4b8a6}
+.topology-node.reserve.awake:after{content:"RUN";border-color:#6f93ad;background:#293b49;color:#c4e0f2}
+.topology-node.guard:after{content:"GUARD";border-color:#8f7449;background:#463923;color:#e5c98e}
+.topology-node.quarantine:after{content:"REPAIR";border-color:#98574c;background:#4a2c27;color:#efaa9d}
+.node-load{position:relative!important;height:5px!important;margin-top:20px!important;background:#171411!important;border:1px solid #494039!important;overflow:visible!important}
+.node-load:before{content:"LOAD";position:absolute;left:-1px;bottom:8px;color:#8f8175;font:800 .38rem/1 var(--mono);letter-spacing:.08em}
+.node-load i{background:linear-gradient(90deg,#6f93ad,#9db8ca)!important;box-shadow:0 0 7px rgba(111,147,173,.28)}
+.topology-node.down .node-load i{background:linear-gradient(90deg,#b74737,#df806e)!important}
+.topology-node:is(:hover,.active,.warn,.down){filter:brightness(1.06)}
+.topology-node:is(:hover,.active) > strong{color:#fff!important}
+.map-legend{z-index:30!important;padding:7px 9px;background:rgba(27,23,20,.82);border:1px solid #51463e;border-radius:2px;backdrop-filter:blur(5px)}
+@media(max-width:1180px){.topology-wrap{overflow-x:auto!important;overscroll-behavior-x:contain}.topology-map{min-width:1180px!important}}
+@media(max-width:560px){.topology-map{min-width:1080px!important;height:620px!important}.topology-node{width:126px!important;min-height:92px!important}.topology-node>strong{font-size:.98rem!important}.topology-node>span{font-size:.53rem!important}}
+@media(prefers-reduced-motion:reduce){.topology-node{transition:none!important}}
