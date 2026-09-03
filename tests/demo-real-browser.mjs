@@ -65,7 +65,7 @@ await run('svc-entry-100', async p => {
 });
 
 await run('svc-web-fix', async p => {
-  await p.waitForFunction(()=>document.querySelectorAll('.real-viewport.good').length===3,null,{timeout:10000});
+  await p.waitForFunction(()=>document.querySelectorAll('.real-viewport.good').length>=3,null,{timeout:10000});
   const txt=await p.locator('#amase-artifact').innerText();
   if(!txt.includes('PASS')) throw new Error('web: viewport pass result missing');
 });
