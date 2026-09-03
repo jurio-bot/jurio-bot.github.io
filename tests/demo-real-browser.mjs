@@ -16,6 +16,10 @@ async function waitHash(){
   }, {timeout:15000});
 }
 
+async function hiddenText(selector){
+  return (await page.locator(selector).evaluate(e=>e.textContent||'')).trim();
+}
+
 async function run(id, verify){
   const url=`${base}/demo-view.html?id=${encodeURIComponent(id)}`;
   await page.goto(url,{waitUntil:'networkidle'});
@@ -25,9 +29,9 @@ async function run(id, verify){
   if(!kicker.includes('BROWSER DEMO')) throw new Error(`${id}: Amase process badge missing`);
   await page.click('#de-start');
   await waitHash();
-  const outputs=Number(await page.locator('#m-output').innerText());
+  const outputs=Number(await hiddenText('#m-output'));
   if(outputs < 1) throw new Error(`${id}: no verified output`);
-  const hash=(await page.locator('#ev-hash').innerText()).trim();
+  const hash=await hiddenText('#ev-hash');
   if(!/^[0-9a-f]{16}/i.test(hash)) throw new Error(`${id}: invalid SHA evidence ${hash}`);
   await page.waitForFunction(()=>document.querySelector('#amase-result-state')?.textContent.includes('結果を生成'),{timeout:5000});
   if(await page.locator('#amase-artifact .real-output-preview').count()) throw new Error(`${id}: raw output leaked into primary result`);
