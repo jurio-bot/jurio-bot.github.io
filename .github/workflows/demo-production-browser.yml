@@ -1,4 +1,4 @@
-name: Production demo browser integrity
+name: Production site browser integrity
 
 on:
   push:
@@ -16,28 +16,78 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Wait for Amase V3 demo UI to reach GitHub Pages
+      - name: Wait for organized site and demo UI to reach GitHub Pages
         run: |
           for i in {1..48}; do
-            body="$(curl -fsS --max-time 12 "https://paper-daemon.github.io/demo-amase-v3.js?run=${GITHUB_RUN_ID}" || true)"
-            if printf '%s' "$body" | grep -q 'PD_AMASE_DEMO_V3_20260903_1'; then
-              echo 'Production Amase V3 UI is current.'
+            home="$(curl -fsS --max-time 12 "https://paper-daemon.github.io/?run=${GITHUB_RUN_ID}" || true)"
+            demo="$(curl -fsS --max-time 12 "https://paper-daemon.github.io/demo-amase-v3.js?run=${GITHUB_RUN_ID}" || true)"
+            if printf '%s' "$home" | grep -q 'site.css?v=20260903' && printf '%s' "$demo" | grep -q 'PD_AMASE_DEMO_V3_20260903_1'; then
+              echo 'Production site and demo UI are current.'
               exit 0
             fi
             echo "Waiting for Pages deploy ($i/48)..."
             sleep 5
           done
-          echo 'Timed out waiting for production Amase V3 UI.'
+          echo 'Timed out waiting for current production site.'
           exit 1
       - name: Install Playwright Chromium
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
+      - name: Verify organized public pages on desktop and mobile
+        run: |
+          node - <<'NODE'
+          const { chromium } = require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const routes=['/','/showcase.html','/demo.html','/notes/','/work.html'];
+            for(const config of [
+              {name:'desktop',viewport:{width:1440,height:1000}},
+              {name:'mobile',viewport:{width:390,height:844},isMobile:true,hasTouch:true}
+            ]){
+              const page=await browser.newPage(config);
+              for(const route of routes){
+                await page.goto(`https://paper-daemon.github.io${route}?ci=${Date.now()}`,{waitUntil:'networkidle'});
+                await page.waitForSelector('.site-head');
+                const siteCss=await page.locator('link[rel="stylesheet"][href*="site.css"]').count();
+                if(siteCss!==1) throw new Error(`${config.name} ${route}: shared site.css missing`);
+                const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+                if(overflow>1) throw new Error(`${config.name} ${route}: horizontal overflow ${overflow}px`);
+                const body=(await page.locator('body').innerText()).trim();
+                if(body.length<80) throw new Error(`${config.name} ${route}: page body unexpectedly empty`);
+              }
+              await page.close();
+            }
+
+            const page=await browser.newPage({viewport:{width:1440,height:1000}});
+            await page.goto('https://paper-daemon.github.io/',{waitUntil:'networkidle'});
+            const home=await page.locator('body').innerText();
+            for(const text of ['作る。','制作物を見る','デモを触る']) if(!home.includes(text)) throw new Error(`home: missing ${text}`);
+
+            await page.goto('https://paper-daemon.github.io/showcase.html',{waitUntil:'networkidle'});
+            if(await page.locator('.link-row').count()<8) throw new Error('works: public proof list too small');
+
+            await page.goto('https://paper-daemon.github.io/demo.html',{waitUntil:'networkidle'});
+            await page.waitForSelector('.dm-card');
+            const demos=await page.locator('.dm-card').count();
+            if(demos!==46) throw new Error(`demos: expected 46 cards, got ${demos}`);
+
+            await page.goto('https://paper-daemon.github.io/notes/',{waitUntil:'networkidle'});
+            const notes=await page.locator('.note-card').count();
+            if(notes<10) throw new Error(`notes: archive unexpectedly small (${notes})`);
+
+            await page.goto('https://paper-daemon.github.io/work.html',{waitUntil:'networkidle'});
+            const stripe=await page.locator('a[href*="stripe.com"]').count();
+            if(stripe!==33) throw new Error(`work: expected 33 Stripe links, got ${stripe}`);
+            console.log(`PUBLIC_SITE_OK demos=${demos} notes=${notes} stripe=${stripe}`);
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
       - name: Run real processing tests against production URL
         env:
           DEMO_BASE_URL: https://paper-daemon.github.io
         run: node tests/demo-real-browser.mjs
-      - name: Verify Amase mobile result UI
+      - name: Verify demo mobile result UI
         run: |
           node - <<'NODE'
           const { chromium } = require('playwright');
@@ -47,27 +97,27 @@ jobs:
             await page.goto('https://paper-daemon.github.io/demo-view.html?id=svc-entry-100',{waitUntil:'networkidle'});
             await page.waitForSelector('.amase-flow');
             const labels=await page.locator('.amase-flow').innerText();
-            if(!labels.includes('入れる')||!labels.includes('動かす')||!labels.includes('見る')) throw new Error('Amase three-step flow missing');
+            if(!labels.includes('入れる')||!labels.includes('動かす')||!labels.includes('見る')) throw new Error('three-step flow missing');
             const start=page.locator('#de-start');
             const box=await start.boundingBox();
             if(!box||box.width<44||box.height<44) throw new Error(`RUN button too small: ${JSON.stringify(box)}`);
             let overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-            if(overflow>1) throw new Error(`mobile page overflows before run by ${overflow}px`);
+            if(overflow>1) throw new Error(`mobile demo overflows before run by ${overflow}px`);
             await start.click();
             await page.waitForFunction(()=>Number(document.querySelector('#m-output')?.textContent||0)>0,null,{timeout:20000});
             await page.waitForFunction(()=>{const e=document.querySelector('#amase-artifact');return e&&!e.querySelector('.amase-empty')&&(e.textContent||'').trim().length>0},null,{timeout:10000});
             const result=await page.locator('#amase-artifact').innerText();
-            if(!result||/run the process|まだ実行/i.test(result)) throw new Error('Amase artifact did not render');
+            if(!result||/run the process|まだ実行/i.test(result)) throw new Error('artifact did not render');
             if(await page.locator('#amase-artifact .real-output-preview').count()>0) throw new Error('raw output leaked into primary result');
             overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-            if(overflow>1) throw new Error(`mobile page overflows after run by ${overflow}px`);
+            if(overflow>1) throw new Error(`mobile demo overflows after run by ${overflow}px`);
             await page.locator('#amase-tech > summary').click();
             if(!(await page.locator('#amase-tech').evaluate(e=>e.open))) throw new Error('technical evidence drawer did not open');
-            console.log('PRODUCTION_AMASE_MOBILE_OK');
+            console.log('PRODUCTION_DEMO_MOBILE_OK');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
-      - name: Verify Amase desktop layout
+      - name: Verify demo desktop layout
         run: |
           node - <<'NODE'
           const { chromium } = require('playwright');
@@ -77,10 +127,10 @@ jobs:
             await page.goto('https://paper-daemon.github.io/demo-view.html?id=work-agentlink',{waitUntil:'networkidle'});
             await page.waitForSelector('.amase-result');
             const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-            if(overflow>1) throw new Error(`desktop page overflows by ${overflow}px`);
+            if(overflow>1) throw new Error(`desktop demo overflows by ${overflow}px`);
             const bg=await page.evaluate(()=>getComputedStyle(document.body).backgroundColor);
             if(bg==='rgb(16, 16, 15)') throw new Error('old dark demo theme still active');
-            console.log('PRODUCTION_AMASE_DESKTOP_OK');
+            console.log('PRODUCTION_DEMO_DESKTOP_OK');
             await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
