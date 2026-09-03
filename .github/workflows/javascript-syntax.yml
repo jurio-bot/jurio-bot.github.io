@@ -16,16 +16,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Check interactive demo JavaScript
+      - name: Check current interactive JavaScript
         run: |
-          node --check recovery-demo.js
-          node --check multi-demos.js
-          node --check demo-hub.js
-          node --check work-demos.js
-          node --check demo-catalog.js
-          node --check demo-menu.js
-          node --check demo-engine.js
-          node --check demo-real-engine.js
-          node --check demo-visible-runtime.js
-          node --check demo-ui-v2.js
-          node --check demo-amase-v3.js
+          for file in \
+            demo-hub.js \
+            work-demos.js \
+            demo-catalog.js \
+            demo-menu.js \
+            demo-engine.js \
+            demo-real-engine.js \
+            demo-visible-runtime.js \
+            demo-ui-v2.js \
+            demo-amase-v3.js
+          do
+            test -f "$file"
+            node --check "$file"
+          done
