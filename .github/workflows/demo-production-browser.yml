@@ -54,8 +54,8 @@ jobs:
             let overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
             if(overflow>1) throw new Error(`mobile page overflows before run by ${overflow}px`);
             await start.click();
-            await page.waitForFunction(()=>Number(document.querySelector('#m-output')?.textContent||0)>0,{timeout:20000});
-            await page.waitForFunction(()=>document.querySelector('#amase-result-state')?.textContent.includes('結果を生成'),{timeout:5000});
+            await page.waitForFunction(()=>Number(document.querySelector('#m-output')?.textContent||0)>0,null,{timeout:20000});
+            await page.waitForFunction(()=>{const e=document.querySelector('#amase-artifact');return e&&!e.querySelector('.amase-empty')&&(e.textContent||'').trim().length>0},null,{timeout:10000});
             const result=await page.locator('#amase-artifact').innerText();
             if(!result||/run the process|まだ実行/i.test(result)) throw new Error('Amase artifact did not render');
             if(await page.locator('#amase-artifact .real-output-preview').count()>0) throw new Error('raw output leaked into primary result');
