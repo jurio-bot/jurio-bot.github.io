@@ -21,3 +21,4 @@ jobs:
           node --check recovery-demo.js
           node --check multi-demos.js
           node --check demo-hub.js
+          node --check work-demos.js
