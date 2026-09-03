@@ -1,0 +1,60 @@
+name: Production demo browser integrity
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Wait for this demo runtime to reach GitHub Pages
+        run: |
+          for i in {1..48}; do
+            body="$(curl -fsS --max-time 12 "https://paper-daemon.github.io/demo-visible-runtime.js?run=${GITHUB_RUN_ID}" || true)"
+            if printf '%s' "$body" | grep -q 'PD_VISIBLE_RUNTIME_20260903_1'; then
+              echo 'Production runtime is current.'
+              exit 0
+            fi
+            echo "Waiting for Pages deploy ($i/48)..."
+            sleep 5
+          done
+          echo 'Timed out waiting for production runtime.'
+          exit 1
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run real processing tests against production URL
+        env:
+          DEMO_BASE_URL: https://paper-daemon.github.io
+        run: node tests/demo-real-browser.mjs
+      - name: Verify visible replay on mobile production
+        run: |
+          node - <<'NODE'
+          const { chromium } = require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+            await page.goto('https://paper-daemon.github.io/demo-view.html?id=svc-entry-100',{waitUntil:'networkidle'});
+            await page.waitForSelector('#vr-shell');
+            await page.click('#de-start');
+            await page.waitForFunction(()=>document.querySelector('#vr-badge')?.textContent.includes('VERIFIED REAL RUN'),{timeout:20000});
+            const hash=(await page.locator('#vr-hash').innerText()).trim();
+            const out=(await page.locator('#m-output').innerText()).trim();
+            if(!/^[0-9a-f]{16}/i.test(hash)) throw new Error(`mobile production hash missing: ${hash}`);
+            if(Number(out)<1) throw new Error(`mobile production output missing: ${out}`);
+            const box=await page.locator('#de-start').boundingBox();
+            if(!box||box.width<40||box.height<25) throw new Error('RUN button is not usable on mobile');
+            console.log(`PRODUCTION_MOBILE_VISIBLE_REPLAY_OK hash=${hash}`);
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
