@@ -49,6 +49,7 @@ async function run(id, verify){
 }
 
 await run('work-agentlink', async p => {
+  await p.locator('#amase-tech > summary').click();
   await p.click('[data-fault="worker crash"]');
   await p.click('#de-start');
   await p.waitForFunction(()=>Number(document.querySelector('#m-recovered')?.textContent||0)>0,null,{timeout:15000});
