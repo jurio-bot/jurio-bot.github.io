@@ -1,5 +1,7 @@
 (()=>{
 'use strict';
+const VERSION='PD_DEMO_UI_V2_20260903_2';
+window.PD_DEMO_UI_VERSION=VERSION;
 const $=(s,r=document)=>r.querySelector(s);
 function labelButtons(){
  const start=$('#de-start'),chaos=$('#de-chaos'),speed=$('#de-speed'),reset=$('#de-reset');
@@ -31,7 +33,7 @@ function mount(){
  const mirror=()=>{target.innerHTML=out.innerHTML;const txt=(out.textContent||'').trim();if(!txt||/run the process|no output yet/i.test(txt))state.textContent='まだ実行していません';else state.textContent='結果を生成しました'};
  new MutationObserver(mirror).observe(out,{subtree:true,childList:true,characterData:true});mirror();
  const status=$('#de-status span');
- const sync=()=>{const [txt,cls]=humanStatus(status?.textContent);const p=$('#dui-flow-process'),r=$('#dui-flow-result');p.classList.remove('is-live','is-done');r.classList.remove('is-live','is-done');if(cls==='is-live')p.classList.add('is-live');if(cls==='is-done'){p.classList.add('is-done');r.classList.add('is-done')}if(state&&cls==='is-live')state.textContent='処理中…';if(state&&cls==='is-done')state.textContent='完了';};
+ const sync=()=>{const [,cls]=humanStatus(status?.textContent);const p=$('#dui-flow-process'),r=$('#dui-flow-result');p.classList.remove('is-live','is-done');r.classList.remove('is-live','is-done');if(cls==='is-live')p.classList.add('is-live');if(cls==='is-done'){p.classList.add('is-done');r.classList.add('is-done')}if(state&&cls==='is-live')state.textContent='処理中…';if(state&&cls==='is-done')state.textContent='完了';};
  if(status)new MutationObserver(sync).observe(status,{subtree:true,childList:true,characterData:true});sync();
  const textarea=$('#de-user-input');if(textarea&&!textarea.placeholder)textarea.placeholder='ここに入力してください';
  const inputWrap=$('.de-inputbar');if(inputWrap)inputWrap.addEventListener('focusin',()=>$('#dui-flow-input')?.classList.add('is-live'));
