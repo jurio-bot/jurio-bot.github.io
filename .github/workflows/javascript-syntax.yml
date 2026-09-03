@@ -25,3 +25,4 @@ jobs:
           node --check demo-catalog.js
           node --check demo-menu.js
           node --check demo-engine.js
+          node --check demo-real-engine.js
