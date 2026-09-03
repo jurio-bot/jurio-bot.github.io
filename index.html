@@ -14,7 +14,7 @@
 <meta property="og:title" content="あませ / paper-daemon">
 <meta property="og:description" content="作ったもの、直したもの、途中のメモ。頼める作業は料金と範囲まで一覧にしています。">
 <meta property="og:url" content="https://paper-daemon.github.io/">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="あませ / paper-daemon">
 <meta name="twitter:description" content="作ったもの、直したもの、途中のメモ。頼める作業は料金と範囲まで一覧にしています。">
 <script type="application/ld+json">
@@ -33,8 +33,13 @@
 }
 </script>
 <script src="/home-v2.js" defer></script>
+<link rel="stylesheet" href="/polish.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f3ecdf">
+<meta property="og:image" content="https://paper-daemon.github.io/og-amase.png">
+<meta name="twitter:image" content="https://paper-daemon.github.io/og-amase.png">
 </head>
-<body>
+<body data-page="home">
 <header class="topbar">
   <a class="name" href="/">あませ <small>paper-daemon</small></a>
   <nav aria-label="main">
@@ -51,8 +56,8 @@
     <p class="date">2026.09.03</p>
     <p class="hero-alias">paper-daemon</p>
     <h1>あませ。</h1>
-    <p class="lead">PCとかWebとか、書類とか動画とか。作ったり直したり、めんどい作業を片付けたりしてます。</p>
-    <p class="hero-links"><a href="/showcase.html">棚を見る →</a><a href="/work.html">頼めるやつ →</a></p>
+    <p class="lead">PC、Web、書類、動画。作ったり、直したり、仕組みにしたりしています。</p>
+    <p class="hero-links"><a href="/showcase.html">棚を見る →</a><a href="/work.html">仕事を見る →</a></p>
   </div>
   <aside class="desk-note">
     <span>机の上</span>
@@ -62,19 +67,19 @@
 </section>
 <div class="status-strip" aria-label="current stack"><span>Fedora</span><span>Windows</span><span>Android</span><span>GitHub</span><span>local AI</span></div>
 <section class="fresh" aria-label="recent additions">
-  <header><span>new</span><h2>今、増えた。</h2></header>
-  <a class="fresh-main" href="/portfolio/ai-production-control-room.html"><strong>作る→見る→直す。</strong><span>AIで何か出して終わりじゃなく、依頼の整理、確認、直し、納品まで。途中で引っかかった時も含めて置きました。</span><b>→</b></a>
+  <header><span>new</span><h2>最近のもの。</h2></header>
+  <a class="fresh-main" data-preview="brief → make → check → fix → deliver" data-preview-kind="production" href="/portfolio/ai-production-control-room.html"><strong>作る→見る→直す。</strong><span>AI制作を、依頼内容の整理から確認、修正、納品まで一つの流れとして見られるようにしています。</span><b>→</b></a>
   <a class="fresh-sub" href="/notes/licensed-video-delivery-pipeline.html"><strong>動画を納品するまでのメモ</strong><span>素材の権利、形式、確認、渡し方。</span><b>→</b></a>
 </section>
 <section class="work-door"><a href="/work.html"><span>頼めるやつ。</span><strong>料金・範囲・購入先 →</strong><b>→</b></a><small>9/30まで。初めて頼む人だけ。</small></section>
 <section id="made" class="made">
   <header class="chapter"><span>01</span><div><h2>いま触ってる。</h2></div></header>
-  <a class="big-piece" href="https://github.com/paper-daemon/AgentLink">
+  <a class="big-piece" data-preview="PC ↔ AI ↔ services" data-preview-kind="system" href="https://github.com/paper-daemon/AgentLink">
     <div class="piece-index">A</div>
-    <div class="piece-copy"><p class="piece-kind">system</p><h3>AgentLink</h3><p>PC、スマホ、AI、外部サービスをつないで長時間動かしてる基盤。落ちた後の復旧や二重実行、workerの引き継ぎを実際に回しながら直してます。</p><code>state → worker → effect → receipt → recover</code></div><b>↗</b>
+    <div class="piece-copy"><p class="piece-kind">system</p><h3>AgentLink</h3><p>PC、スマホ、AI、外部サービスをつないで長時間動かす基盤。復旧、二重実行の防止、workerの引き継ぎまで含めて整備しています。</p><code>state → worker → effect → receipt → recover</code></div><b>↗</b>
   </a>
   <div class="small-pieces">
-    <a href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><span>B</span><h3>Receipt Replay</h3><p>途中で結果が分からなくなった時に、skip / retry / reconcileを分ける実験。</p><b>↗</b></a>
+    <a href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><span>B</span><h3>Receipt Replay</h3><p>結果が不明な時に、skip / retry / reconcileを分けて扱うための実験。</p><b>↗</b></a>
     <a href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><span>C</span><h3>RAG Fleet</h3><p>複数Agentのrouting、source、health、validationをまとめて見てる構成。</p><b>↗</b></a>
   </div>
 </section>
@@ -90,5 +95,6 @@
 <section class="elsewhere"><p><a href="https://github.com/paper-daemon">GitHub</a> / <a href="https://note.com/lovely_hosta391">note</a> / <a href="https://x.com/amase__iv">X</a> / <a href="https://www.threads.com/@ive.amase">Threads</a></p></section>
 </main>
 <footer><span>あませ / paper-daemon</span><a href="/feed.xml">RSS</a></footer>
+<script src="/polish.js" defer></script>
 </body>
 </html>

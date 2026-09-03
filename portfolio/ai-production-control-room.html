@@ -11,31 +11,37 @@
 .trybox{position:relative;margin:72px 0;padding:34px 38px 30px;background:#fffaf1;border:1px solid var(--line);box-shadow:10px 11px 0 #d8ccbd;transform:rotate(.15deg)}.trybox::before{content:'試しに流す';position:absolute;right:20px;top:16px;color:var(--red);font:700 .58rem/1 var(--mono)}.trybox h2{margin:0 0 10px;font:600 clamp(2rem,4vw,3.5rem)/1 var(--serif)}.trybox>p{max-width:650px;color:var(--muted);font-size:.82rem}.try-actions{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0}.try-actions button{border:1px solid var(--ink);background:transparent;padding:9px 14px;cursor:pointer;font:700 .68rem/1 var(--mono)}.try-actions button:first-child{background:var(--ink);color:var(--paper2)}.try-actions button:hover{transform:translateY(-1px)}.memo{min-height:116px;padding:16px;border-left:2px solid var(--red);background:#eee4d7;color:#413932;font:500 .72rem/1.8 var(--mono);white-space:pre-wrap}
 .proof-lines{border-top:2px solid var(--ink)}.proof-lines a{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) 24px;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);text-decoration:none}.proof-lines strong{font:600 1rem/1.4 var(--serif)}.proof-lines span{color:var(--muted);font-size:.76rem}.proof-lines b{color:var(--red)}.quiet-note{margin:26px 0 0;color:var(--muted);font-size:.7rem}.backline{padding:80px 0 24px;font:600 clamp(1.5rem,3vw,2.3rem)/1.6 var(--serif)}
 @media(max-width:700px){.flow-intro{padding-top:72px}.flow-row{grid-template-columns:44px 1fr 22px;gap:10px}.flow-row .n{font-size:2.2rem}.flow-row p{grid-column:2}.flow-row b{grid-column:3;grid-row:1}.trybox{margin-left:4px;margin-right:4px;padding:30px 20px;box-shadow:7px 8px 0 #d8ccbd}.proof-lines a{grid-template-columns:1fr 20px}.proof-lines span{grid-column:1}.proof-lines b{grid-column:2;grid-row:1}}
-</style></head><body>
+</style><link rel="stylesheet" href="/polish.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f3ecdf">
+<meta property="og:image" content="https://paper-daemon.github.io/og-amase.png">
+<meta name="twitter:image" content="https://paper-daemon.github.io/og-amase.png">
+</head><body data-page="case">
 <header class="topbar"><a class="name" href="/">あませ <small>paper-daemon</small></a><nav aria-label="portfolio"><a class="nav-icon i-home" href="/" aria-label="home" data-tip="home"></a><a class="nav-icon i-shelf" href="/showcase.html" aria-label="棚" data-tip="棚"></a><a class="nav-icon i-work" href="/work.html" aria-label="仕事" data-tip="仕事"></a><a class="nav-icon i-github" href="https://github.com/paper-daemon" aria-label="GitHub" data-tip="GitHub"></a></nav></header>
 <main class="catalog">
-<section class="flow-intro"><p>AI / 画像・動画 / 自動化</p><h1>作る→見る→直す。</h1><p class="lead2">AIで何か出すところだけじゃなくて、その前後もけっこう大事なので。依頼内容をほどいて、作って、変なところを見つけて、必要な分だけ直して、納品できる形にする。普段考えてる流れを小さく置いてます。</p><span class="scribble">※ 下の動きは遊べる見本。実績っぽく見せるための数字は置いてません。</span></section>
-<section class="catalog-block"><header><span>01</span><div><h2>だいたいこの順。</h2><p>全部やり直さず、壊れたところだけ戻れるようにする。</p></div></header>
+<section class="flow-intro"><p>AI / 画像・動画 / 自動化</p><h1>作る→見る→<span class="keep">直す。</span></h1><p class="lead2">AIで生成するところだけでなく、依頼内容の整理、制作、確認、必要な修正、納品までを一つの流れとして扱っています。普段使っている考え方を、小さなデモにしました。</p><span class="scribble">※ 下の動きは、このページ内だけで試せるデモです。</span></section>
+<section class="catalog-block"><header><span>01</span><div><h2>制作の流れ。</h2><p>全部をやり直さず、必要なところだけ戻れるようにします。</p></div></header>
 <div class="flow-list" id="flow">
 <div class="flow-row" data-i="0"><span class="n">01</span><h3>まず、何を作るか決める</h3><p>用途、縦横、雰囲気、避けたいもの。最初にズレやすいところだけ固める。</p><b>brief</b></div>
 <div class="flow-row" data-i="1"><span class="n">02</span><h3>作る</h3><p>画像、短い動画、素材。必要なら道具を分ける。全部を同じAIに投げない。</p><b>make</b></div>
-<div class="flow-row" data-i="2"><span class="n">03</span><h3>変なところを見る</h3><p>サイズ、長さ、形式、名前、抜け。見た目だけじゃなく、納品で困るところも見る。</p><b>check</b></div>
+<div class="flow-row" data-i="2"><span class="n">03</span><h3>気になるところを見る</h3><p>サイズ、長さ、形式、名前、抜け。見た目だけじゃなく、納品で困るところも見る。</p><b>check</b></div>
 <div class="flow-row" data-i="3"><span class="n">04</span><h3>そこだけ直す</h3><p>1枚ダメなら1枚だけ。途中で結果が分からなくなった時も、全部やり直さない。</p><b>fix</b></div>
 <div class="flow-row" data-i="4"><span class="n">05</span><h3>渡せる形にする</h3><p>使うもの、確認結果、必要なら作業メモ。あとで「どれだっけ」を減らす。</p><b>give</b></div>
 </div>
 <div class="trybox"><h2>一回、流してみる。</h2><p>外部サービスには何も送りません。このページの中だけで、途中で引っかかった時の動きを見られます。</p><div class="try-actions"><button id="go">順番に流す</button><button id="oops">3番で引っかける</button><button id="clear">戻す</button></div><div class="memo" id="memo">まだ何もしてない。
 上のボタンで流れだけ見られます。</div></div>
 </section>
-<section class="catalog-block"><header><span>02</span><div><h2>口だけにならない用。</h2><p>この辺は実際に公開してるもの。</p></div></header><div class="proof-lines">
+<section class="catalog-block"><header><span>02</span><div><h2>公開している実物。</h2><p>実装や検証の一部は、そのまま見られる形で公開しています。</p></div></header><div class="proof-lines">
 <a href="/creator-delivery-inspector/"><strong>creator-delivery-inspector</strong><span>動画・音声を渡す前に、サイズや長さや形式を確認するやつ。</span><b>→</b></a>
 <a href="https://github.com/paper-daemon/AgentLink"><strong>AgentLink</strong><span>途中復旧、二重実行防止、外部サービスとの接続をずっと触ってる本体。</span><b>↗</b></a>
 <a href="/notes/licensed-video-delivery-pipeline.html"><strong>動画を納品するまでのメモ</strong><span>素材の権利、形式、確認、渡し方までを1本の流れとして整理した記録。</span><b>→</b></a>
-</div><p class="quiet-note">すごそうな数字を置くより、触れるものと失敗した時の扱いを見せる方が好きなので、そうしてます。</p></section>
-<section class="backline"><a href="/showcase.html">← 棚に戻る</a>　/　<a href="/work.html">頼めるやつを見る</a></section>
+</div><p class="quiet-note">数字で飾るより、触れるものと失敗時の扱いが見える形を優先しています。</p></section>
+<section class="backline"><a href="/showcase.html">← 棚に戻る</a>　/　<a href="/work.html">仕事を見る</a></section>
 </main><footer><span>あませ / paper-daemon</span><a href="/">home</a></footer>
 <script>
 const rows=[...document.querySelectorAll('.flow-row')],memo=document.getElementById('memo');let timers=[];
 function reset(){timers.forEach(clearTimeout);timers=[];rows.forEach(x=>{x.classList.remove('active');x.style.background=''});memo.textContent=`まだ何もしてない。\n上のボタンで流れだけ見られます。`}
 function run(fail=false){reset();const words=['用途と条件を整理。','必要な素材を作る。','サイズ・形式・抜けを確認。','引っかかったところだけ直す。','使うものをまとめて渡せる状態にする。'];words.forEach((w,i)=>timers.push(setTimeout(()=>{rows[i].classList.add('active');memo.textContent+=`\n${i+1}. ${w}`;if(fail&&i===2){memo.textContent+=`\n   ↳ ここだけNG。全部は戻さず、3→4だけやり直す。`;rows[2].style.background='#fff0cf';}},i*430)));}
 document.getElementById('go').onclick=()=>run(false);document.getElementById('oops').onclick=()=>run(true);document.getElementById('clear').onclick=reset;
-</script></body></html>
+</script><script src="/polish.js" defer></script>
+</body></html>

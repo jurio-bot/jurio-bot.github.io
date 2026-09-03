@@ -8,8 +8,13 @@
 <link rel="stylesheet" href="/home-v2.css">
 <link rel="stylesheet" href="/showcase-v2.css">
 <link rel="stylesheet" href="/nav-icons.css">
+<link rel="stylesheet" href="/polish.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f3ecdf">
+<meta property="og:image" content="https://paper-daemon.github.io/og-amase.png">
+<meta name="twitter:image" content="https://paper-daemon.github.io/og-amase.png">
 </head>
-<body>
+<body data-page="shelf">
 <header class="topbar">
   <a class="name" href="/">あませ <small>paper-daemon</small></a>
   <nav aria-label="showcase">
@@ -21,16 +26,16 @@
 </header>
 <main class="catalog">
 <section class="catalog-intro">
-  <p>2026.09.03</p><h1>棚。</h1><div><p>できたものと、まだ触ってるもの。小さいのもそのまま置いてます。</p></div>
+  <p>2026.09.03</p><h1>棚。</h1><div><p>完成したもの、試しているもの、小さな道具をまとめています。</p></div>
 </section>
 <section class="catalog-block">
 <header><span>01</span><div><h2>作ってるもの</h2></div></header>
 <div class="feature-stack">
-  <a class="feature-main" href="https://github.com/paper-daemon/AgentLink"><small>main</small><strong>AgentLink</strong><span>PC、スマホ、AI、外部サービスをつないで長時間動かす基盤。復旧や二重実行も実際に踏みながら直してます。</span><b>↗</b></a>
-  <a class="feature-main" href="/portfolio/ai-production-control-room.html"><small>画像・動画 / 自動化</small><strong>作る→見る→直す。</strong><span>AIで作って終わりじゃなく、依頼の整理、確認、直し、納品までどう回すか。途中で引っかかった時も含めて触れるようにしました。</span><b>→</b></a>
+  <a class="feature-main" data-preview="PC ↔ AI ↔ services" data-preview-kind="system" href="https://github.com/paper-daemon/AgentLink"><small>main</small><strong>AgentLink</strong><span>PC、スマホ、AI、外部サービスをつないで長時間動かす基盤。復旧や二重実行も含めて検証しながら整備しています。</span><b>↗</b></a>
+  <a class="feature-main" data-preview="brief → make → check → fix → deliver" data-preview-kind="production" href="/portfolio/ai-production-control-room.html"><small>画像・動画 / 自動化</small><strong>作る→見る→直す。</strong><span>AI制作を、依頼整理から確認、修正、納品まで一つの工程として見られるようにしたデモ。</span><b>→</b></a>
   <div class="feature-pair">
-    <a href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><small>RAG</small><strong>RAG Fleet Harness</strong><span>複数Agentのrouting、source、health、validationをまとめて見る構成。</span><b>↗</b></a>
-    <a href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><small>recovery</small><strong>Receipt Replay Simulator</strong><span>途中で結果が分からなくなった時に、skip / retry / reconcileを分ける実験。</span><b>↗</b></a>
+    <a data-preview="source → route → validate" data-preview-kind="RAG" href="https://github.com/paper-daemon/AgentLink/blob/main/CASE_STUDY_RAG_FLEET.md"><small>RAG</small><strong>RAG Fleet Harness</strong><span>複数Agentのrouting、source、health、validationをまとめて見る構成。</span><b>↗</b></a>
+    <a data-preview="unknown → skip / retry / reconcile" data-preview-kind="recovery" href="https://github.com/paper-daemon/AgentLink/tree/main/demos/receipt-replay-simulator"><small>recovery</small><strong>Receipt Replay Simulator</strong><span>結果が不明な時に、skip / retry / reconcileを分けて扱う実験。</span><b>↗</b></a>
   </div>
 </div>
 </section>
@@ -52,8 +57,9 @@
   <a href="/creator-stack-picker/"><strong>creator-stack-picker</strong><span>制作環境の選択を整理する小さいツール</span><b>→</b></a>
 </div>
 </section>
-<section class="catalog-end"><p><a href="/work.html">頼めるやつ</a> / <a href="https://github.com/paper-daemon">GitHub</a> / <a href="https://note.com/lovely_hosta391">note</a></p></section>
+<section class="catalog-end"><p><a href="/work.html">仕事</a> / <a href="https://github.com/paper-daemon">GitHub</a> / <a href="https://note.com/lovely_hosta391">note</a></p></section>
 </main>
 <footer><span>あませ / paper-daemon</span><a href="/">home</a></footer>
+<script src="/polish.js" defer></script>
 </body>
 </html>
