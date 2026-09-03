@@ -26,3 +26,5 @@ jobs:
           node --check demo-menu.js
           node --check demo-engine.js
           node --check demo-real-engine.js
+          node --check demo-visible-runtime.js
+          node --check demo-ui-v2.js
