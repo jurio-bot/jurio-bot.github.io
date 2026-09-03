@@ -20,3 +20,4 @@ jobs:
         run: |
           node --check recovery-demo.js
           node --check multi-demos.js
+          node --check demo-hub.js
