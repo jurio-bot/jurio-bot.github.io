@@ -28,3 +28,4 @@ jobs:
           node --check demo-real-engine.js
           node --check demo-visible-runtime.js
           node --check demo-ui-v2.js
+          node --check demo-amase-v3.js
