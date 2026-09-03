@@ -1,3 +1,4 @@
+@import url('/ops-node-windows.css');
 .recovery-demo{max-width:1240px;margin:0 auto;padding:92px 30px 106px;border-bottom:1px solid var(--ink)}
 .recovery-head{display:grid;grid-template-columns:1fr minmax(330px,.74fr);gap:66px;align-items:end;margin-bottom:46px}.recovery-head p{margin:0 0 12px;color:var(--red2);font:700 .59rem/1 var(--mono);letter-spacing:.11em}.recovery-head h2{margin:0;font:600 clamp(3.4rem,6vw,6.3rem)/.9 var(--serif);letter-spacing:-.065em}.recovery-head>div+div{font-size:.82rem;color:var(--muted);line-height:1.95}.recovery-head b{color:var(--ink)}
 .recovery-stage{position:relative;padding:30px;background:#e8dfd1;border:1px solid #bda993;overflow:hidden}.recovery-stage:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.34;background:linear-gradient(rgba(74,54,40,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(74,54,40,.07) 1px,transparent 1px);background-size:38px 38px}.recovery-stage>*{position:relative}
