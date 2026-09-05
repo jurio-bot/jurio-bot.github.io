@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Idempotency Receipt Ledger Case Study | Amase</title>
+<meta name="description" content="Case study: a dependency-free SQLite receipt ledger that prevents duplicate external side effects by making execute, skip, retry and conflict decisions explicit.">
+<link rel="canonical" href="https://paper-daemon.github.io/portfolio/idempotency-receipt-ledger.html"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#f4efe6">
+<meta property="og:type" content="article"><meta property="og:title" content="Idempotency Receipt Ledger | Reliability Case Study"><meta property="og:description" content="Durable execute/skip/conflict decisions for webhook, API and automation side effects."><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/site.css?v=20260904-2">
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/global.html"><img class="brand-avatar" src="/amase-avatar.jpg" alt=""><span class="brand-copy"><strong>Amase</strong><small>paper-daemon</small></span></a><nav aria-label="main"><a href="/global.html">Services</a><a href="/portfolio/">Case Studies</a><a href="https://github.com/paper-daemon/idempotency-receipt-ledger">Repository</a></nav><div class="head-actions"><a class="head-cta" href="https://www.upwork.com/freelancers/~01ae32c7c5628f3bfe">Upwork ↗</a></div></header>
+<main class="page">
+<section class="page-hero compact"><p class="eyebrow">CASE STUDY / SIDE-EFFECT RELIABILITY</p><h1>Idempotency Receipt Ledger.</h1><p class="page-lead">A dependency-free SQLite ledger for the moment before an automation performs an irreversible external effect: should this attempt execute, skip, retry, or stop as a conflict?</p><div class="page-meta"><span>PYTHON 3.10+</span><span>SQLITE</span><span>CI READY</span><span>MIT</span></div></section>
+
+<section class="work-intro"><div><p class="eyebrow">THE PROBLEM</p><h2 style="margin:0;font:600 clamp(2rem,4vw,3.7rem)/1 var(--serif);letter-spacing:-.045em">A timeout does not prove the side effect failed.</h2><p style="color:var(--muted);font-size:.8rem;max-width:760px">A payment request, webhook consumer, notification sender or file export can succeed remotely and still return a local timeout. Blindly replaying the same operation may create a duplicate charge, message, record or delivery. Retry logic therefore needs durable memory of what was attempted and what already completed.</p></div><div class="work-rule"><strong>Design constraint</strong><p>The ledger decides whether a caller may execute. It never performs the side effect itself, never silently retries failed work, and never stores a raw payload when the caller uses file fingerprinting.</p></div></section>
+
+<section class="section"><header class="section-head"><small>01 / DECISION MODEL</small><h2>Make replay state explicit.</h2></header><div class="feature-grid">
+<div class="feature-card"><small>FIRST ATTEMPT</small><h3>EXECUTE</h3><p>A new idempotency key and fingerprint create a reserved receipt with attempt 1.</p></div>
+<div class="feature-card"><small>IN FLIGHT</small><h3>SKIP_IN_FLIGHT</h3><p>A competing process sees the existing reservation instead of performing the same external action again.</p></div>
+<div class="feature-card"><small>COMPLETED</small><h3>SKIP_SUCCEEDED</h3><p>Once the receipt is marked successful, future attempts remain a skip rather than becoming a fresh execution.</p></div>
+<div class="feature-card"><small>KEY MISUSE</small><h3>CONFLICT</h3><p>The same key with a different fingerprint is treated as a semantic conflict and exits with code 3.</p></div>
+<div class="feature-card"><small>FAILED WORK</small><h3>SKIP_FAILED</h3><p>A failure is not automatically replayed. The default is to stop and preserve the existing receipt state.</p></div>
+<div class="feature-card"><small>EXPLICIT RETRY</small><h3>RETRY</h3><p>Only <code>--allow-failed-retry</code> reopens a failed receipt and increments the attempt number.</p></div>
+</div></section>
+
+<section class="section"><header class="section-head"><small>02 / RELIABILITY BOUNDARIES</small><h2>Small database, deliberate semantics.</h2></header><div class="lane-grid">
+<article class="lane"><span class="lane-no">ATOMIC</span><h3>Serialize reservations</h3><p>SQLite <code>BEGIN IMMEDIATE</code>, WAL mode and a busy timeout make concurrent reserve attempts converge on one durable receipt.</p></article>
+<article class="lane"><span class="lane-no">PRIVATE</span><h3>Fingerprint payloads</h3><p><code>--payload-file</code> stores a SHA-256 fingerprint rather than the raw payload, reducing accidental retention of customer or secret data.</p></article>
+<article class="lane"><span class="lane-no">REVIEWABLE</span><h3>Deterministic exit codes</h3><p>Normal decisions return 0, invalid input returns 2, and idempotency-key fingerprint conflicts return 3 for orchestration or CI.</p></article>
+</div></section>
+
+<section class="section"><header class="section-head"><small>03 / CLI</small><h2>Put the receipt before the side effect.</h2></header><div class="proof-main"><div class="terminal"><span class="ok">$ receipt-ledger --db receipts.db reserve --key order:42 --fingerprint send-v1</span><br>decision=EXECUTE state=reserved attempt=1<br><br><span class="ok">$ receipt-ledger --db receipts.db succeed --key order:42 --result-json '{"delivery_id":"d_42"}'</span><br>state=succeeded attempt=1<br><br><span class="ok">$ receipt-ledger --db receipts.db reserve --key order:42 --fingerprint send-v1</span><br><span class="warn">decision=SKIP_SUCCEEDED state=succeeded attempt=1</span></div><p style="max-width:760px;color:var(--muted)">The caller performs the actual payment, message, write or webhook action only after an <code>EXECUTE</code> or explicitly approved <code>RETRY</code> decision.</p></div></section>
+
+<section class="section"><header class="section-head"><small>04 / REGRESSION PROOF</small><h2>The duplicate paths are tested.</h2></header><div class="lane-grid">
+<article class="lane"><h3>11 regression tests</h3><p>Coverage includes in-flight duplicates, completed duplicates, fingerprint conflicts, failed-retry gating, missing receipts and CLI exit behavior.</p></article>
+<article class="lane"><h3>Concurrent connections</h3><p>A two-connection test asserts that the same key cannot produce two <code>EXECUTE</code> decisions.</p></article>
+<article class="lane"><h3>Three Python versions</h3><p>GitHub Actions runs the suite on Python 3.10, 3.12 and 3.13 so the public repository carries reproducible compatibility evidence.</p></article>
+</div></section>
+
+<section class="section"><header class="section-head"><small>05 / CLIENT VALUE</small><h2>Useful anywhere retries can duplicate money or work.</h2></header><div class="feature-grid">
+<div class="feature-card"><small>WEBHOOKS</small><h3>Deduplicate event consumers</h3><p>Use provider event IDs or business keys to prevent repeated handling when delivery is retried.</p></div>
+<div class="feature-card"><small>AI AGENTS</small><h3>Guard tool side effects</h3><p>Wrap email sends, record creation, file writes and other non-idempotent tools with a durable decision boundary.</p></div>
+<div class="feature-card"><small>AUTOMATION</small><h3>Recover without guessing</h3><p>Persist the last known state so a restarted worker can distinguish completed, in-flight, failed and conflicting attempts.</p></div>
+</div></section>
+
+<section class="cta-band"><div><h2>Have a workflow where “retry” can mean “duplicate”?</h2><p>I can add an idempotency and receipt boundary around webhook, API, AI-agent or automation side effects without hiding the retry decision.</p></div><a class="button primary" href="https://www.upwork.com/freelancers/~01ae32c7c5628f3bfe">Discuss on Upwork ↗</a></section>
+</main><footer class="site-footer"><div class="footer-brand"><img src="/amase-avatar.jpg" alt=""><span><strong>Amase</strong><br>paper-daemon</span></div><nav><a href="/global.html">Services</a><a href="https://github.com/paper-daemon/idempotency-receipt-ledger">Source</a><a href="https://github.com/paper-daemon">GitHub</a></nav></footer>
+</body></html>
