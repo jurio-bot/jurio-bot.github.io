@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Workflow Contract Gate Case Study | Amase</title>
+<meta name="description" content="Case study: a compact CI gate for explicit API and webhook contracts, fixture validation, secret-safe diagnostics and deterministic exit codes.">
+<link rel="canonical" href="https://paper-daemon.github.io/portfolio/workflow-contract-gate.html"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#f4efe6">
+<meta property="og:type" content="article"><meta property="og:title" content="Workflow Contract Gate | Integration Reliability Case Study"><meta property="og:description" content="Explicit payload contracts and fixture checks for APIs, webhooks and automations."><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/site.css?v=20260904-2">
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/global.html"><img class="brand-avatar" src="/amase-avatar.jpg" alt=""><span class="brand-copy"><strong>Amase</strong><small>paper-daemon</small></span></a><nav aria-label="main"><a href="/global.html">Services</a><a href="/portfolio/">Case Studies</a><a href="https://github.com/paper-daemon/workflow-contract-gate">Repository</a></nav><div class="head-actions"><a class="head-cta" href="https://upwork.com/freelancers/~01ae32c7c5628f3bfe">Upwork ↗</a></div></header>
+<main class="page">
+<section class="page-hero compact"><p class="eyebrow">CASE STUDY / INTEGRATION RELIABILITY</p><h1>Workflow Contract Gate.</h1><p class="page-lead">A small contract-testing CLI for the seams between APIs, webhooks and automation steps. Define the payload you rely on, save representative fixtures, and fail CI before a breaking change reaches the workflow.</p><div class="page-meta"><span>PYTHON 3.10+</span><span>EXPLICIT CONTRACTS</span><span>CI READY</span><span>MIT</span></div></section>
+
+<section class="work-intro"><div><p class="eyebrow">THE PROBLEM</p><h2 style="margin:0;font:600 clamp(2rem,4vw,3.7rem)/1 var(--serif);letter-spacing:-.045em">Integrations break at the boundary nobody wrote down.</h2><p style="color:var(--muted);font-size:.8rem;max-width:760px">A webhook can keep returning valid JSON while silently changing a field type, dropping a required key, adding an unsupported event, or introducing structure the next automation step cannot accept. When those assumptions exist only in a workflow editor or a developer's memory, regressions arrive in production.</p></div><div class="work-rule"><strong>Design constraint</strong><p>Keep the contract format intentionally smaller than full JSON Schema. The tool should be understandable in one review, produce no payload-value leaks by default, and return stable exit codes for CI and automation.</p></div></section>
+
+<section class="section"><header class="section-head"><small>01 / MODEL</small><h2>Contract, fixture, gate.</h2></header><div class="lane-grid">
+<article class="lane"><span class="lane-no">CONTRACT</span><h3>Make assumptions explicit.</h3><p>Declare object fields, required keys, primitive types, nested arrays, enum values and whether unknown fields are accepted.</p></article>
+<article class="lane"><span class="lane-no">FIXTURE</span><h3>Test representative payloads.</h3><p>Validate one saved request/response or a directory of fixtures from staging, webhook samples or API adapters.</p></article>
+<article class="lane"><span class="lane-no">GATE</span><h3>Turn drift into a build signal.</h3><p>Valid fixtures exit 0, contract violations exit 1, and malformed contract/input configuration exits 2.</p></article>
+</div></section>
+
+<section class="section"><header class="section-head"><small>02 / FAILURE MODES</small><h2>Small rules, useful diagnostics.</h2></header><div class="feature-grid">
+<div class="feature-card"><small>REQUIRED FIELDS</small><h3>Missing keys fail at the exact path</h3><p>A missing nested property is reported with its JSON path instead of a generic validation error.</p></div>
+<div class="feature-card"><small>TYPE SAFETY</small><h3>Booleans are not integers</h3><p>Python's type quirks are handled explicitly so <code>true</code> cannot accidentally satisfy an integer contract.</p></div>
+<div class="feature-card"><small>ENUMS</small><h3>Unexpected events stay visible</h3><p>Allowed event names or states can be bounded without exposing the rejected value in diagnostics.</p></div>
+<div class="feature-card"><small>UNKNOWN FIELDS</small><h3>Strict only where you want it</h3><p>Each object boundary can allow new fields or reject them, depending on how fragile the downstream consumer is.</p></div>
+<div class="feature-card"><small>ARRAY PATHS</small><h3>Item failures point to the index</h3><p>Nested list violations identify paths such as <code>$.payload.tags[1]</code> for fast triage.</p></div>
+<div class="feature-card"><small>SECRET HYGIENE</small><h3>Report rules, not values</h3><p>Default diagnostics contain paths, violation codes and rule messages. Fixture values are not echoed into CI logs.</p></div>
+</div></section>
+
+<section class="section"><header class="section-head"><small>03 / CLI</small><h2>A contract gate that fits in a pipeline.</h2></header><div class="proof-main"><div class="terminal"><span class="ok">$ workflow-contract-gate check --contract contract.json fixture.json</span><br>PASS fixture.json<br><br><span class="ok">$ workflow-contract-gate check --contract contract.json bad.json</span><br><span class="warn">FAIL bad.json</span><br>&nbsp;&nbsp;$.payload.email [missing_required] required field is missing<br>&nbsp;&nbsp;$.payload.id [type_mismatch] expected integer<br>exit 1</div><p style="max-width:760px;color:var(--muted)">The same check can emit JSON for a larger monitoring system or run across every <code>*.json</code> fixture in a directory. The public repository includes passing and deliberately failing fixtures plus a GitHub Actions matrix.</p></div></section>
+
+<section class="section"><header class="section-head"><small>04 / DIFFERENT FROM DATA SHAPE GUARD</small><h2>Observed drift and explicit contracts solve different problems.</h2></header><div class="lane-grid">
+<article class="lane"><h3>Data Shape Guard</h3><p>Infers what real JSON/JSONL data looks like and compares observed shape or presence drift between datasets.</p></article>
+<article class="lane"><h3>Workflow Contract Gate</h3><p>Starts from a deliberate contract and asks whether saved API/webhook fixtures still satisfy that boundary.</p></article>
+<article class="lane"><h3>Used together</h3><p>Observed production/staging data can inform a contract; the explicit contract can then become a lightweight release gate.</p></article>
+</div></section>
+
+<section class="cta-band"><div><h2>Have an integration that breaks when one field moves?</h2><p>I can turn the assumptions at an API, webhook or automation boundary into a small, reviewable validation gate and regression fixture set.</p></div><a class="button primary" href="https://upwork.com/freelancers/~01ae32c7c5628f3bfe">Discuss on Upwork ↗</a></section>
+</main><footer class="site-footer"><div class="footer-brand"><img src="/amase-avatar.jpg" alt=""><span><strong>Amase</strong><br>paper-daemon</span></div><nav><a href="/global.html">Services</a><a href="https://github.com/paper-daemon/workflow-contract-gate">Source</a><a href="https://github.com/paper-daemon">GitHub</a></nav></footer>
+</body></html>
