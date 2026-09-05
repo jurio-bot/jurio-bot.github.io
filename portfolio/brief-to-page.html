@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Brief to Page Case Study | Amase</title>
+<meta name="description" content="Case study: a validation-first pipeline that turns a structured JSON brief into a responsive single-file landing page with bounded URLs, metadata and reproducible output.">
+<link rel="canonical" href="https://paper-daemon.github.io/portfolio/brief-to-page.html"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#f4efe6">
+<meta property="og:type" content="article"><meta property="og:title" content="Brief to Page | Content Pipeline Case Study"><meta property="og:description" content="Structured brief in, validated single-file landing page out."><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/site.css?v=20260904-2">
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/global.html"><img class="brand-avatar" src="/amase-avatar.jpg" alt=""><span class="brand-copy"><strong>Amase</strong><small>paper-daemon</small></span></a><nav aria-label="main"><a href="/global.html">Services</a><a href="/showcase.html">Work</a><a href="https://github.com/paper-daemon/brief-to-page">Repository</a></nav><div class="head-actions"><a class="head-cta" href="https://upwork.com/freelancers/~0113e1480d19478321">Upwork ↗</a></div></header>
+<main class="page">
+<section class="page-hero compact"><p class="eyebrow">CASE STUDY / CONTENT SYSTEMS</p><h1>Brief to Page.</h1><p class="page-lead">A validation-first static-page pipeline where content stays reviewable as structured data and the final HTML is deterministic, portable and safe to hand off.</p><div class="page-meta"><span>PYTHON 3.10+</span><span>NO RUNTIME DEPS</span><span>SINGLE HTML</span><span>MIT</span></div></section>
+
+<section class="work-intro"><div><p class="eyebrow">THE PROBLEM</p><h2 style="margin:0;font:600 clamp(2rem,4vw,3.7rem)/1 var(--serif);letter-spacing:-.045em">Fast page generation should not mean unreviewable output.</h2><p style="color:var(--muted);font-size:.8rem;max-width:760px">When a landing page is generated directly from a prompt, brand copy, links, metadata and layout decisions often collapse into one opaque artifact. That makes approvals, revisions and automation brittle. Brief to Page separates the content contract from rendering: a small JSON brief can be reviewed first, validated in CI, and rendered only after it passes defined boundaries.</p></div><div class="work-rule"><strong>Design constraint</strong><p>The output must be a self-contained HTML file with no external runtime dependency, while unsafe URLs, malformed palette values and accidental source-file overwrite fail before delivery.</p></div></section>
+
+<section class="section"><header class="section-head"><small>01 / PIPELINE</small><h2>Brief, validate, render.</h2></header><div class="lane-grid">
+<article class="lane"><span class="lane-no">BRIEF</span><h3>Keep decisions explicit.</h3><p>Brand, title, hero, sections, cards, CTA, language and metadata live in JSON rather than being scattered through markup.</p></article>
+<article class="lane"><span class="lane-no">VALIDATE</span><h3>Fail before output.</h3><p><code>--validate-only</code> checks container shapes, palette values, CTA schemes, canonical URLs, OG image URLs and language tags without writing HTML.</p></article>
+<article class="lane"><span class="lane-no">RENDER</span><h3>Generate a portable artifact.</h3><p>The result is one responsive HTML file with embedded CSS, escaped content and no JavaScript dependency.</p></article>
+</div></section>
+
+<section class="section"><header class="section-head"><small>02 / BOUNDARIES</small><h2>Small tool, explicit trust model.</h2></header><div class="feature-grid">
+<div class="feature-card"><small>URL SAFETY</small><h3>Constrained link schemes</h3><p>CTA links allow only local paths, anchors, HTTP(S), mailto and tel. Canonical and OG image metadata require absolute HTTP(S) URLs.</p></div>
+<div class="feature-card"><small>OUTPUT PROTECTION</small><h3>The source brief cannot be overwritten</h3><p>The output path is resolved and compared against the input path before rendering, protecting the JSON source from accidental replacement.</p></div>
+<div class="feature-card"><small>INTERNATIONAL</small><h3>Language is part of the contract</h3><p>Pages can declare simple language tags such as <code>ja</code>, <code>en</code> and <code>en-US</code> without opening the HTML attribute to arbitrary injection.</p></div>
+<div class="feature-card"><small>SEO HANDOFF</small><h3>Metadata is data, too</h3><p>Title, description, optional canonical URL and optional Open Graph image are generated from the same reviewable brief.</p></div>
+<div class="feature-card"><small>REPEATABILITY</small><h3>Validation can run in CI</h3><p>A pull request can validate a campaign brief before a separate build step emits the final HTML artifact.</p></div>
+<div class="feature-card"><small>COMPATIBILITY</small><h3>Tested across Python versions</h3><p>The project runs regression tests across Python 3.10, 3.12 and 3.13 in GitHub Actions.</p></div>
+</div></section>
+
+<section class="section"><header class="section-head"><small>03 / CLI</small><h2>Review the brief before shipping the page.</h2></header><div class="proof-main"><div class="terminal"><span class="ok">$ python brief_to_page.py campaign/brief.json --validate-only</span><br>valid=1 sections=3 brand=Northstar Ops<br><br><span class="ok">$ python brief_to_page.py campaign/brief.json --output public/index.html</span><br>generated=public/index.html sections=3 brand=Northstar Ops</div><p style="max-width:760px;color:var(--muted)">This pattern also works well with AI-assisted content generation: an AI can propose the brief, but the deterministic validator defines what is acceptable before HTML is emitted.</p></div></section>
+
+<section class="section"><header class="section-head"><small>04 / CLIENT VALUE</small><h2>Why this matters beyond a demo.</h2></header><div class="lane-grid">
+<article class="lane"><h3>Approval-friendly</h3><p>Clients can review copy, CTA targets and page sections as structured content before layout generation.</p></article>
+<article class="lane"><h3>Automation-friendly</h3><p>The same brief format can be produced from forms, spreadsheets, internal tools or an AI workflow without coupling those systems to HTML internals.</p></article>
+<article class="lane"><h3>Handoff-friendly</h3><p>The delivered artifact is a single file, while the source brief remains readable and editable for the next iteration.</p></article>
+</div></section>
+
+<section class="cta-band"><div><h2>Need a repeatable content-to-page workflow?</h2><p>I can adapt the same structured-brief pattern to landing pages, campaign variants, product pages or internal content pipelines.</p></div><a class="button primary" href="https://upwork.com/freelancers/~0113e1480d19478321">Discuss on Upwork ↗</a></section>
+</main><footer class="site-footer"><div class="footer-brand"><img src="/amase-avatar.jpg" alt=""><span><strong>Amase</strong><br>paper-daemon</span></div><nav><a href="/global.html">Services</a><a href="https://github.com/paper-daemon/brief-to-page">Source</a><a href="https://github.com/paper-daemon">GitHub</a></nav></footer>
+</body></html>
