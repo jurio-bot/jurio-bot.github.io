@@ -20,6 +20,17 @@ AI、自動化、Web、データ、画像、動画、字幕、文章、リサー
 - リサーチ、データ収集、文章整理、要約
 - 既存フローの原因調査・デバッグ・信頼性改善
 
+## Direct checkout / international
+
+英語圏・海外向けの固定スコープ依頼は、Stripeの直販ページから開始できます。
+
+- Direct services: https://paper-daemon.github.io/direct.html
+- Automation & QA Diagnostic — USD 49: https://book.stripe.com/14AaEW8hge7c5stf0TgEg2c
+- Data Cleanup & Validation Pack — USD 99: https://book.stripe.com/4gM8wO7dce7caMNg4XgEg2d
+- Web Research & Evidence Pack — USD 99: https://book.stripe.com/5kQ3cubts4wC5stdWPgEg2e
+
+追加実装や範囲拡大は、最初の固定スコープを確認してから別途切り分けます。
+
 ## 安全な依頼のしかた
 
 公開IssueにはAPIキー、パスワード、個人情報、顧客データ、非公開ファイルを貼らないでください。秘密情報がある仕事は各マーケットプレイスの非公開メッセージで相談してください。
