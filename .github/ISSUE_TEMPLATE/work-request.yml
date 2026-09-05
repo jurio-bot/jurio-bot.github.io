@@ -1,0 +1,44 @@
+name: これできますか？相談
+description: 公開してよい内容だけで、対応可否や進め方を相談します
+title: "[相談] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        公開Issueです。APIキー、パスワード、個人情報、顧客データ、非公開ファイルは貼らないでください。マーケットプレイス経由の案件は、そのサイト内で契約・支払いを継続します。
+  - type: textarea
+    id: goal
+    attributes:
+      label: やりたいこと / 困っていること
+      description: 一文でも大丈夫です。
+      placeholder: 例：毎日CSVを手で整える作業を自動化したい
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: 現在の状態・参考URL
+      description: 公開して問題ないURLや再現手順だけを書いてください。
+  - type: input
+    id: deadline
+    attributes:
+      label: 希望納期
+      placeholder: 未定 / 今週中 / 2026-09-10 など
+  - type: input
+    id: budget
+    attributes:
+      label: 予算
+      placeholder: 未定・相談でもOK
+  - type: dropdown
+    id: contact
+    attributes:
+      label: 契約に使いたいサイト
+      options:
+        - CrowdWorks
+        - Lancers
+        - ココナラ
+        - Upwork
+        - まだ未定
+    validations:
+      required: true
