@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Data Shape Guard Case Study | Amase</title>
+<meta name="description" content="Case study: turning messy JSON and JSONL payloads into a lightweight, CI-ready data contract with strict parsing, drift detection, secret redaction and reproducible reports.">
+<link rel="canonical" href="https://paper-daemon.github.io/portfolio/data-shape-guard.html"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#f4efe6">
+<meta property="og:type" content="article"><meta property="og:title" content="Data Shape Guard | Reliability Case Study"><meta property="og:description" content="A small dependency-free CLI for catching breaking payload drift before production."><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/site.css?v=20260904-2">
+</head>
+<body>
+<header class="site-head">
+<a class="brand" href="/global.html"><img class="brand-avatar" src="/amase-avatar.jpg" alt=""><span class="brand-copy"><strong>Amase</strong><small>paper-daemon</small></span></a>
+<nav aria-label="main"><a href="/global.html">Services</a><a href="/showcase.html">Work</a><a href="/demo.html">Demos</a><a href="https://github.com/paper-daemon/data-shape-guard">Repository</a></nav>
+<div class="head-actions"><a class="head-cta" href="https://upwork.com/freelancers/~0113e1480d19478321">Upwork ↗</a></div>
+</header>
+<main class="page">
+<section class="page-hero compact"><p class="eyebrow">CASE STUDY / DATA RELIABILITY</p><h1>Data Shape Guard.</h1><p class="page-lead">A lightweight data-contract check for the stage where the payload is real, the schema is informal, and downstream breakage is expensive.</p><div class="page-meta"><span>PYTHON 3.10+</span><span>STANDARD LIBRARY ONLY</span><span>CI READY</span><span>MIT</span></div></section>
+
+<section class="work-intro"><div><p class="eyebrow">THE PROBLEM</p><h2 style="margin:0;font:600 clamp(2rem,4vw,3.7rem)/1 var(--serif);letter-spacing:-.045em">“Valid JSON” can still break the system.</h2><p style="color:var(--muted);font-size:.8rem;max-width:760px">A webhook payload can remain syntactically valid while a field disappears, an integer becomes a string, or an almost-required property becomes sparse. Spot checks rarely catch those changes consistently. Full schema governance can also be too heavy for early-stage integrations and operational exports.</p></div><div class="work-rule"><strong>Design constraint</strong><p>Keep deployment friction close to zero. No third-party runtime dependency, no mutation of source data, and reports must remain available even when CI intentionally fails.</p></div></section>
+
+<section class="section">
+<header class="section-head"><small>01 / APPROACH</small><h2>Infer, compare, gate.</h2></header>
+<div class="lane-grid">
+<article class="lane"><span class="lane-no">INFER</span><h3>Observe real payloads.</h3><p>Walk nested objects and every array element, record observed types, presence ratios and a small set of safe examples.</p></article>
+<article class="lane"><span class="lane-no">COMPARE</span><h3>Classify drift.</h3><p>Removed paths and type-set changes are high severity. Presence-ratio drift is medium. New fields are informational.</p></article>
+<article class="lane"><span class="lane-no">GATE</span><h3>Choose what breaks CI.</h3><p>Teams can report only, fail on high severity, fail on medium-or-higher, or fail on any detected drift.</p></article>
+</div>
+</section>
+
+<section class="section">
+<header class="section-head"><small>02 / FAILURE MODES</small><h2>The edge cases are part of the feature.</h2></header>
+<div class="feature-grid">
+<div class="feature-card"><small>ARRAY COVERAGE</small><h3>No silent first-N sampling</h3><p>A type change that appears late in an array is still observed. The regression suite explicitly checks a change after the first 50 elements.</p></div>
+<div class="feature-card"><small>PATH SAFETY</small><h3>Literal keys stay literal</h3><p>Keys containing dots or array-like markers are escaped, preventing collisions between a literal key such as <code>a.b</code> and a nested path.</p></div>
+<div class="feature-card"><small>INPUT STRICTNESS</small><h3>Reject ambiguous JSON</h3><p>Duplicate object keys and non-finite values such as NaN or Infinity are rejected instead of being quietly normalized.</p></div>
+<div class="feature-card"><small>SECRET HYGIENE</small><h3>Useful reports without leaking values</h3><p>Examples under token, password, API-key, authorization and cookie-like paths are redacted, including unusual bracketed keys.</p></div>
+<div class="feature-card"><small>CI DIAGNOSTICS</small><h3>Fail and still explain why</h3><p>When the configured policy returns exit code 1, JSON and HTML reports have already been written and can be retained as CI artifacts.</p></div>
+<div class="feature-card"><small>COMPATIBILITY</small><h3>Small operational footprint</h3><p>The project targets Python 3.10+ and runs its regression suite across multiple supported Python versions in GitHub Actions.</p></div>
+</div>
+</section>
+
+<section class="section">
+<header class="section-head"><small>03 / CLI</small><h2>A reviewable contract in two commands.</h2></header>
+<div class="proof-main">
+<div class="terminal"><span class="ok">$ python data_shape_guard.py infer fixtures/baseline.jsonl</span><br>records=120 paths=37<br><br><span class="ok">$ python data_shape_guard.py compare fixtures/baseline.jsonl build/current.jsonl --fail-on high</span><br>drift=2<br><span class="warn">exit 1 when breaking drift matches policy</span></div>
+<p style="max-width:760px;color:var(--muted)">The default remains report-only for backward compatibility. Teams opt into CI failure behavior explicitly and can tune presence-ratio sensitivity with <code>--required-drift-threshold</code>.</p>
+</div>
+</section>
+
+<section class="section">
+<header class="section-head"><small>04 / WHAT THIS DEMONSTRATES</small><h2>Small tool, production-minded decisions.</h2></header>
+<div class="lane-grid">
+<article class="lane"><h3>Boundary thinking</h3><p>Failure behavior, malformed inputs and accidental secret exposure are designed alongside the happy path.</p></article>
+<article class="lane"><h3>Regression discipline</h3><p>Edge cases are encoded as tests so a later refactor cannot silently erase the reliability work.</p></article>
+<article class="lane"><h3>Client handoff</h3><p>The CLI, exit codes, reports and documentation are shaped so another person can run and troubleshoot the tool without hidden context.</p></article>
+</div>
+</section>
+
+<section class="cta-band"><div><h2>Need this pattern inside your own workflow?</h2><p>I can adapt the same validation and failure-gating approach to API responses, webhooks, ETL exports or AI-agent tool outputs.</p></div><a class="button primary" href="https://upwork.com/freelancers/~0113e1480d19478321">Discuss on Upwork ↗</a></section>
+</main>
+<footer class="site-footer"><div class="footer-brand"><img src="/amase-avatar.jpg" alt=""><span><strong>Amase</strong><br>paper-daemon</span></div><nav><a href="/global.html">Services</a><a href="https://github.com/paper-daemon/data-shape-guard">Source</a><a href="https://github.com/paper-daemon">GitHub</a></nav></footer>
+</body></html>
