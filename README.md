@@ -8,6 +8,7 @@ Public site for projects, browser demos, field notes, small tools, and a fixed-s
 
 - Home: https://paper-daemon.github.io/
 - General request desk: https://paper-daemon.github.io/request.html
+- Direct international services: https://paper-daemon.github.io/direct.html
 - AI automation: https://paper-daemon.github.io/services/ai-automation.html
 - Workflow reliability: https://paper-daemon.github.io/services/workflow-reliability.html
 - Data quality: https://paper-daemon.github.io/services/data-quality.html
@@ -21,6 +22,7 @@ Public site for projects, browser demos, field notes, small tools, and a fixed-s
 ## Information architecture
 
 - **General request desk** accepts unclear or mixed-scope requests and turns them into an executable first scope.
+- **Direct international services** offers English, fixed-scope async checkout for QA/automation diagnostics, data cleanup, and source-backed research.
 - **Specialist service pages** explain one problem class, one delivery model, and the closest public proof.
 - **Home** is a short front door. It does not host large simulations.
 - **Works** contains public projects and tools with real links.
