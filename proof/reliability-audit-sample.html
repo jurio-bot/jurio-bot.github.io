@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Workflow Reliability Audit — Sample Deliverable | Amase</title>
+<meta name="description" content="A sample workflow reliability audit showing failure modes, duplicate-risk analysis, retry boundaries, observability gaps and a prioritized remediation plan.">
+<link rel="canonical" href="https://paper-daemon.github.io/proof/reliability-audit-sample.html"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#f4efe6">
+<meta property="og:type" content="article"><meta property="og:title" content="Workflow Reliability Audit — Sample Deliverable"><meta property="og:description" content="See the structure of a real audit before ordering one."><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/site.css?v=20260904-2">
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/global.html"><img class="brand-avatar" src="/amase-avatar.jpg" alt=""><span class="brand-copy"><strong>Amase</strong><small>paper-daemon</small></span></a><nav aria-label="main"><a href="/global.html">Services</a><a href="/portfolio/">Work</a><a href="/request.html">Request</a></nav><div class="head-actions"><a class="head-cta" href="https://upwork.com/freelancers/~01ae32c7c5628f3bfe">Upwork ↗</a></div></header>
+<main class="page">
+<section class="page-hero compact"><p class="eyebrow">SAMPLE DELIVERABLE / WORKFLOW RELIABILITY</p><h1>What an audit actually looks like.</h1><p class="page-lead">This is a fictional example, built to show the structure and depth of a deliverable before you order one. No client data is used.</p><div class="page-meta"><span>FAILURE MAP</span><span>RETRY SAFETY</span><span>IDEMPOTENCY</span><span>PRIORITIZED FIXES</span></div></section>
+<section class="work-intro"><div><p class="eyebrow">SAMPLE SYSTEM</p><h2 style="margin:0;font:600 clamp(2rem,4vw,3.7rem)/1 var(--serif);letter-spacing:-.045em">Lead form → AI classification → CRM → Slack.</h2><p style="color:var(--muted);font-size:.8rem;max-width:760px">The sample workflow receives a web lead, enriches it with an LLM, creates or updates a CRM record and posts a Slack notification. The reported symptom is simple: “sometimes the workflow times out, and occasionally we see duplicates.”</p></div><div class="work-rule"><strong>Audit goal</strong><p>Find the smallest set of reliability changes that reduce duplicate side effects and make failures diagnosable without rewriting the workflow.</p></div></section>
+<section class="section"><header class="section-head"><small>01 / FLOW MAP</small><h2>Separate computation from side effects.</h2></header><div class="lane-grid">
+<article class="lane"><span class="lane-no">01</span><h3>Receive</h3><p>Webhook accepts the lead. No stable request key is currently recorded.</p></article>
+<article class="lane"><span class="lane-no">02</span><h3>Classify</h3><p>LLM call may time out. Retrying this step is usually safe because it has no external side effect.</p></article>
+<article class="lane"><span class="lane-no">03</span><h3>Write</h3><p>CRM update creates a durable external effect. Blind replay can create or overwrite records.</p></article>
+<article class="lane"><span class="lane-no">04</span><h3>Notify</h3><p>Slack send is another external effect and needs its own duplicate boundary.</p></article>
+</div></section>
+<section class="section"><header class="section-head"><small>02 / FINDINGS</small><h2>Issues ranked by operational risk.</h2></header><div class="feature-grid">
+<div class="feature-card"><small>CRITICAL</small><h3>No idempotency key before CRM write</h3><p>If the worker times out after the CRM accepts the request, the next retry cannot prove whether the write already succeeded.</p></div>
+<div class="feature-card"><small>HIGH</small><h3>Whole-workflow retries</h3><p>A transient LLM timeout causes the orchestration layer to replay downstream side effects instead of retrying only the safe computation step.</p></div>
+<div class="feature-card"><small>HIGH</small><h3>Success is not checkpointed</h3><p>The workflow has no durable record that the CRM stage completed, so recovery starts from memory rather than evidence.</p></div>
+<div class="feature-card"><small>MEDIUM</small><h3>Logs miss correlation IDs</h3><p>Operators cannot reliably connect the original webhook, LLM request, CRM result and Slack send during an incident.</p></div>
+<div class="feature-card"><small>MEDIUM</small><h3>Timeouts share one policy</h3><p>LLM, CRM and Slack failures use the same retry behavior despite having different side-effect and rate-limit characteristics.</p></div>
+<div class="feature-card"><small>LOW</small><h3>Manual recovery is undocumented</h3><p>There is no short operator checklist for determining whether a failed-looking run should be replayed, resumed or stopped.</p></div>
+</div></section>
+<section class="section"><header class="section-head"><small>03 / REMEDIATION ORDER</small><h2>Fix the dangerous ambiguity first.</h2></header><div class="lane-grid">
+<article class="lane"><span class="lane-no">P0</span><h3>Introduce a request key</h3><p>Derive or accept a stable request identifier before any external write. Store it with the CRM operation.</p></article>
+<article class="lane"><span class="lane-no">P0</span><h3>Checkpoint external effects</h3><p>Record started/succeeded/failed state around CRM and Slack independently so recovery can resume instead of replay.</p></article>
+<article class="lane"><span class="lane-no">P1</span><h3>Split retry policies</h3><p>Retry safe LLM failures automatically; gate ambiguous external-effect retries behind evidence or an idempotent API.</p></article>
+<article class="lane"><span class="lane-no">P1</span><h3>Add correlation logging</h3><p>Use one request ID across all stages and log status, attempt, latency and final disposition without storing secrets.</p></article>
+</div></section>
+<section class="section"><header class="section-head"><small>04 / VERIFICATION</small><h2>Tests that prove the fix, not just the happy path.</h2></header><div class="proof-main"><div class="terminal"><span class="ok">TEST 01</span> CRM succeeds, client times out → retry does not create a second record<br><span class="ok">TEST 02</span> LLM times out before side effects → safe retry resumes normally<br><span class="ok">TEST 03</span> Slack fails after CRM success → recovery sends Slack only<br><span class="ok">TEST 04</span> Same webhook arrives twice → one logical CRM effect<br><span class="ok">TEST 05</span> Logs reconstruct every stage from one correlation ID</div><p style="max-width:760px;color:var(--muted)">A real audit adapts these checks to the actual tools, APIs and failure evidence you provide. The goal is a reviewable repair order, not a generic checklist.</p></div></section>
+<section class="section"><header class="section-head"><small>05 / DELIVERABLE</small><h2>What you receive.</h2></header><div class="feature-grid">
+<div class="feature-card"><small>01</small><h3>Failure map</h3><p>Where the workflow can fail, which failures are transient and which can duplicate an external effect.</p></div>
+<div class="feature-card"><small>02</small><h3>Prioritized findings</h3><p>Critical, high, medium and low findings with evidence and why each matters.</p></div>
+<div class="feature-card"><small>03</small><h3>Remediation plan</h3><p>The smallest sensible repair order, including idempotency, checkpoints, retry boundaries and observability.</p></div>
+<div class="feature-card"><small>04</small><h3>Verification checklist</h3><p>Concrete scenarios to prove the workflow recovers safely after changes.</p></div>
+</div></section>
+<section class="cta-band"><div><h2>Have a workflow that “usually works”?</h2><p>Send a sanitized diagram, logs or screenshots. I can first tell you whether an audit, a small fix or a larger rebuild is the right scope.</p></div><a class="button primary" href="/request.html">Start with a brief ↗</a></section>
+</main><footer class="site-footer"><div class="footer-brand"><img src="/amase-avatar.jpg" alt=""><span><strong>Amase</strong><br>paper-daemon</span></div><nav><a href="/global.html">Services</a><a href="/portfolio/automation-first-aid.html">Related proof</a><a href="https://github.com/paper-daemon">GitHub</a></nav></footer>
+</body></html>
