@@ -2,9 +2,16 @@
 
 Public site for projects, browser demos, field notes, small tools, and a fixed-scope work catalog.
 
+**Development context:** Amase has been building AI/LLM-assisted software and automation continuously since November 2022. This refers to hands-on design, implementation, testing, debugging and operation, not casual ChatGPT use or employer tenure.
+
 ## Main navigation
 
 - Home: https://paper-daemon.github.io/
+- General request desk: https://paper-daemon.github.io/request.html
+- AI automation: https://paper-daemon.github.io/services/ai-automation.html
+- Workflow reliability: https://paper-daemon.github.io/services/workflow-reliability.html
+- Data quality: https://paper-daemon.github.io/services/data-quality.html
+- Python automation: https://paper-daemon.github.io/services/python-automation.html
 - Works: https://paper-daemon.github.io/showcase.html
 - Demos: https://paper-daemon.github.io/demo.html
 - Notes: https://paper-daemon.github.io/notes/
@@ -13,14 +20,18 @@ Public site for projects, browser demos, field notes, small tools, and a fixed-s
 
 ## Information architecture
 
+- **General request desk** accepts unclear or mixed-scope requests and turns them into an executable first scope.
+- **Specialist service pages** explain one problem class, one delivery model, and the closest public proof.
 - **Home** is a short front door. It does not host large simulations.
 - **Works** contains public projects and tools with real links.
 - **Demos** contains interactive browser demos. The default view is curated; all demos remain reachable by category.
 - **Notes** is the technical archive.
 - **Work** is the source of truth for currently purchasable fixed-scope work and prices.
 
-## Publishing rule
+## Evidence model
 
-Public technical claims should point to code, tests, reproducible examples, or other real evidence. Do not fabricate users, reviews, adoption numbers, revenue, or performance.
+Implemented, tested, published, deployed or operated artifacts can be used as practical development evidence when supported by code, CI, state, receipts, screenshots, logs or public pages. Ideas and unimplemented plans do not count as development proof.
+
+Public technical claims should point to code, tests, reproducible examples, or other real evidence. Do not fabricate users, reviews, adoption numbers, revenue, employer tenure, or performance.
 
 Production AgentLink internals, credentials, private operational state, and customer data do not belong in this repository.
