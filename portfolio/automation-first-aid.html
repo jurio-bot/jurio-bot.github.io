@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Automation First Aid Case Study | Amase</title>
+<meta name="description" content="Case study: dependency-free automation diagnostics, retry-safety classification, strict JSON checks, log-safe endpoint probes and CI-ready failure signals.">
+<link rel="canonical" href="https://paper-daemon.github.io/portfolio/automation-first-aid.html"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#f4efe6">
+<meta property="og:type" content="article"><meta property="og:title" content="Automation First Aid | Reliability Case Study"><meta property="og:description" content="First-response diagnostics that make the next automation decision safer."><meta property="og:image" content="https://paper-daemon.github.io/og-amase.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/site.css?v=20260904-2">
+</head>
+<body>
+<header class="site-head"><a class="brand" href="/global.html"><img class="brand-avatar" src="/amase-avatar.jpg" alt=""><span class="brand-copy"><strong>Amase</strong><small>paper-daemon</small></span></a><nav aria-label="main"><a href="/global.html">Services</a><a href="/showcase.html">Work</a><a href="https://github.com/paper-daemon/automation-first-aid">Repository</a></nav><div class="head-actions"><a class="head-cta" href="https://upwork.com/freelancers/~0113e1480d19478321">Upwork ↗</a></div></header>
+<main class="page">
+<section class="page-hero compact"><p class="eyebrow">CASE STUDY / AUTOMATION RELIABILITY</p><h1>Automation First Aid.</h1><p class="page-lead">A diagnostic-only CLI for the first minutes of an automation incident: environment checks, endpoint probing, strict JSON validation, retry-safety classification and Linux user-service status.</p><div class="page-meta"><span>PYTHON 3.10+</span><span>DIAGNOSTIC ONLY</span><span>CI READY</span><span>MIT</span></div></section>
+
+<section class="work-intro"><div><p class="eyebrow">THE PROBLEM</p><h2 style="margin:0;font:600 clamp(2rem,4vw,3.7rem)/1 var(--serif);letter-spacing:-.045em">A failed automation does not automatically mean “retry it.”</h2><p style="color:var(--muted);font-size:.8rem;max-width:760px">A timeout might be transient. A permission error is probably not. A scary error line can even belong to an earlier attempt while the final process already succeeded. Blind retries can duplicate payments, messages, file writes or other external effects. First response needs enough structure to separate transient failures from configuration errors and already-successful work.</p></div><div class="work-rule"><strong>Design constraint</strong><p>The diagnostic tool must not restart services, rewrite configuration, repair files or replay external actions. It should improve the next decision without creating another side effect.</p></div></section>
+
+<section class="section"><header class="section-head"><small>01 / TRIAGE</small><h2>Observe before acting.</h2></header><div class="lane-grid">
+<article class="lane"><span class="lane-no">DOCTOR</span><h3>Check the environment.</h3><p>Python version, path access, free disk, optional DNS/URL health and Linux user-manager state are reported as explicit checks.</p></article>
+<article class="lane"><span class="lane-no">RETRY</span><h3>Classify the failure.</h3><p>Outcomes distinguish successful final state, retry-with-backoff, stop-and-fix, and unknown failures that need review.</p></article>
+<article class="lane"><span class="lane-no">JSON</span><h3>Validate the payload.</h3><p>JSON/JSONL errors surface line and column information, and non-standard NaN/Infinity values are rejected instead of silently accepted.</p></article>
+</div></section>
+
+<section class="section"><header class="section-head"><small>02 / RELIABILITY DETAILS</small><h2>The boring edge cases are the product.</h2></header><div class="feature-grid">
+<div class="feature-card"><small>SUCCESS PRECEDENCE</small><h3>Exit 0 beats stale error text</h3><p>If the final process succeeded, the tool returns <code>NO_RETRY</code> even when captured logs still contain timeout or permission-warning text.</p></div>
+<div class="feature-card"><small>HTTP PROBES</small><h3>HEAD fallback is narrow</h3><p>GET fallback is used only for 403, 405 or 501 responses that commonly reject HEAD. A genuine 404 stays a failure.</p></div>
+<div class="feature-card"><small>LOG PRIVACY</small><h3>Probe the real URL, display a safe one</h3><p>Userinfo and secret-like query values are redacted in output without changing the actual request target.</p></div>
+<div class="feature-card"><small>MALFORMED INPUT</small><h3>Bad ports do not crash logging</h3><p>Malformed URL port syntax becomes <code>&lt;invalid-url&gt;</code> rather than escaping the diagnostic boundary.</p></div>
+<div class="feature-card"><small>STRICT EXIT</small><h3>Human diagnostics can feed CI</h3><p><code>--strict-exit</code> maps actionable NG states to exit code 1 while transient retry advice remains non-failing.</p></div>
+<div class="feature-card"><small>SIDE-EFFECT BOUNDARY</small><h3>No automatic repair</h3><p>The CLI intentionally stops before remediation, preserving a clean boundary between diagnosis and production changes.</p></div>
+</div></section>
+
+<section class="section"><header class="section-head"><small>03 / OPERATIONS</small><h2>Useful to a human and a monitor.</h2></header><div class="proof-main"><div class="terminal"><span class="ok">$ python automation_first_aid.py --strict-exit retry --text "connection reset" --exit-code 1</span><br>decision=RETRY_WITH_BACKOFF | reason=transient/network/resource-like error<br><br><span class="ok">$ python automation_first_aid.py --strict-exit retry --text "permission denied" --exit-code 1</span><br><span class="warn">decision=STOP_AND_FIX | reason=permanent/configuration-like error</span><br>exit 1</div><p style="max-width:760px;color:var(--muted)">The same commands can emit JSON, making the tool usable as a lightweight preflight or incident classifier inside a larger monitoring workflow.</p></div></section>
+
+<section class="section"><header class="section-head"><small>04 / WHAT THIS DEMONSTRATES</small><h2>Reliability work is mostly decision design.</h2></header><div class="lane-grid">
+<article class="lane"><h3>Idempotency awareness</h3><p>The retry model starts from the fact that replaying a failed-looking operation may repeat a successful external effect.</p></article>
+<article class="lane"><h3>Operational observability</h3><p>Checks return concrete values and classifications rather than collapsing everything into “works” or “broken.”</p></article>
+<article class="lane"><h3>Safe handoff</h3><p>Explicit commands, machine-readable output, process exit semantics and tests make the diagnostic behavior reviewable by another operator.</p></article>
+</div></section>
+
+<section class="cta-band"><div><h2>Have a workflow that fails in the ugly 10%?</h2><p>I can map its failure modes, duplicate risks, retry boundaries and observability gaps before changing production behavior.</p></div><a class="button primary" href="https://upwork.com/freelancers/~0113e1480d19478321">Discuss on Upwork ↗</a></section>
+</main><footer class="site-footer"><div class="footer-brand"><img src="/amase-avatar.jpg" alt=""><span><strong>Amase</strong><br>paper-daemon</span></div><nav><a href="/global.html">Services</a><a href="https://github.com/paper-daemon/automation-first-aid">Source</a><a href="https://github.com/paper-daemon">GitHub</a></nav></footer>
+</body></html>
